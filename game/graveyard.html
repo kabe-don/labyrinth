@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Graveyard Keeper — LABYRINTH</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@400;700;900&family=Baloo+Bhaijaan+2:wght@500;700;800&family=Bruno+Ace&family=Inter:wght@200;300;400;500;600;700;800;900&family=Reddit+Sans:wght@300;400;500;600;700&family=REM:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/game.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+</head>
+<body>
+    <header class="header" id="header">
+        <a class="header__logo-group" href="../index.html">
+            <div class="header__logo-icon"><img src="../img/web_logo.png" alt="LABYRINTH" class="logo-img"></div>
+            <span class="header__brand">LABYRINTH</span>
+        </a>
+        <nav class="header__nav">
+            <div class="nav-search">
+                <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                <input type="text" id="globalSearch" placeholder="Search games..." autocomplete="off">
+                <div class="search-dropdown" id="searchDropdown"></div>
+            </div>
+            <div class="header__nav-dropdown">
+                <span class="header__nav-link header__nav-dropdown-trigger">CATEGORY <span class="dropdown-arrow">▾</span></span>
+                <div class="header__dropdown-menu">
+                    <a class="header__dropdown-item" href="../singleplayer.html">Single Player</a>
+                    <a class="header__dropdown-item" href="../multiplayer.html">Multiplayer</a>
+                </div>
+            </div>
+            <a class="header__nav-link" href="../about.html">About</a>
+        </nav>
+    </header>
+
+    <section class="game-hero">
+        <img class="game-hero__banner-bg" src="../img/games/gk-thumb.jpg" alt="Graveyard Keeper" onerror="this.style.display='none'">
+        <div class="game-hero__overlay"></div>
+        <div class="game-hero__content">
+            <div class="game-hero__left">
+                <div class="game-hero__cover">
+                    <img src="../img/games/gk-thumb_tall.jpg" alt="Cover" onerror="this.style.background='#1a2740'">
+                </div>
+                <div class="hero-dev-badge"><strong>DEVELOPER</strong> / Lazy Bear Games</div>
+                <div class="hero-dev-badge"><strong>PUBLISHER</strong> / tinyBuild</div>
+                <a href="https://store.steampowered.com/app/599140/Graveyard_Keeper/" target="_blank" class="hero-steam-btn">
+                    <img src="../img/platforms/steam.png" alt="Steam" onerror="this.style.display='none'"> STEAM REDIRECT
+                </a>
+                <div class="hero-release-date">Release Date: August 15, 2018</div>
+            </div>
+            <div class="game-hero__info">
+                <h1 class="game-hero__title">Graveyard Keeper</h1>
+                <div class="badge-platform-row">
+                    <span class="very-positive-badge">very positive</span>
+                    <div class="platform-icons-wrapper">
+                        <img src="../img/platforms/win.png" alt="Windows" class="platform-icon">
+                        <img src="../img/platforms/mac.png" alt="Mac" class="platform-icon">
+                        <img src="../img/platforms/ns.png" alt="Nintendo Switch" class="platform-icon">
+                        <img src="../img/platforms/ps.png" alt="PlayStation" class="platform-icon">
+                        <img src="../img/platforms/xbox.png" alt="Xbox" class="platform-icon">
+                    </div>
+                </div>
+                <div class="rating-info">
+                    <div class="rate-review-heading">RATE AND REVIEW</div>
+                    <div class="stars-row"><span class="stars-gold">★★★★☆</span><span class="rating-number">4.3 / 5</span></div>
+                    <span class="badge-recommend">84% recommend</span>
+                    <a href="#reviews" class="read-reviews-link">Read reviews ></a>
+                </div>
+                <div class="game-hero__tags">
+                    <span class="game-hero__tag">RPG</span><span class="game-hero__tag">Simulation</span><span class="game-hero__tag">Dark Humor</span><span class="game-hero__tag">Crafting</span><span class="game-hero__tag">Management</span>
+                </div>
+                <p class="game-hero__desc">
+                    Graveyard Keeper is a dark, medieval management game where you run and improve a graveyard while trying to find a way back home. You bury bodies, craft items, farm, and interact with villagers. The game features a large technology tree and interconnected systems that unlock over time, offering a unique but complex take on life-simulation.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="sysreq-section">
+        <div class="sysreq-container">
+            <h2 class="section-title">System Requirements</h2>
+            <p class="section-subtitle">Minimum specifications needed</p>
+            <div class="sysreq-card">
+                <div class="sysreq-col">
+                    <p><strong>OS</strong> Windows 7 (SP1+)</p>
+                    <p><strong>Processor</strong> Intel Core i5, 1.5 GHz+</p>
+                    <p><strong>Memory</strong> 4 GB RAM</p>
+                    <p><strong>Graphics</strong> 1 GB dedicated GPU, Shader Model 3.0+</p>
+                </div>
+                <div class="sysreq-col">
+                    <p><strong>DirectX</strong> Version 10</p>
+                    <p><strong>Network</strong> Not required</p>
+                    <p><strong>Storage</strong> 1 GB available space</p>
+                    <p><strong>Sound Card</strong> Any</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="gallery-section">
+        <div class="gallery-container">
+            <h2 class="section-title">Game Screenshots Gallery</h2>
+            <div class="carousel-container">
+                <div class="carousel-track">
+                    <div class="carousel-card"><img src="../img/games/gk-1.jpg" alt="Screenshot 1" loading="lazy"><span class="carousel-card__label">Game Screenshot 1</span></div>
+                    <div class="carousel-card"><img src="../img/games/gk-2.jpg" alt="Screenshot 2" loading="lazy"><span class="carousel-card__label">Game Screenshot 2</span></div>
+                    <div class="carousel-card"><img src="../img/games/gk-3.jpg" alt="Screenshot 3" loading="lazy"><span class="carousel-card__label">Game Screenshot 3</span></div>
+                    <div class="carousel-card"><img src="../img/games/gk-4.jpg" alt="Screenshot 4" loading="lazy"><span class="carousel-card__label">Game Screenshot 4</span></div>
+                    <div class="carousel-card"><img src="../img/games/gk-1.jpg" alt="Screenshot 1" loading="lazy"><span class="carousel-card__label">Game Screenshot 1</span></div>
+                    <div class="carousel-card"><img src="../img/games/gk-2.jpg" alt="Screenshot 2" loading="lazy"><span class="carousel-card__label">Game Screenshot 2</span></div>
+                    <div class="carousel-card"><img src="../img/games/gk-3.jpg" alt="Screenshot 3" loading="lazy"><span class="carousel-card__label">Game Screenshot 3</span></div>
+                    <div class="carousel-card"><img src="../img/games/gk-4.jpg" alt="Screenshot 4" loading="lazy"><span class="carousel-card__label">Game Screenshot 4</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="review-section" id="reviews">
+        <div class="review-container">
+            <h2 class="section-title">Game Review</h2>
+            <div class="review-card">
+                <p>I enjoyed the chaos. It's like a pleasant brain teaser. Having to remember what quest NPC is available on what days, managing your daily chores, micromanaging your zombies, trying to work on advancing your tech trees, all while trying to keep your graveyard tidy. There's always something going on. Yet it still comes across as a cozy game. At first I was stressed out when I would forget the day, but then you realize it'll come around again in 20 minutes and in the interim there's a dozen other quest lines you can advance.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="tutorial-section">
+        <div class="tutorial-container">
+            <h2 class="section-title">Beginner Guides / Tutorials</h2>
+            <a href="https://www.youtube.com/watch?v=zX8HVh2Nru4" target="_blank" rel="noopener" class="video-card">
+                <div class="video-card__inner">
+                    <span class="video-card__play">▶</span>
+                    <span class="video-card__text">Watch Beginner Guide on YouTube</span>
+                    <span class="video-card__arrow">→</span>
+                </div>
+            </a>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer__links">
+            <a href="../contacts.html" class="footer__link">Contacts</a> ·
+            <a href="../faqs.html" class="footer__link">FAQs</a> ·
+            <a href="../references.html" class="footer__link">References</a> ·
+            <a href="../creator.html" class="footer__link">Creator Information</a>
+        </div>
+        <div class="footer__copy">&copy; 2026 Labyrinth. All rights reserved.</div>
+    </footer>
+
+    <script src="../js/search.js"></script>
+    <script>
+        window.addEventListener('scroll', () => {
+            document.getElementById('header').classList.toggle('scrolled', window.scrollY > 20);
+        });
+    </script>
+</body>
+</html>

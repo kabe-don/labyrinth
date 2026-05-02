@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>LABYRINTH · Discover & Play</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@400;700;900&family=Baloo+Bhaijaan+2:wght@500;700;800&family=Bruno+Ace&family=Inter:wght@200;300;400;500;600;700;800;900&family=Reddit+Sans:wght@300;400;500;600;700&family=REM:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Main stylesheet -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+
+    <style>
+        /* Tiny fix for the sticky header gap */
+        .header {
+            width: 100%;
+            min-width: 100vw;
+            left: 0;
+            right: 0;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ========== SPLASH SCREEN ========== -->
+    <div class="splash-screen" id="splashScreen">
+        <div class="splash-logo">
+            <img src="img/web_logo.png" alt="LABYRINTH" class="splash-logo-img">
+        </div>
+        <div class="splash-title">LABYRINTH</div>
+        <div class="splash-loader">
+            <div class="splash-loader-bar"></div>
+        </div>
+    </div>
+
+    <!-- ========== HEADER (gap‑free) ========== -->
+    <header class="header" id="header">
+        <a class="header__logo-group" id="logoTop" href="index.html">
+            <div class="header__logo-icon">
+                <img src="img/web_logo.png" alt="LABYRINTH" class="logo-img">
+            </div>
+            <span class="header__brand">LABYRINTH</span>
+        </a>
+        <nav class="header__nav">
+            <div class="nav-search">
+                <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="11" cy="11" r="8"/>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                </svg>
+                <input type="text" id="globalSearch" placeholder="Search games..." autocomplete="off">
+                <div class="search-dropdown" id="searchDropdown"></div>
+            </div>
+            <div class="header__nav-dropdown">
+                <span class="header__nav-link header__nav-dropdown-trigger">CATEGORY <span class="dropdown-arrow">▾</span></span>
+                <div class="header__dropdown-menu">
+                    <a class="header__dropdown-item" href="singleplayer.html">Single Player</a>
+                    <a class="header__dropdown-item" href="multiplayer.html">Multiplayer</a>
+                </div>
+            </div>
+            <a class="header__nav-link" href="about.html">About</a>
+        </nav>
+    </header>
+
+    <!-- ========== HERO CAROUSEL (8 slides) ========== -->
+    <section class="hero" id="hero">
+        <div class="hero__slides" id="heroSlides">
+            <!-- Slide 0: Slay the Spire II -->
+            <div class="hero__slide hero__slide--active" data-index="0">
+                <video class="hero__slide-video" autoplay muted loop playsinline>
+                    <source src="game_trailer/STS2.mp4" type="video/mp4">
+                </video>
+                <div class="hero__slide-overlay"></div>
+                <div class="hero__slide-content">
+                    <h1 class="hero__slide-title">Slay the<br><span class="hero__slide-title-accent">SPIRE II</span></h1>
+                    <p class="hero__slide-desc">The ultimate roguelike deckbuilder returns. New perils demand sharper strategies.</p>
+                    <div class="hero__slide-meta"><span class="hero__badge">Overwhelmingly positive</span><span class="hero__year">2026</span></div>
+                    <a href="game/sts2.html" class="hero__btn">DETAILS →</a>
+                </div>
+            </div>
+            <!-- Slide 1: Red Dead Redemption 2 -->
+            <div class="hero__slide" data-index="1">
+                <video class="hero__slide-video" autoplay muted loop playsinline>
+                    <source src="game_trailer/RDR2.mp4" type="video/mp4">
+                </video>
+                <div class="hero__slide-overlay"></div>
+                <div class="hero__slide-content">
+                    <h1 class="hero__slide-title">Red Dead<br><span class="hero__slide-title-accent">Redemption 2</span></h1>
+                    <p class="hero__slide-desc">America, 1899. The end of the Wild West era has begun.</p>
+                    <div class="hero__slide-meta"><span class="hero__badge">Very positive</span><span class="hero__year">2018</span></div>
+                    <a href="game/rdr2.html" class="hero__btn">DETAILS →</a>
+                </div>
+            </div>
+            <!-- Slide 2: It Takes Two -->
+            <div class="hero__slide" data-index="2">
+                <video class="hero__slide-video" autoplay muted loop playsinline>
+                    <source src="game_trailer/ITT.mp4" type="video/mp4">
+                </video>
+                <div class="hero__slide-overlay"></div>
+                <div class="hero__slide-content">
+                    <h1 class="hero__slide-title">It Takes<br><span class="hero__slide-title-accent">Two</span></h1>
+                    <p class="hero__slide-desc">A fun emotional co‑op adventure. Cody and May must work together.</p>
+                    <div class="hero__slide-meta"><span class="hero__badge">Overwhelmingly positive</span><span class="hero__year">2021</span></div>
+                    <a href="game/itt.html" class="hero__btn">DETAILS →</a>
+                </div>
+            </div>
+            <!-- Slide 3: Stardew Valley -->
+            <div class="hero__slide" data-index="3">
+                <video class="hero__slide-video" autoplay muted loop playsinline>
+                    <source src="game_trailer/SV.mp4" type="video/mp4">
+                </video>
+                <div class="hero__slide-overlay"></div>
+                <div class="hero__slide-content">
+                    <h1 class="hero__slide-title">Stardew<br><span class="hero__slide-title-accent">Valley</span></h1>
+                    <p class="hero__slide-desc">Turn overgrown fields into a thriving farm. The cozy life awaits.</p>
+                    <div class="hero__slide-meta"><span class="hero__badge">Overwhelmingly positive</span><span class="hero__year">2016</span></div>
+                    <a href="game/stardew.html" class="hero__btn">DETAILS →</a>
+                </div>
+            </div>
+            <!-- Slide 4: Graveyard Keeper -->
+            <div class="hero__slide" data-index="4">
+                <video class="hero__slide-video" autoplay muted loop playsinline>
+                    <source src="game_trailer/GK.mp4" type="video/mp4">
+                </video>
+                <div class="hero__slide-overlay"></div>
+                <div class="hero__slide-content">
+                    <h1 class="hero__slide-title">Graveyard<br><span class="hero__slide-title-accent">Keeper</span></h1>
+                    <p class="hero__slide-desc">Build and manage a medieval graveyard. Ethical dilemmas included.</p>
+                    <div class="hero__slide-meta"><span class="hero__badge">Very positive</span><span class="hero__year">2018</span></div>
+                    <a href="game/graveyard.html" class="hero__btn">DETAILS →</a>
+                </div>
+            </div>
+            <!-- Slide 5: A Little to the Left -->
+            <div class="hero__slide" data-index="5">
+                <video class="hero__slide-video" autoplay muted loop playsinline>
+                    <source src="game_trailer/ALTTL.mp4" type="video/mp4">
+                </video>
+                <div class="hero__slide-overlay"></div>
+                <div class="hero__slide-content">
+                    <h1 class="hero__slide-title">A Little to<br><span class="hero__slide-title-accent">the Left</span></h1>
+                    <p class="hero__slide-desc">Sort, stack, and organize everyday objects. Watch out for the cat!</p>
+                    <div class="hero__slide-meta"><span class="hero__badge">Very positive</span><span class="hero__year">2022</span></div>
+                    <a href="game/alittle.html" class="hero__btn">DETAILS →</a>
+                </div>
+            </div>
+            <!-- Slide 6: Pico Park -->
+            <div class="hero__slide" data-index="6">
+                <video class="hero__slide-video" autoplay muted loop playsinline>
+                    <source src="game_trailer/PP.mp4" type="video/mp4">
+                </video>
+                <div class="hero__slide-overlay"></div>
+                <div class="hero__slide-content">
+                    <h1 class="hero__slide-title">Pico<br><span class="hero__slide-title-accent">Park</span></h1>
+                    <p class="hero__slide-desc">Work together with friends to solve cute puzzles. Cooperation is key!</p>
+                    <div class="hero__slide-meta"><span class="hero__badge">Very positive</span><span class="hero__year">2021</span></div>
+                    <a href="game/picopark.html" class="hero__btn">DETAILS →</a>
+                </div>
+            </div>
+            <!-- Slide 7: Call of Duty: Black Ops III -->
+            <div class="hero__slide" data-index="7">
+                <video class="hero__slide-video" autoplay muted loop playsinline>
+                    <source src="game_trailer/BO3.mp4" type="video/mp4">
+                </video>
+                <div class="hero__slide-overlay"></div>
+                <div class="hero__slide-content">
+                    <h1 class="hero__slide-title">Call of Duty®<br><span class="hero__slide-title-accent">Black Ops III</span></h1>
+                    <p class="hero__slide-desc">A dark, twisted future where humanity and robotics collide.</p>
+                    <div class="hero__slide-meta"><span class="hero__badge">Very positive</span><span class="hero__year">2015</span></div>
+                    <a href="game/cod.html" class="hero__btn">DETAILS →</a>
+                </div>
+            </div>
+        </div>
+        <div class="hero__controls">
+            <button class="hero__arrow" id="heroPrev">◂</button>
+            <div class="hero__dots" id="heroDots">
+                <button class="hero__dot hero__dot--active" data-slide="0"></button>
+                <button class="hero__dot" data-slide="1"></button>
+                <button class="hero__dot" data-slide="2"></button>
+                <button class="hero__dot" data-slide="3"></button>
+                <button class="hero__dot" data-slide="4"></button>
+                <button class="hero__dot" data-slide="5"></button>
+                <button class="hero__dot" data-slide="6"></button>
+                <button class="hero__dot" data-slide="7"></button>
+            </div>
+            <button class="hero__arrow" id="heroNext">▸</button>
+        </div>
+    </section>
+
+    <!-- ========== TOP RATED & TRENDING (release dates) ========== -->
+    <section class="section-top-rated">
+        <h2 class="section-heading">Top Rated and Trending</h2>
+        <div class="top-rated-grid">
+            <!-- Stardew Valley -->
+            <a href="game/stardew.html" class="top-rated-card">
+                <div class="top-rated-card__thumb">
+                    <img src="img/games/sv-thumb_tall.jpg" alt="Stardew Valley" class="top-rated-card__img">
+                </div>
+                <div class="top-rated-card__body">
+                    <span class="top-rated-card__title">Stardew Valley</span>
+                    <span class="top-rated-card__review">Overwhelmingly positive</span>
+                    <div class="top-rated-card__meta">
+                        <span class="top-rated-card__price">Feb 26, 2016</span>
+                        <div class="top-rated-card__platforms">
+                            <img src="img/platforms/win.png" alt="Windows" class="platform-icon">
+                            <img src="img/platforms/mac.png" alt="Mac" class="platform-icon">
+                            <img src="img/platforms/ns.png" alt="Nintendo Switch" class="platform-icon">
+                            <img src="img/platforms/ps.png" alt="PlayStation" class="platform-icon">
+                            <img src="img/platforms/xbox.png" alt="Xbox" class="platform-icon">
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <!-- Pico Park -->
+            <a href="game/picopark.html" class="top-rated-card">
+                <div class="top-rated-card__thumb">
+                    <img src="img/games/pp-thumb_tall.jpg" alt="Pico Park" class="top-rated-card__img">
+                </div>
+                <div class="top-rated-card__body">
+                    <span class="top-rated-card__title">Pico Park</span>
+                    <span class="top-rated-card__review">Very positive</span>
+                    <div class="top-rated-card__meta">
+                        <span class="top-rated-card__price">May 7, 2021</span>
+                        <div class="top-rated-card__platforms">
+                            <img src="img/platforms/win.png" alt="Windows" class="platform-icon">
+                            <img src="img/platforms/mac.png" alt="Mac" class="platform-icon">
+                            <img src="img/platforms/ns.png" alt="Nintendo Switch" class="platform-icon">
+                            <img src="img/platforms/ps.png" alt="PlayStation" class="platform-icon">
+                            <img src="img/platforms/xbox.png" alt="Xbox" class="platform-icon">
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <!-- It Takes Two -->
+            <a href="game/itt.html" class="top-rated-card">
+                <div class="top-rated-card__thumb">
+                    <img src="img/games/itt-thumb_tall.jpg" alt="It Takes Two" class="top-rated-card__img">
+                </div>
+                <div class="top-rated-card__body">
+                    <span class="top-rated-card__title">It Takes Two</span>
+                    <span class="top-rated-card__review">Overwhelmingly positive</span>
+                    <div class="top-rated-card__meta">
+                        <span class="top-rated-card__price">Mar 26, 2021</span>
+                        <div class="top-rated-card__platforms">
+                            <img src="img/platforms/win.png" alt="Windows" class="platform-icon">
+                            <img src="img/platforms/ns.png" alt="Nintendo Switch" class="platform-icon">
+                            <img src="img/platforms/ps.png" alt="PlayStation" class="platform-icon">
+                            <img src="img/platforms/xbox.png" alt="Xbox" class="platform-icon">
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </section>
+
+    <!-- ========== CATEGORY BANNERS ========== -->
+    <section class="section-categories">
+        <h2 class="section-heading">Collection / Categories</h2>
+        <div class="categories-grid">
+            <a class="category-banner category-banner--single" href="singleplayer.html">
+                <div class="category-banner__bg" style="background-image: url('img/banners/singleplayer-bg.jpg');"></div>
+                <div class="category-banner__overlay"></div>
+                <span class="category-banner__text">SINGLE PLAYER</span>
+            </a>
+            <a class="category-banner category-banner--multi" href="multiplayer.html">
+                <div class="category-banner__bg" style="background-image: url('img/banners/multiplayer-bg.jpg');"></div>
+                <div class="category-banner__overlay"></div>
+                <span class="category-banner__text">MULTIPLAYER</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- ========== ALL GAMES LIST ========== -->
+    <section class="page-section active" id="page-all">
+        <div class="browse-container">
+            <div class="browse-left">
+                <h2 class="section-heading" style="position:sticky;top:0;background:var(--bg-deep);z-index:1;padding-bottom:12px;">All Games</h2>
+                <div class="game-list" id="gameListAll"></div>
+            </div>
+            <div class="browse-right">
+                <div class="preview-panel" id="previewPanelAll">
+                    <div class="preview-content" id="previewContentAll">
+                        <div class="preview-title">Select a Game</div>
+                        <p style="color:var(--text-muted); margin-top:6px;">Hover over any game to see details</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== ABOUT (in‑page) ========== -->
+    <section class="page-section" id="page-about">
+        <div class="about-content">
+            <h2>About LABYRINTH</h2>
+            <p>LABYRINTH is a modern game discovery platform built to connect players with extraordinary interactive experiences. We believe that the journey of finding your next adventure should be as thrilling as playing it.</p>
+            <p>Created by a passionate team of gamers and developers, this platform combines sleek design with powerful curation to bring you the best titles across all genres.</p>
+        </div>
+    </section>
+
+    <!-- ========== FOOTER (no modal links) ========== -->
+    <footer class="footer">
+        <div class="footer__links">
+            <a href="contacts.html" class="footer__link">Contacts</a> ·
+            <a href="faqs.html" class="footer__link">FAQs</a> ·
+            <a href="references.html" class="footer__link">References</a> ·
+            <a href="creator.html" class="footer__link">Creator Information</a>
+        </div>
+        <div class="footer__copy">&copy; 2026 Labyrinth. All rights reserved.</div>
+    </footer>
+
+    <!-- ========== SCRIPTS ========== -->
+    <script src="js/search.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>

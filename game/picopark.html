@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Pico Park — LABYRINTH</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@400;700;900&family=Baloo+Bhaijaan+2:wght@500;700;800&family=Bruno+Ace&family=Inter:wght@200;300;400;500;600;700;800;900&family=Reddit+Sans:wght@300;400;500;600;700&family=REM:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/game.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+</head>
+<body>
+    <header class="header" id="header">
+        <a class="header__logo-group" href="../index.html">
+            <div class="header__logo-icon"><img src="../img/web_logo.png" alt="LABYRINTH" class="logo-img"></div>
+            <span class="header__brand">LABYRINTH</span>
+        </a>
+        <nav class="header__nav">
+            <div class="nav-search">
+                <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                <input type="text" id="globalSearch" placeholder="Search games..." autocomplete="off">
+                <div class="search-dropdown" id="searchDropdown"></div>
+            </div>
+            <div class="header__nav-dropdown">
+                <span class="header__nav-link header__nav-dropdown-trigger">CATEGORY <span class="dropdown-arrow">▾</span></span>
+                <div class="header__dropdown-menu">
+                    <a class="header__dropdown-item" href="../singleplayer.html">Single Player</a>
+                    <a class="header__dropdown-item" href="../multiplayer.html">Multiplayer</a>
+                </div>
+            </div>
+            <a class="header__nav-link" href="../about.html">About</a>
+        </nav>
+    </header>
+
+    <section class="game-hero">
+        <img class="game-hero__banner-bg" src="../img/games/pp-thumb.jpg" alt="Pico Park" onerror="this.style.display='none'">
+        <div class="game-hero__overlay"></div>
+        <div class="game-hero__content">
+            <div class="game-hero__left">
+                <div class="game-hero__cover">
+                    <img src="../img/games/pp-thumb_tall.jpg" alt="Cover" onerror="this.style.background='#1a2740'">
+                </div>
+                <div class="hero-dev-badge"><strong>DEVELOPER</strong> / TECOPARK</div>
+                <div class="hero-dev-badge"><strong>PUBLISHER</strong> / TECOPARK</div>
+                <a href="https://store.steampowered.com/app/1509960/PICO_PARK/" target="_blank" class="hero-steam-btn">
+                    <img src="../img/platforms/steam.png" alt="Steam" onerror="this.style.display='none'"> STEAM REDIRECT
+                </a>
+                <div class="hero-release-date">Release Date: May 7, 2021</div>
+            </div>
+            <div class="game-hero__info">
+                <h1 class="game-hero__title">Pico Park</h1>
+                <div class="badge-platform-row">
+                    <span class="very-positive-badge">very positive</span>
+                    <div class="platform-icons-wrapper">
+                       <img src="../img/platforms/win.png" alt="Windows" class="platform-icon">
+                       <img src="../img/platforms/mac.png" alt="MacOS" class="platform-icon">
+                       <img src="../img/platforms/ps.png" alt="PlayStation" class="platform-icon">
+                       <img src="../img/platforms/xbox.png" alt="Xbox" class="platform-icon">
+                       <img src="../img/platforms/ns.png" alt="Nintendo Switch" class="platform-icon">
+                    </div>
+                </div>
+                <div class="rating-info">
+                    <div class="rate-review-heading">RATE AND REVIEW</div>
+                    <div class="stars-row"><span class="stars-gold">★★★★☆</span><span class="rating-number">4.5 / 5</span></div>
+                    <span class="badge-recommend">92% recommend</span>
+                    <a href="#reviews" class="read-reviews-link">Read reviews ></a>
+                </div>
+                <div class="game-hero__tags">
+                    <span class="game-hero__tag">Co-op</span><span class="game-hero__tag">Puzzle</span><span class="game-hero__tag">Cute</span><span class="game-hero__tag">Party</span>
+                </div>
+                <p class="game-hero__desc">
+                    Pico Park is a fun cooperative puzzle game where players must work together to complete levels. Each stage requires teamwork, communication, and coordination to solve challenges. The game supports local and online multiplayer, making it ideal for friends. Its simple design hides surprisingly tricky puzzles that become more complex as you progress.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="sysreq-section">
+        <div class="sysreq-container">
+            <h2 class="section-title">System Requirements</h2>
+            <p class="section-subtitle">Minimum specifications needed</p>
+            <div class="sysreq-card">
+                <div class="sysreq-col">
+                    <p><strong>OS</strong> Windows 7 or later 64bit</p>
+                    <p><strong>Memory</strong> 4 GB RAM</p>
+                    <p><strong>Graphics</strong> 2nd Generation Intel Core HD Graphics, 512MB</p>
+                    <p><strong>DirectX</strong> Version 9.0c</p>
+                </div>
+                <div class="sysreq-col">
+                    <p><strong>Network</strong> Broadband Internet</p>
+                    <p><strong>Storage</strong> 100 MB available space</p>
+                    <p><strong>Sound Card</strong> Any</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="gallery-section">
+        <div class="gallery-container">
+            <h2 class="section-title">Game Screenshots Gallery</h2>
+            <div class="carousel-container">
+                <div class="carousel-track">
+                    <div class="carousel-card"><img src="../img/games/pp-1.jpg" alt="Screenshot 1" loading="lazy"><span class="carousel-card__label">Game Screenshot 1</span></div>
+                    <div class="carousel-card"><img src="../img/games/pp-2.jpg" alt="Screenshot 2" loading="lazy"><span class="carousel-card__label">Game Screenshot 2</span></div>
+                    <div class="carousel-card"><img src="../img/games/pp-3.jpg" alt="Screenshot 3" loading="lazy"><span class="carousel-card__label">Game Screenshot 3</span></div>
+                    <div class="carousel-card"><img src="../img/games/pp-4.jpg" alt="Screenshot 4" loading="lazy"><span class="carousel-card__label">Game Screenshot 4</span></div>
+                    <div class="carousel-card"><img src="../img/games/pp-1.jpg" alt="Screenshot 1" loading="lazy"><span class="carousel-card__label">Game Screenshot 1</span></div>
+                    <div class="carousel-card"><img src="../img/games/pp-2.jpg" alt="Screenshot 2" loading="lazy"><span class="carousel-card__label">Game Screenshot 2</span></div>
+                    <div class="carousel-card"><img src="../img/games/pp-3.jpg" alt="Screenshot 3" loading="lazy"><span class="carousel-card__label">Game Screenshot 3</span></div>
+                    <div class="carousel-card"><img src="../img/games/pp-4.jpg" alt="Screenshot 4" loading="lazy"><span class="carousel-card__label">Game Screenshot 4</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="review-section" id="reviews">
+        <div class="review-container">
+            <h2 class="section-title">Game Review</h2>
+            <div class="review-card">
+                <p>Pico Park shines as a multiplayer experience focused on teamwork and communication. Players must coordinate movements, share responsibilities, and solve puzzles together, often leading to chaotic and hilarious moments. The simplicity of controls makes it accessible, but the increasing difficulty keeps players engaged. While it may feel short, the fun comes from playing with others.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="tutorial-section">
+        <div class="tutorial-container">
+            <h2 class="section-title">Beginner Guides / Tutorials</h2>
+            <a href="https://www.youtube.com/watch?v=QI0BvgCULM0" target="_blank" rel="noopener" class="video-card">
+                <div class="video-card__inner">
+                    <span class="video-card__play">▶</span>
+                    <span class="video-card__text">Watch Beginner Guide on YouTube</span>
+                    <span class="video-card__arrow">→</span>
+                </div>
+            </a>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer__links">
+            <a href="../contacts.html" class="footer__link">Contacts</a> ·
+            <a href="../faqs.html" class="footer__link">FAQs</a> ·
+            <a href="../references.html" class="footer__link">References</a> ·
+            <a href="../creator.html" class="footer__link">Creator Information</a>
+        </div>
+        <div class="footer__copy">&copy; 2026 Labyrinth. All rights reserved.</div>
+    </footer>
+
+    <script src="../js/search.js"></script>
+    <script>
+        window.addEventListener('scroll', () => {
+            document.getElementById('header').classList.toggle('scrolled', window.scrollY > 20);
+        });
+    </script>
+</body>
+</html>
