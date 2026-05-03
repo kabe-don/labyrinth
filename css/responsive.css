@@ -3,20 +3,17 @@
    ============================================= */
 
 /* ---------- BASE OVERRIDES (all devices) ---------- */
-
-/* Allow sticky header while hiding accidental horizontal overflow */
 html {
-    overflow-x: hidden;      /* clip overflow that would cause a scrollbar */
-    overflow-y: scroll;      /* always show vertical scrollbar, avoid layout jump */
+    overflow-x: hidden;
+    overflow-y: scroll;
 }
 body {
-    overflow: visible !important;  /* mandatory: sticky header needs visible overflow */
+    overflow: visible !important;
     width: 100%;
     max-width: 100%;
     position: relative;
 }
 
-/* Universal box‑sizing and media constraints – prevent content from breaking out */
 *, *::before, *::after {
     box-sizing: border-box;
 }
@@ -697,7 +694,7 @@ body, .carousel-container, .hero, .gallery-section,
     overflow-x: hidden;
 }
 
-/* Make sure the video overlay doesn't break out */
+/* Video overlay fix */
 .video-overlay-wrapper {
     width: 95vw !important;
     max-width: 95vw !important;

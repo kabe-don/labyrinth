@@ -3,245 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>LABYRINTH | About — Discover & Play</title>
+    <title>LABYRINTH | About — Your Game Discovery Engine</title>
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@400;700;900&family=Baloo+Bhaijaan+2:wght@500;700;800&family=Bruno+Ace&family=Inter:wght@200;300;400;500;600;700;800;900&family=Reddit+Sans:wght@300;400;500;600;700&family=REM:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-    <!-- Font Awesome Icons -->
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <!-- External CSS -->
+    <!-- Main CSS -->
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/about.css">
     <link rel="stylesheet" href="css/responsive.css">
-
-    <style>
-        /* ========== ABOUT PAGE SPECIFIC STYLES ========== */
-        .about-page-container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 80px 40px;
-        }
-
-        /* Hero banner */
-        .about-hero {
-            text-align: center;
-            margin-bottom: 72px;
-            position: relative;
-            padding: 60px 20px 40px;
-        }
-        .about-hero::before {
-            content: '';
-            position: absolute;
-            top: -40px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 600px;
-            height: 500px;
-            background: radial-gradient(ellipse, rgba(76, 140, 228, 0.12) 0%, transparent 70%);
-            pointer-events: none;
-            z-index: 0;
-        }
-        .about-hero h1 {
-            font-family: 'Bruno Ace', sans-serif;
-            font-size: clamp(2.4rem, 5.5vw, 3.6rem);
-            background: linear-gradient(135deg, #FFFFFF 0%, #4C8CE4 45%, #00C950 100%);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            margin-bottom: 20px;
-            letter-spacing: -0.03em;
-            text-transform: uppercase;
-            position: relative;
-            z-index: 1;
-            line-height: 1.2;
-        }
-        .about-hero .tagline {
-            font-family: 'Reddit Sans', sans-serif;
-            font-size: 1.25rem;
-            color: rgba(233, 239, 255, 0.7);
-            max-width: 620px;
-            margin: 0 auto;
-            line-height: 1.6;
-            font-weight: 400;
-            position: relative;
-            z-index: 1;
-        }
-        .about-hero .tagline strong {
-            color: #00C950;
-            font-weight: 700;
-        }
-
-        /* Section blocks */
-        .about-section {
-            margin-bottom: 64px;
-            padding: 44px 48px;
-            background: rgba(15, 23, 42, 0.55);
-            backdrop-filter: blur(14px);
-            -webkit-backdrop-filter: blur(14px);
-            border: 1px solid rgba(76, 140, 228, 0.18);
-            border-radius: 28px;
-            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
-            position: relative;
-            overflow: hidden;
-        }
-        .about-section::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 4px;
-            height: 100%;
-            background: linear-gradient(180deg, #4C8CE4, #00C950);
-            border-radius: 0 4px 4px 0;
-            transition: width 0.35s ease;
-        }
-        .about-section:hover {
-            border-color: rgba(76, 140, 228, 0.45);
-            box-shadow: 0 18px 50px rgba(76, 140, 228, 0.18);
-            transform: translateY(-4px);
-        }
-        .about-section:hover::after {
-            width: 6px;
-        }
-
-        .about-section .section-icon {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 56px;
-            height: 56px;
-            border-radius: 18px;
-            background: linear-gradient(135deg, rgba(76, 140, 228, 0.2), rgba(0, 201, 80, 0.1));
-            border: 1.5px solid rgba(76, 140, 228, 0.3);
-            margin-bottom: 22px;
-            color: #4C8CE4;
-            font-size: 1.5rem;
-            transition: all 0.3s;
-        }
-        .about-section:hover .section-icon {
-            background: linear-gradient(135deg, rgba(76, 140, 228, 0.35), rgba(0, 201, 80, 0.2));
-            border-color: #4C8CE4;
-            box-shadow: 0 0 28px rgba(76, 140, 228, 0.3);
-            color: #6BA3F5;
-        }
-
-        .about-section h2 {
-            font-family: 'Inter', sans-serif;
-            font-weight: 800;
-            font-size: 1.7rem;
-            color: #FFFFFF;
-            margin-bottom: 16px;
-            letter-spacing: -0.01em;
-        }
-        .about-section p {
-            font-family: 'Reddit Sans', sans-serif;
-            font-size: 1.05rem;
-            line-height: 1.8;
-            color: rgba(233, 239, 255, 0.75);
-            margin-bottom: 12px;
-        }
-        .about-section p:last-child {
-            margin-bottom: 0;
-        }
-        .about-section .highlight {
-            color: #00C950;
-            font-weight: 600;
-        }
-        .about-section .accent {
-            color: #6BA3F5;
-            font-weight: 600;
-        }
-
-        /* Two-column layout for mission & vision */
-        .about-dual-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 28px;
-            margin-bottom: 64px;
-        }
-        .about-dual-grid .about-section {
-            margin-bottom: 0;
-        }
-
-        /* Core values row */
-        .values-strip {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 18px;
-            justify-content: center;
-            margin-bottom: 48px;
-        }
-        .value-chip {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            padding: 14px 26px;
-            background: rgba(76, 140, 228, 0.08);
-            border: 1px solid rgba(76, 140, 228, 0.2);
-            border-radius: 50px;
-            font-family: 'Inter', sans-serif;
-            font-weight: 600;
-            font-size: 0.95rem;
-            color: #E9EFFF;
-            transition: all 0.3s;
-        }
-        .value-chip i {
-            color: #00C950;
-            font-size: 1rem;
-        }
-        .value-chip:hover {
-            background: rgba(76, 140, 228, 0.18);
-            border-color: #4C8CE4;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(76, 140, 228, 0.2);
-        }
-
-        /* Responsive tweaks */
-        @media (max-width: 768px) {
-            .about-page-container {
-                padding: 50px 20px;
-            }
-            .about-section {
-                padding: 30px 24px;
-            }
-            .about-dual-grid {
-                grid-template-columns: 1fr;
-                gap: 24px;
-            }
-            .about-hero h1 {
-                font-size: 2rem;
-            }
-            .about-hero .tagline {
-                font-size: 1.05rem;
-            }
-            .value-chip {
-                padding: 10px 18px;
-                font-size: 0.85rem;
-            }
-        }
-        @media (max-width: 480px) {
-            .about-page-container {
-                padding: 40px 14px;
-            }
-            .about-section {
-                padding: 22px 18px;
-                border-radius: 20px;
-            }
-            .about-section h2 {
-                font-size: 1.35rem;
-            }
-            .about-section p {
-                font-size: 0.95rem;
-            }
-            .about-hero h1 {
-                font-size: 1.6rem;
-            }
-        }
-    </style>
 </head>
 <body>
 
@@ -249,7 +24,7 @@
     <header class="header" id="header">
         <a class="header__logo-group" href="index.html">
             <div class="header__logo-icon">
-                <img src="img/web_logo.png" alt="LABYRINTH" class="logo-img" onerror="this.src='https://placehold.co/40x40?text=L'">
+                <img src="img/web_logo.png" alt="LABYRINTH" class="logo-img">
             </div>
             <span class="header__brand">LABYRINTH</span>
         </a>
@@ -273,75 +48,76 @@
         </nav>
     </header>
 
-    <!-- ========== MAIN CONTENT ========== -->
     <main>
-        <div class="about-page-container">
-
-            <!-- Hero -->
-            <div class="about-hero">
-                <h1>ENTER LABYRINTH</h1>
-                <p class="tagline">Jump straight into the fun. <strong>Discover, explore, and play.</strong></p>
+        <!-- HERO -->
+        <section class="about-hero-new">
+            <div class="hero-content">
+                <p class="hero-eyebrow">Welcome to the future of game discovery</p>
+                <h1 class="hero-title-large">ENTER<br><span>LABYRINTH</span></h1>
+                <p class="hero-sub">Jump straight into the fun. Discover, explore, and play the world's most compelling games — all in one place.</p>
             </div>
-
-            <!-- Core Values -->
-            <div class="values-strip">
-                <div class="value-chip"><i class="fas fa-compass"></i> Curated Discovery</div>
-                <div class="value-chip"><i class="fas fa-star"></i> Trusted Reviews</div>
-                <div class="value-chip"><i class="fas fa-bolt"></i> Fast & Intuitive</div>
-                <div class="value-chip"><i class="fas fa-users"></i> For Every Player</div>
-                <div class="value-chip"><i class="fas fa-shield-alt"></i> Reliable Info</div>
+            <div class="hero-scroll-indicator">
+                <span>Scroll to explore</span>
+                <i class="fas fa-chevron-down"></i>
             </div>
+        </section>
 
-            <!-- Website Introduction -->
-            <div class="about-section">
-                <div class="section-icon"><i class="fas fa-gamepad"></i></div>
-                <h2>Website Introduction</h2>
-                <p>Labyrinth is a gaming discovery platform that brings together <span class="highlight">carefully selected single-player and multiplayer games</span>, from trending hits to top-rated favorites, all in one place. Each title includes key details, reviews, and beginner-friendly guides to help users find the perfect match for their playstyle.</p>
-                <p>Built for <span class="accent">accessibility and efficiency</span>, the platform ensures that exploring games is both fast and enjoyable. With its organized structure and engaging presentation, Labyrinth transforms the process of choosing games into a seamless experience.</p>
+        <!-- CONTENT -->
+        <div class="about-content-new">
+            <!-- Introduction -->
+            <div class="info-block">
+                <div class="info-text">
+                    <span class="tag">Platform</span>
+                    <h2>Discover games, redefined</h2>
+                    <p>Labyrinth is a curated gaming discovery platform that brings together carefully selected <strong style="color:#00C950;">single‑player and multiplayer</strong> titles. Every game includes key details, authentic reviews, and beginner‑friendly guides — all designed to help you find the perfect match in seconds.</p>
+                    <p>Built for <strong style="color:#6BA3F5;">accessibility and speed</strong>, Labyrinth transforms the overwhelming choice of modern gaming into a seamless, enjoyable journey.</p>
+                </div>
+                <div class="info-visual">
+                    <div class="visual-card">
+                        <i class="fas fa-compass visual-icon-large"></i>
+                        <span class="floating-text">Explore</span>
+                    </div>
+                </div>
             </div>
 
             <!-- Objective -->
-            <div class="about-section">
-                <div class="section-icon"><i class="fas fa-bullseye"></i></div>
-                <h2>Objective</h2>
-                <p>Welcome to your next destination for discovering great games—where <span class="highlight">exploration is simple, engaging, and built around your playstyle</span>.</p>
-                <p>Labyrinth brings together essential game information in a clear and organized format, including descriptions, ratings, compatibility, developers, and release dates. Each detail is presented to help users quickly understand what a game offers, <span class="accent">reducing search time</span> and making decision-making easier.</p>
-                <p>Whether you enjoy immersive single-player adventures or competitive multiplayer battles, the platform provides curated categories such as single-player, multiplayer, trending, and top-rated games. This allows users to discover titles that match their preferences in a fast and enjoyable way.</p>
-                <p>To support informed choices, Labyrinth offers <span class="highlight">reliable reviews, structured ratings, and beginner-friendly indicators</span>. These features help players select games suited to their skill level and interests before committing their time or money.</p>
-                <p>The platform is designed to deliver a <span class="accent">smooth and intuitive user experience</span> through clean navigation and interactive elements. It serves students, casual gamers, and dedicated enthusiasts alike, creating a dependable hub for discovering meaningful gaming experiences.</p>
-                <p><strong style="color:#fff;">Start exploring and discover your next favorite game.</strong></p>
-            </div>
-
-            <!-- Purpose -->
-            <div class="about-section">
-                <div class="section-icon"><i class="fas fa-lightbulb"></i></div>
-                <h2>Purpose</h2>
-                <p><span class="highlight">Find your next game without the grind.</span></p>
-                <p>The purpose of Labyrinth is to provide <span class="accent">clear, organized, and reliable game information</span> that helps users make better gaming decisions. From descriptions and ratings to compatibility and release details, the platform ensures players can quickly determine which titles are worth their time.</p>
-                <p>With curated categories like single-player, multiplayer, trending, and top-rated, Labyrinth <span class="highlight">simplifies game discovery</span> while maintaining variety and relevance. Its goal is to make exploring games smooth, exciting, and consistently worthwhile.</p>
-            </div>
-
-            <!-- Mission & Vision (side by side) -->
-            <div class="about-dual-grid">
-                <!-- Mission -->
-                <div class="about-section">
-                    <div class="section-icon"><i class="fas fa-flag"></i></div>
-                    <h2>Mission Statement</h2>
-                    <p><span class="highlight">Guiding every player toward smarter and more confident game choices.</span></p>
-                    <p>Labyrinth's mission is to deliver a <span class="accent">reliable and engaging platform</span> where players can discover, explore, and evaluate games with confidence.</p>
-                    <p>Through accurate information, trusted reviews, and user-friendly design, the platform supports <span class="highlight">informed decision-making</span> for gamers of all levels. Labyrinth is committed to creating an accessible space where game discovery feels effortless and rewarding.</p>
+            <div class="info-block reverse">
+                <div class="info-text">
+                    <span class="tag">Objective</span>
+                    <h2>Built for your playstyle</h2>
+                    <p>Whether you crave immersive solo adventures or competitive multiplayer battles, Labyrinth organizes games into clear categories — <strong style="color:#fff;">single‑player, multiplayer, trending,</strong> and <strong style="color:#fff;">top‑rated</strong>. Every detail, from ratings to release dates, is presented so you can decide faster and play sooner.</p>
+                    <p>Our beginner‑friendly indicators and structured reviews help you choose games that truly fit your skill and mood.</p>
                 </div>
-
-                <!-- Vision -->
-                <div class="about-section">
-                    <div class="section-icon"><i class="fas fa-eye"></i></div>
-                    <h2>Vision Statement</h2>
-                    <p><span class="highlight">Level up the future of game discovery.</span></p>
-                    <p>Labyrinth envisions becoming a <span class="accent">trusted and innovative gaming hub</span> where every player can discover their next favorite title with confidence and ease.</p>
-                    <p>By continuously expanding its library, improving recommendations, and refining the browsing experience, the platform aims to <span class="highlight">remain relevant in the evolving gaming landscape</span>. Its vision is to create a space where game discovery is fast, immersive, and always worth coming back to.</p>
+                <div class="info-visual">
+                    <div class="visual-card">
+                        <i class="fas fa-gamepad visual-icon-large"></i>
+                        <span class="floating-text">Play Your Way</span>
+                    </div>
                 </div>
             </div>
 
+            <!-- Purpose full width -->
+            <div class="block-full">
+                <span class="tag">Purpose</span>
+                <h2>Find your next game without the grind.</h2>
+                <p>We exist to deliver <strong style="color:#6BA3F5;">clear, organized, and trustworthy</strong> game information. From descriptions and ratings to compatibility and release details, Labyrinth makes sure you know exactly which titles are worth your time — every single time.</p>
+            </div>
+
+            <!-- Mission & Vision -->
+            <div class="mission-vision-row">
+                <div class="mission-card">
+                    <div class="card-label">Mission</div>
+                    <h3>Guiding every player toward smarter choices</h3>
+                    <p>Labyrinth's mission is to provide a reliable, engaging space where players can discover, explore, and evaluate games with absolute confidence.</p>
+                    <p>Through accurate information, trusted reviews, and an effortless interface, we empower gamers of all levels to make informed decisions — without the noise.</p>
+                </div>
+                <div class="vision-card">
+                    <div class="card-label">Vision</div>
+                    <h3>Level up the future of discovery</h3>
+                    <p>We envision a world where every player can instantly find their next favorite title. By continuously expanding our library, refining recommendations, and pushing the boundaries of digital exploration, Labyrinth aims to become the most trusted, innovative gaming hub on the web.</p>
+                    <p>Game discovery should be fast, immersive, and always worth coming back to.</p>
+                </div>
+            </div>
         </div>
     </main>
 
@@ -356,7 +132,7 @@
         <div class="footer__copy">&copy; 2026 Labyrinth. All rights reserved.</div>
     </footer>
 
-    <!-- ========== SCRIPTS ========== -->
+    <!-- ========== SCRIPTS – order matches main/index.html ========== -->
     <script src="js/data.js"></script>
     <script src="js/search.js"></script>
     <script src="js/script.js"></script>
