@@ -159,7 +159,7 @@
         </video>
         <div class="hero__slide-overlay"></div>
         <div class="hero__slide-content">
-          <h1 class="hero__slide-title">${game.title.split(' ')[0]}<br><span class="hero__slide-title-accent">${game.title.split(' ').slice(1).join(' ') || game.title}</span></h1>
+          <h1 class="hero__slide-title">${game.titleWhite || game.title.split(' ')[0]}<br><span class="hero__slide-title-accent">${game.titleGradient || (game.title.split(' ').slice(1).join(' ') || game.title)}</span></h1>
           <p class="hero__slide-desc">${game.description.substring(0, 100)}...</p>
           <div class="hero__slide-meta"><span class="hero__badge">${game.review}</span><span class="hero__year">${game.releaseDate.split(' ')[2] || game.releaseDate}</span></div>
           <a href="game/${game.id}.html" class="hero__btn">DETAILS →</a>

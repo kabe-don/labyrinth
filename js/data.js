@@ -4,6 +4,8 @@ const GAMES_CATALOG = [
   {
     id: "sts2",
     title: "Slay the Spire II",
+    titleWhite: "Slay the",
+    titleGradient: "Spire II",
     tags: ["Roguelike", "Deckbuilding", "Strategy"],
     description: "The ultimate roguelike deckbuilder returns. New perils demand sharper strategies. Climb the spire alone or with friends.",
     review: "Overwhelmingly Positive",
@@ -27,6 +29,8 @@ const GAMES_CATALOG = [
   {
     id: "rdr2",
     title: "Red Dead Redemption 2",
+    titleWhite: "Red Dead",
+    titleGradient: "Redemption 2",
     tags: ["Action", "Adventure", "Open World"],
     description: "America, 1899. The end of the Wild West era has begun. Arthur Morgan and the Van der Linde gang are outlaws on the run.",
     review: "Very Positive",
@@ -42,14 +46,16 @@ const GAMES_CATALOG = [
     publisher: "Rockstar Games",
     rating: 4.6,
     stars: "★★★★☆",
-    video: "game_trailer/sp vid/rdr2 vid.mp4",           // category page video
-    heroVideo: "game_trailer/hero/RDR2.mp4",            // homepage hero video
+    video: "game_trailer/sp vid/rdr2 vid.mp4",
+    heroVideo: "game_trailer/hero/RDR2.mp4",
     bgImage: "img/games/rdr2-cover.jpg",
     duration: 24000
   },
   {
     id: "stardew",
     title: "Stardew Valley",
+    titleWhite: "Stardew",
+    titleGradient: "Valley",
     tags: ["RPG", "Simulation", "Cozy"],
     description: "Inherited an old farm plot. Turn overgrown fields into a thriving home. Grow crops, raise animals, fish, mine, and build relationships.",
     review: "Overwhelmingly Positive",
@@ -73,6 +79,8 @@ const GAMES_CATALOG = [
   {
     id: "itt",
     title: "It Takes Two",
+    titleWhite: "It Takes",
+    titleGradient: "Two",
     tags: ["Co-op", "Adventure", "Story Rich"],
     description: "A fun emotional co‑op adventure. Cody and May, turned into tiny dolls, must work together to mend their relationship.",
     review: "Overwhelmingly Positive",
@@ -96,6 +104,8 @@ const GAMES_CATALOG = [
   {
     id: "graveyard",
     title: "Graveyard Keeper",
+    titleWhite: "Graveyard",
+    titleGradient: "Keeper",
     tags: ["RPG", "Simulation", "Dark Humor"],
     description: "Build and manage a medieval graveyard while facing ethical dilemmas. Bury bodies, craft items, and deal with quirky villagers.",
     review: "Very Positive",
@@ -119,6 +129,8 @@ const GAMES_CATALOG = [
   {
     id: "alittle",
     title: "A Little to the Left",
+    titleWhite: "A Little to",
+    titleGradient: "the Left",
     tags: ["Puzzle", "Cozy", "Strategy"],
     description: "Sort, stack, and organize household items. Watch out for a mischievous cat! A tidy puzzle game with multiple solutions.",
     review: "Very Positive",
@@ -142,6 +154,8 @@ const GAMES_CATALOG = [
   {
     id: "picopark",
     title: "Pico Park",
+    titleWhite: "Pico",
+    titleGradient: "Park",
     tags: ["Multiplayer", "Puzzle", "Cute"],
     description: "Work together with friends to solve puzzles in this charming cooperative game. Teamwork is key!",
     review: "Very Positive",
@@ -165,6 +179,8 @@ const GAMES_CATALOG = [
   {
     id: "cod",
     title: "Call of Duty: Black Ops III",
+    titleWhite: "Call of Duty:",
+    titleGradient: "Black Ops III",
     tags: ["FPS", "Multiplayer", "Action"],
     description: "A dark, twisted future where lines blur between humanity and military robotics. Wall‑run, slide, and fight in 2065.",
     review: "Very Positive",
