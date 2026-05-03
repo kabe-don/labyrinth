@@ -40,12 +40,12 @@
         <div class="game-hero__content">
             <div class="game-hero__left">
                 <div class="game-hero__cover">
-                    <img src="../img/games/rdr2-thumb_tall.jpg" alt="Cover" onerror="this.style.background='#1a2740'">
+                    <img src="../img/games/rdr2-thumb_tall.jpg" alt="Cover">
                 </div>
                 <div class="hero-dev-badge"><strong>DEVELOPER</strong> / Rockstar Games</div>
                 <div class="hero-dev-badge"><strong>PUBLISHER</strong> / Rockstar Games</div>
                 <a href="https://store.steampowered.com/app/1174180/Red_Dead_Redemption_2/" target="_blank" class="hero-steam-btn">
-                    <img src="../img/platforms/steam.png" alt="Steam" onerror="this.style.display='none'"> STEAM REDIRECT
+                    <img src="../img/platforms/steam.png" alt="Steam"> STEAM REDIRECT
                 </a>
                 <div class="hero-release-date">Release Date: October 26, 2018</div>
             </div>
@@ -100,16 +100,7 @@
         <div class="gallery-container">
             <h2 class="section-title">Game Screenshots Gallery</h2>
             <div class="carousel-container">
-                <div class="carousel-track">
-                    <div class="carousel-card"><img src="../img/games/rdr2-1.jpg" alt="Screenshot 1" loading="lazy"><span class="carousel-card__label">Game Screenshot 1</span></div>
-                    <div class="carousel-card"><img src="../img/games/rdr2-2.jpg" alt="Screenshot 2" loading="lazy"><span class="carousel-card__label">Game Screenshot 2</span></div>
-                    <div class="carousel-card"><img src="../img/games/rdr2-3.jpg" alt="Screenshot 3" loading="lazy"><span class="carousel-card__label">Game Screenshot 3</span></div>
-                    <div class="carousel-card"><img src="../img/games/rdr2-4.jpg" alt="Screenshot 4" loading="lazy"><span class="carousel-card__label">Game Screenshot 4</span></div>
-                    <div class="carousel-card"><img src="../img/games/rdr2-1.jpg" alt="Screenshot 1" loading="lazy"><span class="carousel-card__label">Game Screenshot 1</span></div>
-                    <div class="carousel-card"><img src="../img/games/rdr2-2.jpg" alt="Screenshot 2" loading="lazy"><span class="carousel-card__label">Game Screenshot 2</span></div>
-                    <div class="carousel-card"><img src="../img/games/rdr2-3.jpg" alt="Screenshot 3" loading="lazy"><span class="carousel-card__label">Game Screenshot 3</span></div>
-                    <div class="carousel-card"><img src="../img/games/rdr2-4.jpg" alt="Screenshot 4" loading="lazy"><span class="carousel-card__label">Game Screenshot 4</span></div>
-                </div>
+                <div class="carousel-track"></div>
             </div>
         </div>
     </section>
@@ -118,7 +109,7 @@
         <div class="review-container">
             <h2 class="section-title">Game Review</h2>
             <div class="review-card">
-                <p>Red Dead Redemption 2 delivers a gripping narrative experience that blends action, exploration, and character‑driven storytelling in a richly detailed open world. The game captures the harsh beauty of the Wild West through expansive landscapes, dynamic encounters, and authentic period‑inspired design. Combat feels engaging, with classic shootouts and horseback chases adding excitement throughout the journey. Beyond its action elements, the game stands out for its emotional depth and strong character development, making players invested in Arthur Morgan’s personal struggle. Its balance of freedom and storytelling creates an unforgettable adventure that continues to resonate with players years after release.</p>
+                <p>Red Dead Redemption 2 delivers a gripping narrative experience that blends action, exploration, and character‑driven storytelling in a richly detailed open world. The game captures the harsh beauty of the Wild West through expansive landscapes, dynamic encounters, and authentic period‑inspired design. Combat feels engaging, with classic shootouts and horseback chases adding excitement throughout the journey. Beyond its action elements, the game stands out for its emotional depth and strong character development, making players invested in Arthur Morgan's personal struggle. Its balance of freedom and storytelling creates an unforgettable adventure that continues to resonate with players years after release.</p>
             </div>
         </div>
     </section>
@@ -146,11 +137,31 @@
         <div class="footer__copy">&copy; 2026 Labyrinth. All rights reserved.</div>
     </footer>
 
+    <script src="../js/data.js"></script>
     <script src="../js/search.js"></script>
     <script>
-        window.addEventListener('scroll', () => {
-            document.getElementById('header').classList.toggle('scrolled', window.scrollY > 20);
-        });
+    window.addEventListener('scroll', () => {
+        document.getElementById('header').classList.toggle('scrolled', window.scrollY > 20);
+    });
+    (function() {
+        const gameId = window.location.pathname.split('/').pop().replace('.html', '');
+        const game = GAMES_CATALOG.find(g => g.id === gameId);
+        if (!game) return;
+        const galleryImages = game.gallery;
+        const track = document.querySelector('.carousel-track');
+        if (track) {
+            track.innerHTML = '';
+            const imagesToShow = [...galleryImages, ...galleryImages];
+            imagesToShow.forEach((src, idx) => {
+                const card = document.createElement('div');
+                card.className = 'carousel-card';
+                // 🔧 FIX: prepend '../' to make path relative to /game/ folder
+                const fixedSrc = src.startsWith('/') ? src : `../${src}`;
+                card.innerHTML = `<img src="${fixedSrc}" alt="Screenshot ${idx+1}" loading="lazy"><span class="carousel-card__label">Game Screenshot ${(idx % galleryImages.length)+1}</span>`;
+                track.appendChild(card);
+            });
+        }
+    })();
     </script>
 </body>
 </html>

@@ -1,5 +1,6 @@
+// js/script.js – Homepage logic (splash, hero carousel, dynamic sections)
 (function() {
-  /* ---------- splash screen ---------- */
+  // ---------- Splash Screen ----------
   const splashScreen = document.getElementById('splashScreen');
   if (!sessionStorage.getItem('splashShown')) {
     sessionStorage.setItem('splashShown', 'true');
@@ -10,147 +11,59 @@
     splashScreen.classList.add('hidden');
   }
 
-  /* ---------- game data (platforms corrected) ---------- */
-  const games = [
-    {
-      id: 'rdr2',
-      title: 'Red Dead Redemption 2',
-      tags: ['Action', 'Adventure', 'Open World'],
-      description: 'America, 1899. The end of the Wild West era has begun.',
-      review: 'Very Positive',
-      releaseDate: 'Oct 26, 2018',
-      platforms: ['win', 'ps', 'xbox'],
-      thumb: 'img/games/rdr2-thumb.jpg',
-      topThumb: 'img/games/rdr2-thumb_tall.jpg',
-      gallery: ['img/games/rdr2-1.jpg', 'img/games/rdr2-2.jpg', 'img/games/rdr2-3.jpg', 'img/games/rdr2-4.jpg'],
-      category: 'single'
-    },
-    {
-      id: 'stardew',
-      title: 'Stardew Valley',
-      tags: ['RPG', 'Simulation', 'Cozy'],
-      description: 'Inherited an old farm plot. Turn fields into a thriving home.',
-      review: 'Overwhelmingly Positive',
-      releaseDate: 'Feb 26, 2016',
-      platforms: ['win', 'mac', 'ns', 'ps', 'xbox'],
-      thumb: 'img/games/sv-thumb.jpg',
-      topThumb: 'img/games/sv-thumb_tall.jpg',
-      gallery: ['img/games/sv-1.jpg', 'img/games/sv-2.jpg', 'img/games/sv-3.jpg', 'img/games/sv-4.jpg'],
-      category: 'single'
-    },
-    {
-      id: 'itt',
-      title: 'It Takes Two',
-      tags: ['Co-op', 'Adventure', 'Story Rich'],
-      description: 'A fun emotional co‑op adventure. Cody and May, turned into tiny dolls, must work together.',
-      review: 'Overwhelmingly Positive',
-      releaseDate: 'Mar 26, 2021',
-      platforms: ['win', 'ns', 'ps', 'xbox',],
-      thumb: 'img/games/itt-thumb.jpg',
-      topThumb: 'img/games/itt-thumb_tall.jpg',
-      gallery: ['img/games/itt-1.jpg', 'img/games/itt-2.jpg', 'img/games/itt-3.jpg', 'img/games/itt-4.jpg'],
-      category: 'multi'
-    },
-    {
-      id: 'graveyard',
-      title: 'Graveyard Keeper',
-      tags: ['RPG', 'Simulation', 'Dark Humor'],
-      description: 'Build and manage a medieval graveyard while facing ethical dilemmas.',
-      review: 'Very Positive',
-      releaseDate: 'Aug 15, 2018',
-      platforms: ['win', 'mac', 'ns', 'ps', 'xbox'],
-      thumb: 'img/games/gk-thumb.jpg',
-      topThumb: 'img/games/gk-thumb_tall.jpg',
-      gallery: ['img/games/gk-1.jpg', 'img/games/gk-2.jpg', 'img/games/gk-3.jpg', 'img/games/gk-4.jpg'],
-      category: 'single'
-    },
-    {
-      id: 'alittle',
-      title: 'A Little to the Left',
-      tags: ['Puzzle', 'Cozy', 'Strategy'],
-      description: 'Sort, stack, and organize household items. Watch out for a mischievous cat!',
-      review: 'Very Positive',
-      releaseDate: 'Nov 8, 2022',
-      platforms: ['win', 'mac', 'ns', 'ps', 'xbox'],
-      thumb: 'img/games/alttl-thumb.jpg',
-      topThumb: 'img/games/alttl-thumb_tall.jpg',
-      gallery: ['img/games/alttl-1.png', 'img/games/alttl-2.png', 'img/games/alttl-3.jpg', 'img/games/alttl-4.jpg'],
-      category: 'single'
-    },
-    {
-      id: 'picopark',
-      title: 'Pico Park',
-      tags: ['Multiplayer', 'Puzzle', 'Cute'],
-      description: 'Work together with friends to solve puzzles in this charming cooperative game.',
-      review: 'Very Positive',
-      releaseDate: 'May 7, 2021',
-      platforms: ['win', 'mac', 'ns', 'ps', 'xbox'],
-      thumb: 'img/games/pp-thumb.jpg',
-      topThumb: 'img/games/pp-thumb_tall.jpg',
-      gallery: ['img/games/pp-1.jpg', 'img/games/pp-2.jpg', 'img/games/pp-3.jpg', 'img/games/pp-4.jpg'],
-      category: 'multi'
-    },
-    {
-      id: 'cod',
-      title: 'Call of Duty®: Black Ops III',
-      tags: ['FPS', 'Multiplayer', 'Action'],
-      description: 'A dark, twisted future where lines blur between humanity and military robotics.',
-      review: 'Very Positive',
-      releaseDate: 'Nov 6, 2015',
-      platforms: ['win', 'ps', 'xbox'],
-      thumb: 'img/games/bo3-thumb.jpg',
-      topThumb: 'img/games/bo3-thumb_tall.jpg',
-      gallery: ['img/games/bo3-1.jpg', 'img/games/bo3-2.jpg', 'img/games/bo3-3.jpg', 'img/games/bo3-4.jpg'],
-      category: 'multi'
-    },
-    {
-      id: 'sts2',
-      title: 'Slay the Spire II',
-      tags: ['Roguelike', 'Deckbuilding', 'Strategy'],
-      description: 'The ultimate roguelike deckbuilder returns. New perils demand sharper strategies.',
-      review: 'Overwhelmingly Positive',
-      releaseDate: 'Mar 6, 2026',
-      platforms: ['win', 'mac'],
-      thumb: 'img/games/sts2-thumb.jpg',
-      topThumb: 'img/games/sts2-thumb_tall.jpg',
-      gallery: ['img/games/sts2-1.jpg', 'img/games/sts2-2.jpg', 'img/games/sts2-3.jpg', 'img/games/sts2-4.jpg'],
-      category: 'multi'
-    }
-  ];
-
-  /* ---------- PNG platform icons ---------- */
+  // ---------- Platform icons helper ----------
   const platformIcons = {
     win: '<img src="img/platforms/win.png" alt="Windows" class="platform-icon">',
     mac: '<img src="img/platforms/mac.png" alt="Mac" class="platform-icon">',
-    ps:  '<img src="img/platforms/ps.png" alt="PlayStation" class="platform-icon">',
-    xbox:'<img src="img/platforms/xbox.png" alt="Xbox" class="platform-icon">',
-    ns:  '<img src="img/platforms/ns.png" alt="Nintendo Switch" class="platform-icon">'
+    ps: '<img src="img/platforms/ps.png" alt="PlayStation" class="platform-icon">',
+    xbox: '<img src="img/platforms/xbox.png" alt="Xbox" class="platform-icon">',
+    ns: '<img src="img/platforms/ns.png" alt="Nintendo Switch" class="platform-icon">'
   };
 
-  const state = {
-    all: { activeGameId: null, hoverTimeout: null }
-  };
-  let currentPage = 'all';
+  // ---------- Render Top Rated & Trending (custom selection) ----------
+  const topRatedGrid = document.querySelector('.top-rated-grid');
+  if (topRatedGrid && typeof TOP_RATED_GAMES !== 'undefined' && typeof GAMES_CATALOG !== 'undefined') {
+    const topGames = TOP_RATED_GAMES.map(id => GAMES_CATALOG.find(g => g.id === id)).filter(g => g);
+    topRatedGrid.innerHTML = topGames.map(game => `
+      <a href="game/${game.id}.html" class="top-rated-card">
+        <div class="top-rated-card__thumb">
+          <img src="${game.topThumb}" alt="${game.title}" class="top-rated-card__img" loading="lazy">
+        </div>
+        <div class="top-rated-card__body">
+          <span class="top-rated-card__title">${game.title}</span>
+          <span class="top-rated-card__review">${game.review}</span>
+          <div class="top-rated-card__meta">
+            <span class="top-rated-card__price">${game.releaseDate}</span>
+            <div class="top-rated-card__platforms">
+              ${game.platforms.map(p => platformIcons[p] || '').join('')}
+            </div>
+          </div>
+        </div>
+      </a>
+    `).join('');
+  }
 
-  /* ---------- render game list ---------- */
+  // ---------- Render All Games List & Preview Panel ----------
+  let activeGameId = null;
+  let hoverTimeout = null;
+
   function renderGameList() {
     const listEl = document.getElementById('gameListAll');
     if (!listEl) return;
     listEl.innerHTML = '';
-    games.forEach(game => {
+    GAMES_CATALOG.forEach(game => {
       const item = document.createElement('a');
       item.className = 'game-item';
       item.href = `game/${game.id}.html`;
       item.dataset.gameId = game.id;
-
       const thumbDiv = document.createElement('div');
       thumbDiv.className = 'game-thumb';
       const thumbImg = document.createElement('img');
       thumbImg.src = game.thumb;
       thumbImg.alt = game.title;
       thumbImg.className = 'game-thumb-img';
+      thumbImg.loading = 'lazy';
       thumbDiv.appendChild(thumbImg);
-
       const info = document.createElement('div');
       info.className = 'game-info';
       info.innerHTML = `
@@ -162,26 +75,25 @@
         </div>`;
       item.appendChild(thumbDiv);
       item.appendChild(info);
-
       item.addEventListener('mouseenter', () => {
-        if (state.all.hoverTimeout) clearTimeout(state.all.hoverTimeout);
-        state.all.hoverTimeout = setTimeout(() => setActiveGame(game.id), 100);
+        if (hoverTimeout) clearTimeout(hoverTimeout);
+        hoverTimeout = setTimeout(() => setActiveGame(game.id), 100);
       });
       item.addEventListener('mouseleave', () => {
-        if (state.all.hoverTimeout) clearTimeout(state.all.hoverTimeout);
+        if (hoverTimeout) clearTimeout(hoverTimeout);
       });
       listEl.appendChild(item);
     });
   }
 
   function setActiveGame(gameId) {
-    if (state.all.activeGameId === gameId) return;
+    if (activeGameId === gameId) return;
     const listEl = document.getElementById('gameListAll');
     listEl.querySelectorAll('.game-item').forEach(el => el.classList.remove('active'));
     const target = listEl.querySelector(`.game-item[data-game-id="${gameId}"]`);
     if (target) {
       target.classList.add('active');
-      state.all.activeGameId = gameId;
+      activeGameId = gameId;
       updatePreview(gameId);
       const panel = document.getElementById('previewPanelAll');
       if (panel) {
@@ -192,7 +104,7 @@
   }
 
   function updatePreview(gameId) {
-    const game = games.find(g => g.id === gameId);
+    const game = GAMES_CATALOG.find(g => g.id === gameId);
     if (!game) return;
     const contentEl = document.getElementById('previewContentAll');
     if (!contentEl) return;
@@ -207,12 +119,12 @@
         <div class="preview-gallery">
           ${game.gallery.map((c,i) => `
             <div class="preview-gallery-thumb${i===0?' active':''}">
-              <img src="${c}" alt="Screenshot ${i+1}" class="preview-gallery-img">
+              <img src="${c}" alt="Screenshot ${i+1}" class="preview-gallery-img" loading="lazy">
             </div>`).join('')}
         </div>`;
       contentEl.classList.remove('fading');
       contentEl.querySelectorAll('.preview-gallery-thumb').forEach(thumb => {
-        thumb.addEventListener('click', function () {
+        thumb.addEventListener('click', function() {
           contentEl.querySelectorAll('.preview-gallery-thumb').forEach(t => t.classList.remove('active'));
           this.classList.add('active');
         });
@@ -220,17 +132,80 @@
     }, 150);
   }
 
+  renderGameList();
+
+  // ---------- Hero Carousel (dynamic from GAMES_CATALOG) ----------
+  const heroSlidesData = GAMES_CATALOG.slice(0,8);
+  const heroSlidesContainer = document.getElementById('heroSlides');
+  const heroDotsContainer = document.getElementById('heroDots');
+  let currentSlide = 0;
+
+  function buildHeroCarousel() {
+    if (!heroSlidesContainer || !heroDotsContainer) {
+      console.error('Hero containers missing');
+      return;
+    }
+    heroSlidesContainer.innerHTML = '';
+    heroDotsContainer.innerHTML = '';
+    heroSlidesData.forEach((game, idx) => {
+      const slideDiv = document.createElement('div');
+      slideDiv.className = `hero__slide ${idx === 0 ? 'hero__slide--active' : ''}`;
+      slideDiv.dataset.index = idx;
+      // Use heroVideo or fallback to video
+      const videoSrc = game.heroVideo || game.video;
+      slideDiv.innerHTML = `
+        <video class="hero__slide-video" autoplay muted loop playsinline>
+          <source src="${videoSrc}" type="video/mp4">
+        </video>
+        <div class="hero__slide-overlay"></div>
+        <div class="hero__slide-content">
+          <h1 class="hero__slide-title">${game.title.split(' ')[0]}<br><span class="hero__slide-title-accent">${game.title.split(' ').slice(1).join(' ') || game.title}</span></h1>
+          <p class="hero__slide-desc">${game.description.substring(0, 100)}...</p>
+          <div class="hero__slide-meta"><span class="hero__badge">${game.review}</span><span class="hero__year">${game.releaseDate.split(' ')[2] || game.releaseDate}</span></div>
+          <a href="game/${game.id}.html" class="hero__btn">DETAILS →</a>
+        </div>
+      `;
+      heroSlidesContainer.appendChild(slideDiv);
+
+      const dot = document.createElement('button');
+      dot.className = `hero__dot ${idx === 0 ? 'hero__dot--active' : ''}`;
+      dot.dataset.slide = idx;
+      dot.addEventListener('click', () => goToSlide(idx));
+      heroDotsContainer.appendChild(dot);
+    });
+  }
+
+  function goToSlide(index) {
+    const slides = document.querySelectorAll('.hero__slide');
+    const dots = document.querySelectorAll('.hero__dot');
+    if (!slides.length) return;
+    slides.forEach(s => s.classList.remove('hero__slide--active'));
+    dots.forEach(d => d.classList.remove('hero__dot--active'));
+    currentSlide = index;
+    slides[currentSlide]?.classList.add('hero__slide--active');
+    dots[currentSlide]?.classList.add('hero__dot--active');
+  }
+
+  buildHeroCarousel();
+  const nextBtn = document.getElementById('heroNext');
+  const prevBtn = document.getElementById('heroPrev');
+  if (nextBtn) nextBtn.addEventListener('click', () => goToSlide((currentSlide + 1) % heroSlidesData.length));
+  if (prevBtn) prevBtn.addEventListener('click', () => goToSlide((currentSlide - 1 + heroSlidesData.length) % heroSlidesData.length));
+  setInterval(() => goToSlide((currentSlide + 1) % heroSlidesData.length), 5000);
+
+  // ---------- Navigation between "All Games" and "About" ----------
   function navigateTo(pageKey, skipScroll = false) {
     document.querySelectorAll('.page-section').forEach(s => s.classList.remove('active'));
     const section = document.getElementById(`page-${pageKey}`);
     if (section) section.classList.add('active');
-    currentPage = pageKey;
     if (pageKey === 'about') {
-      document.getElementById('globalSearch').value = '';
-      document.getElementById('searchDropdown').classList.remove('show');
+      const searchInput = document.getElementById('globalSearch');
+      if (searchInput) searchInput.value = '';
+      const dropdown = document.getElementById('searchDropdown');
+      if (dropdown) dropdown.classList.remove('show');
     }
-    state.all.activeGameId = null;
-    if (state.all.hoverTimeout) clearTimeout(state.all.hoverTimeout);
+    activeGameId = null;
+    if (hoverTimeout) clearTimeout(hoverTimeout);
     const contentEl = document.getElementById('previewContentAll');
     if (contentEl && pageKey !== 'about') {
       contentEl.innerHTML = '<div class="preview-title">Select a Game</div><p style="color:var(--text-muted);">Hover over a game to see details</p>';
@@ -243,39 +218,25 @@
 
   window.addEventListener('hashchange', () => {
     const hash = window.location.hash.replace('#', '');
-    if (hash === 'about') navigateTo('about');
-    else navigateTo('all');
+    navigateTo(hash === 'about' ? 'about' : 'all', true);
   });
-
   const initialHash = window.location.hash.replace('#', '');
-  if (initialHash === 'about') navigateTo('about');
-  else navigateTo('all', true);
+  navigateTo(initialHash === 'about' ? 'about' : 'all', true);
 
-  renderGameList();
-
-  /* logo scroll to top (if on same page) */
-  document.getElementById('logoTop').addEventListener('click', function(e) {
-    if (window.location.pathname.endsWith('index.html') || window.location.pathname === '/') {
-      e.preventDefault();
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-  });
-
-  /* hero carousel */
-  let currentSlide = 0;
-  const slides = document.querySelectorAll('.hero__slide');
-  const dots = document.querySelectorAll('.hero__dot');
-  function goToSlide(index) {
-    slides.forEach(s => s.classList.remove('hero__slide--active'));
-    dots.forEach(d => d.classList.remove('hero__dot--active'));
-    currentSlide = index;
-    slides[currentSlide].classList.add('hero__slide--active');
-    dots[currentSlide].classList.add('hero__dot--active');
+  // Logo scroll to top (only on homepage)
+  const logoTop = document.getElementById('logoTop');
+  if (logoTop) {
+    logoTop.addEventListener('click', (e) => {
+      if (window.location.pathname.endsWith('index.html') || window.location.pathname === '/' || window.location.pathname === '') {
+        e.preventDefault();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    });
   }
-  document.getElementById('heroNext').addEventListener('click', () => goToSlide((currentSlide + 1) % slides.length));
-  document.getElementById('heroPrev').addEventListener('click', () => goToSlide((currentSlide - 1 + slides.length) % slides.length));
-  dots.forEach(d => d.addEventListener('click', () => goToSlide(parseInt(d.dataset.slide))));
-  setInterval(() => goToSlide((currentSlide + 1) % slides.length), 5000);
 
-  window.addEventListener('scroll', () => document.getElementById('header').classList.toggle('scrolled', window.scrollY > 20));
+  // Sticky header
+  window.addEventListener('scroll', () => {
+    const header = document.getElementById('header');
+    if (header) header.classList.toggle('scrolled', window.scrollY > 20);
+  });
 })();

@@ -10,14 +10,14 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@400;700;900&family=Baloo+Bhaijaan+2:wght@500;700;800&family=Bruno+Ace&family=Inter:wght@200;300;400;500;600;700;800;900&family=Reddit+Sans:wght@300;400;500;600;700&family=REM:wght@400;500;600;700&display=swap" rel="stylesheet">
 
+  <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/category-styles.css">
   <link rel="stylesheet" href="css/responsive.css">
-  
 </head>
 <body data-category="multiplayer">
   <!-- ========== HEADER ========== -->
   <header class="header" id="header">
-    <a class="header__logo-group" href="index.html">
+    <a class="header__logo-group" id="logoTop" href="index.html">
       <div class="header__logo-icon">
         <img src="img/web_logo.png" alt="LABYRINTH" class="logo-img">
       </div>
@@ -52,7 +52,6 @@
         <section class="hero-section">
           <div class="slideshow-container">
             <button class="slideshow-arrow" id="prevBtn">&#10094;</button>
-
             <div class="slideshow-content" id="slideshowContent">
               <div class="slideshow-left" id="slideLeft">
                 <div>
@@ -60,7 +59,7 @@
                     <img id="slideCover" src="img/games/sts2-thumb_tall.jpg" alt="Game Cover">
                   </div>
                   <p class="game-description-text" id="slideDescription">
-                    Slay the Spire II is a strategic deck‑building roguelike game where players climb a mysterious tower filled with enemies, treasures, and challenges. Each run is unique, requiring players to adapt their strategy based on the cards they collect. The sequel expands on the original with new mechanics, characters, and multiplayer elements.
+                    Slay the Spire II is a strategic deck‑building roguelike game...
                   </p>
                 </div>
                 <div class="slide-bottom-row">
@@ -75,7 +74,6 @@
                   </div>
                 </div>
               </div>
-
               <div class="slideshow-right" id="slideRight">
                 <div class="video-placeholder" id="videoPlaceholder">
                   <div class="video-placeholder-icon">
@@ -90,16 +88,9 @@
                 </video>
               </div>
             </div>
-
             <button class="slideshow-arrow" id="nextBtn">&#10095;</button>
           </div>
-
-          <div class="slideshow-dots" id="slideshowDots">
-            <div class="dot active" data-index="0"></div>
-            <div class="dot" data-index="1"></div>
-            <div class="dot" data-index="2"></div>
-            <div class="dot" data-index="3"></div>
-          </div>
+          <div class="slideshow-dots" id="slideshowDots"></div>
         </section>
       </div>
     </div>
@@ -117,131 +108,53 @@
       <div class="section-header">
         <h2 class="section-title">Curated Picks</h2>
       </div>
-
       <div class="games-grid">
         <!-- Slay the Spire II -->
         <a href="game/sts2.html" class="game-card">
-          <div class="card-image">
-            <img src="img/games/sts2-thumb_tall.jpg" alt="Slay the Spire II">
-          </div>
+          <div class="card-image"><img src="img/games/sts2-thumb_tall.jpg" alt="Slay the Spire II"></div>
           <div class="card-content">
             <div>
-              <div class="card-header">
-                <h3 class="card-title">Slay the Spire II</h3>
-                <div class="platform-icons">
-                  <img class="platform-icon" src="img/platforms/win.png" alt="Windows">
-                  <img class="platform-icon" src="img/platforms/mac.png" alt="MacOS">
-                </div>
-              </div>
-              <div class="card-tags">
-                <span class="tag">Roguelike</span>
-                <span class="tag">Deckbuilding</span>
-                <span class="tag">Strategy</span>
-              </div>
-              <p class="card-description">
-                <b>Climb alone or with allies.</b> <br> Brave the ascent on your own, or play with up to 4 players...
-              </p>
+              <div class="card-header"><h3 class="card-title">Slay the Spire II</h3><div class="platform-icons"><img src="img/platforms/win.png" alt="Windows" class="platform-icon"><img src="img/platforms/mac.png" alt="MacOS" class="platform-icon"></div></div>
+              <div class="card-tags"><span class="tag">Roguelike</span><span class="tag">Deckbuilding</span><span class="tag">Strategy</span></div>
+              <p class="card-description"><b>Climb alone or with allies.</b> <br> Brave the ascent on your own, or play with up to 4 players...</p>
             </div>
-            <div class="card-footer">
-              <span></span>
-              <span class="card-size">4 GB</span>
-            </div>
+            <div class="card-footer"><span></span><span class="card-size">4 GB</span></div>
           </div>
         </a>
-
         <!-- It Takes Two -->
         <a href="game/itt.html" class="game-card">
-          <div class="card-image">
-            <img src="img/mp img/itt photoc.webp" alt="It Takes Two">
-          </div>
+          <div class="card-image"><img src="img/mp img/itt photoc.webp" alt="It Takes Two"></div>
           <div class="card-content">
             <div>
-              <div class="card-header">
-                <h3 class="card-title">It Takes Two</h3>
-                <div class="platform-icons">
-                  <img class="platform-icon" src="img/platforms/win.png" alt="Windows">
-                  <img class="platform-icon" src="img/platforms/ps.png" alt="PlayStation">
-                  <img class="platform-icon" src="img/platforms/xbox.png" alt="Xbox">
-                  <img class="platform-icon" src="img/platforms/ns.png" alt="Nintendo Switch">
-                </div>
-              </div>
-              <div class="card-tags">
-                <span class="tag">Co-op</span>
-                <span class="tag">Adventure</span>
-                <span class="tag">Funny</span>
-              </div>
-              <p class="card-description">
-                <b>Embark on the craziest journey of your life.</b> <br>Master unique and connected character abilities...
-              </p>
+              <div class="card-header"><h3 class="card-title">It Takes Two</h3><div class="platform-icons"><img src="img/platforms/win.png" alt="Windows" class="platform-icon"><img src="img/platforms/ps.png" alt="PlayStation" class="platform-icon"><img src="img/platforms/xbox.png" alt="Xbox" class="platform-icon"><img src="img/platforms/ns.png" alt="Nintendo Switch" class="platform-icon"></div></div>
+              <div class="card-tags"><span class="tag">Co-op</span><span class="tag">Adventure</span><span class="tag">Funny</span></div>
+              <p class="card-description"><b>Embark on the craziest journey of your life.</b> <br>Master unique and connected character abilities...</p>
             </div>
-            <div class="card-footer">
-              <span></span>
-              <span class="card-size">50 GB</span>
-            </div>
+            <div class="card-footer"><span></span><span class="card-size">50 GB</span></div>
           </div>
         </a>
-
         <!-- Pico Park -->
         <a href="game/picopark.html" class="game-card">
-          <div class="card-image">
-            <img src="img/mp img/pp photoc2.jpg" alt="Pico Park">
-          </div>
+          <div class="card-image"><img src="img/mp img/pp photoc2.jpg" alt="Pico Park"></div>
           <div class="card-content">
             <div>
-              <div class="card-header">
-                <h3 class="card-title">Pico Park</h3>
-                <div class="platform-icons">
-                  <img class="platform-icon" src="img/platforms/win.png" alt="Windows">
-                  <img class="platform-icon" src="img/platforms/mac.png" alt="MacOS">
-                  <img class="platform-icon" src="img/platforms/ps.png" alt="PlayStation">
-                  <img class="platform-icon" src="img/platforms/xbox.png" alt="Xbox">
-                  <img class="platform-icon" src="img/platforms/ns.png" alt="Nintendo Switch">
-                </div>
-              </div>
-              <div class="card-tags">
-                <span class="tag">Co-op</span>
-                <span class="tag">Puzzle</span>
-                <span class="tag">Cute</span>
-              </div>
-              <p class="card-description">
-                <b>The rule is quite simple:</b> <br>"Get all the keys and get to the goal and clear"...
-              </p>
+              <div class="card-header"><h3 class="card-title">Pico Park</h3><div class="platform-icons"><img src="img/platforms/win.png" alt="Windows" class="platform-icon"><img src="img/platforms/mac.png" alt="MacOS" class="platform-icon"><img src="img/platforms/ps.png" alt="PlayStation" class="platform-icon"><img src="img/platforms/xbox.png" alt="Xbox" class="platform-icon"><img src="img/platforms/ns.png" alt="Nintendo Switch" class="platform-icon"></div></div>
+              <div class="card-tags"><span class="tag">Co-op</span><span class="tag">Puzzle</span><span class="tag">Cute</span></div>
+              <p class="card-description"><b>The rule is quite simple:</b> <br>"Get all the keys and get to the goal and clear"...</p>
             </div>
-            <div class="card-footer">
-              <span></span>
-              <span class="card-size">~200 MB</span>
-            </div>
+            <div class="card-footer"><span></span><span class="card-size">~200 MB</span></div>
           </div>
         </a>
-
         <!-- Call of Duty: Black Ops III -->
         <a href="game/cod.html" class="game-card">
-          <div class="card-image">
-            <img src="img/mp img/cod photoc.webp" alt="Call of Duty: Black Ops III">
-          </div>
+          <div class="card-image"><img src="img/mp img/cod photoc.webp" alt="Call of Duty: Black Ops III"></div>
           <div class="card-content">
             <div>
-              <div class="card-header">
-                <h3 class="card-title">Call of Duty:<br>Black Ops III</h3>
-                <div class="platform-icons">
-                  <img class="platform-icon" src="img/platforms/win.png" alt="Windows">
-                  <img class="platform-icon" src="img/platforms/ps.png" alt="PlayStation">
-                  <img class="platform-icon" src="img/platforms/xbox.png" alt="Xbox">
-                </div>
-              </div>
-              <div class="card-tags">
-                <span class="tag">Action</span>
-                <span class="tag">FPS</span>
-                <span class="tag">Multiplayer</span>
-              </div>
-              <p class="card-description">
-                <b>Black Ops III</b> <br>combines three unique game modes: Campaign, Multiplayer, and Zombies...
-              </p>
+              <div class="card-header"><h3 class="card-title">Call of Duty:<br>Black Ops III</h3><div class="platform-icons"><img src="img/platforms/win.png" alt="Windows" class="platform-icon"><img src="img/platforms/ps.png" alt="PlayStation" class="platform-icon"><img src="img/platforms/xbox.png" alt="Xbox" class="platform-icon"></div></div>
+              <div class="card-tags"><span class="tag">Action</span><span class="tag">FPS</span><span class="tag">Multiplayer</span></div>
+              <p class="card-description"><b>Black Ops III</b> <br>combines three unique game modes: Campaign, Multiplayer, and Zombies...</p>
             </div>
-            <div class="card-footer">
-              <span></span>
-              <span class="card-size">100 GB</span>
-            </div>
+            <div class="card-footer"><span></span><span class="card-size">100 GB</span></div>
           </div>
         </a>
       </div>
@@ -259,6 +172,8 @@
     <div class="footer__copy">&copy; 2026 Labyrinth. All rights reserved.</div>
   </footer>
 
+  <script src="js/data.js"></script>
+  <script src="js/search.js"></script>
   <script src="js/category-script.js" defer></script>
 </body>
 </html>

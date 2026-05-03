@@ -13,17 +13,6 @@
     <!-- Main stylesheet -->
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/responsive.css">
-
-    <style>
-        /* Tiny fix for the sticky header gap */
-        .header {
-            width: 100%;
-            min-width: 100vw;
-            left: 0;
-            right: 0;
-            box-sizing: border-box;
-        }
-    </style>
 </head>
 <body>
 
@@ -38,7 +27,7 @@
         </div>
     </div>
 
-    <!-- ========== HEADER (gap‑free) ========== -->
+    <!-- ========== HEADER ========== -->
     <header class="header" id="header">
         <a class="header__logo-group" id="logoTop" href="index.html">
             <div class="header__logo-icon">
@@ -66,194 +55,20 @@
         </nav>
     </header>
 
-    <!-- ========== HERO CAROUSEL (8 slides) ========== -->
+    <!-- ========== HERO CAROUSEL (dynamic placeholder) ========== -->
     <section class="hero" id="hero">
-        <div class="hero__slides" id="heroSlides">
-            <!-- Slide 0: Slay the Spire II -->
-            <div class="hero__slide hero__slide--active" data-index="0">
-                <video class="hero__slide-video" autoplay muted loop playsinline>
-                    <source src="game_trailer/STS2.mp4" type="video/mp4">
-                </video>
-                <div class="hero__slide-overlay"></div>
-                <div class="hero__slide-content">
-                    <h1 class="hero__slide-title">Slay the<br><span class="hero__slide-title-accent">SPIRE II</span></h1>
-                    <p class="hero__slide-desc">The ultimate roguelike deckbuilder returns. New perils demand sharper strategies.</p>
-                    <div class="hero__slide-meta"><span class="hero__badge">Overwhelmingly positive</span><span class="hero__year">2026</span></div>
-                    <a href="game/sts2.html" class="hero__btn">DETAILS →</a>
-                </div>
-            </div>
-            <!-- Slide 1: Red Dead Redemption 2 -->
-            <div class="hero__slide" data-index="1">
-                <video class="hero__slide-video" autoplay muted loop playsinline>
-                    <source src="game_trailer/RDR2.mp4" type="video/mp4">
-                </video>
-                <div class="hero__slide-overlay"></div>
-                <div class="hero__slide-content">
-                    <h1 class="hero__slide-title">Red Dead<br><span class="hero__slide-title-accent">Redemption 2</span></h1>
-                    <p class="hero__slide-desc">America, 1899. The end of the Wild West era has begun.</p>
-                    <div class="hero__slide-meta"><span class="hero__badge">Very positive</span><span class="hero__year">2018</span></div>
-                    <a href="game/rdr2.html" class="hero__btn">DETAILS →</a>
-                </div>
-            </div>
-            <!-- Slide 2: It Takes Two -->
-            <div class="hero__slide" data-index="2">
-                <video class="hero__slide-video" autoplay muted loop playsinline>
-                    <source src="game_trailer/ITT.mp4" type="video/mp4">
-                </video>
-                <div class="hero__slide-overlay"></div>
-                <div class="hero__slide-content">
-                    <h1 class="hero__slide-title">It Takes<br><span class="hero__slide-title-accent">Two</span></h1>
-                    <p class="hero__slide-desc">A fun emotional co‑op adventure. Cody and May must work together.</p>
-                    <div class="hero__slide-meta"><span class="hero__badge">Overwhelmingly positive</span><span class="hero__year">2021</span></div>
-                    <a href="game/itt.html" class="hero__btn">DETAILS →</a>
-                </div>
-            </div>
-            <!-- Slide 3: Stardew Valley -->
-            <div class="hero__slide" data-index="3">
-                <video class="hero__slide-video" autoplay muted loop playsinline>
-                    <source src="game_trailer/SV.mp4" type="video/mp4">
-                </video>
-                <div class="hero__slide-overlay"></div>
-                <div class="hero__slide-content">
-                    <h1 class="hero__slide-title">Stardew<br><span class="hero__slide-title-accent">Valley</span></h1>
-                    <p class="hero__slide-desc">Turn overgrown fields into a thriving farm. The cozy life awaits.</p>
-                    <div class="hero__slide-meta"><span class="hero__badge">Overwhelmingly positive</span><span class="hero__year">2016</span></div>
-                    <a href="game/stardew.html" class="hero__btn">DETAILS →</a>
-                </div>
-            </div>
-            <!-- Slide 4: Graveyard Keeper -->
-            <div class="hero__slide" data-index="4">
-                <video class="hero__slide-video" autoplay muted loop playsinline>
-                    <source src="game_trailer/GK.mp4" type="video/mp4">
-                </video>
-                <div class="hero__slide-overlay"></div>
-                <div class="hero__slide-content">
-                    <h1 class="hero__slide-title">Graveyard<br><span class="hero__slide-title-accent">Keeper</span></h1>
-                    <p class="hero__slide-desc">Build and manage a medieval graveyard. Ethical dilemmas included.</p>
-                    <div class="hero__slide-meta"><span class="hero__badge">Very positive</span><span class="hero__year">2018</span></div>
-                    <a href="game/graveyard.html" class="hero__btn">DETAILS →</a>
-                </div>
-            </div>
-            <!-- Slide 5: A Little to the Left -->
-            <div class="hero__slide" data-index="5">
-                <video class="hero__slide-video" autoplay muted loop playsinline>
-                    <source src="game_trailer/ALTTL.mp4" type="video/mp4">
-                </video>
-                <div class="hero__slide-overlay"></div>
-                <div class="hero__slide-content">
-                    <h1 class="hero__slide-title">A Little to<br><span class="hero__slide-title-accent">the Left</span></h1>
-                    <p class="hero__slide-desc">Sort, stack, and organize everyday objects. Watch out for the cat!</p>
-                    <div class="hero__slide-meta"><span class="hero__badge">Very positive</span><span class="hero__year">2022</span></div>
-                    <a href="game/alittle.html" class="hero__btn">DETAILS →</a>
-                </div>
-            </div>
-            <!-- Slide 6: Pico Park -->
-            <div class="hero__slide" data-index="6">
-                <video class="hero__slide-video" autoplay muted loop playsinline>
-                    <source src="game_trailer/PP.mp4" type="video/mp4">
-                </video>
-                <div class="hero__slide-overlay"></div>
-                <div class="hero__slide-content">
-                    <h1 class="hero__slide-title">Pico<br><span class="hero__slide-title-accent">Park</span></h1>
-                    <p class="hero__slide-desc">Work together with friends to solve cute puzzles. Cooperation is key!</p>
-                    <div class="hero__slide-meta"><span class="hero__badge">Very positive</span><span class="hero__year">2021</span></div>
-                    <a href="game/picopark.html" class="hero__btn">DETAILS →</a>
-                </div>
-            </div>
-            <!-- Slide 7: Call of Duty: Black Ops III -->
-            <div class="hero__slide" data-index="7">
-                <video class="hero__slide-video" autoplay muted loop playsinline>
-                    <source src="game_trailer/BO3.mp4" type="video/mp4">
-                </video>
-                <div class="hero__slide-overlay"></div>
-                <div class="hero__slide-content">
-                    <h1 class="hero__slide-title">Call of Duty®<br><span class="hero__slide-title-accent">Black Ops III</span></h1>
-                    <p class="hero__slide-desc">A dark, twisted future where humanity and robotics collide.</p>
-                    <div class="hero__slide-meta"><span class="hero__badge">Very positive</span><span class="hero__year">2015</span></div>
-                    <a href="game/cod.html" class="hero__btn">DETAILS →</a>
-                </div>
-            </div>
-        </div>
+        <div class="hero__slides" id="heroSlides"></div>
         <div class="hero__controls">
             <button class="hero__arrow" id="heroPrev">◂</button>
-            <div class="hero__dots" id="heroDots">
-                <button class="hero__dot hero__dot--active" data-slide="0"></button>
-                <button class="hero__dot" data-slide="1"></button>
-                <button class="hero__dot" data-slide="2"></button>
-                <button class="hero__dot" data-slide="3"></button>
-                <button class="hero__dot" data-slide="4"></button>
-                <button class="hero__dot" data-slide="5"></button>
-                <button class="hero__dot" data-slide="6"></button>
-                <button class="hero__dot" data-slide="7"></button>
-            </div>
+            <div class="hero__dots" id="heroDots"></div>
             <button class="hero__arrow" id="heroNext">▸</button>
         </div>
     </section>
 
-    <!-- ========== TOP RATED & TRENDING (release dates) ========== -->
+    <!-- ========== TOP RATED & TRENDING (dynamic) ========== -->
     <section class="section-top-rated">
         <h2 class="section-heading">Top Rated and Trending</h2>
-        <div class="top-rated-grid">
-            <!-- Stardew Valley -->
-            <a href="game/stardew.html" class="top-rated-card">
-                <div class="top-rated-card__thumb">
-                    <img src="img/games/sv-thumb_tall.jpg" alt="Stardew Valley" class="top-rated-card__img">
-                </div>
-                <div class="top-rated-card__body">
-                    <span class="top-rated-card__title">Stardew Valley</span>
-                    <span class="top-rated-card__review">Overwhelmingly positive</span>
-                    <div class="top-rated-card__meta">
-                        <span class="top-rated-card__price">Feb 26, 2016</span>
-                        <div class="top-rated-card__platforms">
-                            <img src="img/platforms/win.png" alt="Windows" class="platform-icon">
-                            <img src="img/platforms/mac.png" alt="Mac" class="platform-icon">
-                            <img src="img/platforms/ns.png" alt="Nintendo Switch" class="platform-icon">
-                            <img src="img/platforms/ps.png" alt="PlayStation" class="platform-icon">
-                            <img src="img/platforms/xbox.png" alt="Xbox" class="platform-icon">
-                        </div>
-                    </div>
-                </div>
-            </a>
-            <!-- Pico Park -->
-            <a href="game/picopark.html" class="top-rated-card">
-                <div class="top-rated-card__thumb">
-                    <img src="img/games/pp-thumb_tall.jpg" alt="Pico Park" class="top-rated-card__img">
-                </div>
-                <div class="top-rated-card__body">
-                    <span class="top-rated-card__title">Pico Park</span>
-                    <span class="top-rated-card__review">Very positive</span>
-                    <div class="top-rated-card__meta">
-                        <span class="top-rated-card__price">May 7, 2021</span>
-                        <div class="top-rated-card__platforms">
-                            <img src="img/platforms/win.png" alt="Windows" class="platform-icon">
-                            <img src="img/platforms/mac.png" alt="Mac" class="platform-icon">
-                            <img src="img/platforms/ns.png" alt="Nintendo Switch" class="platform-icon">
-                            <img src="img/platforms/ps.png" alt="PlayStation" class="platform-icon">
-                            <img src="img/platforms/xbox.png" alt="Xbox" class="platform-icon">
-                        </div>
-                    </div>
-                </div>
-            </a>
-            <!-- It Takes Two -->
-            <a href="game/itt.html" class="top-rated-card">
-                <div class="top-rated-card__thumb">
-                    <img src="img/games/itt-thumb_tall.jpg" alt="It Takes Two" class="top-rated-card__img">
-                </div>
-                <div class="top-rated-card__body">
-                    <span class="top-rated-card__title">It Takes Two</span>
-                    <span class="top-rated-card__review">Overwhelmingly positive</span>
-                    <div class="top-rated-card__meta">
-                        <span class="top-rated-card__price">Mar 26, 2021</span>
-                        <div class="top-rated-card__platforms">
-                            <img src="img/platforms/win.png" alt="Windows" class="platform-icon">
-                            <img src="img/platforms/ns.png" alt="Nintendo Switch" class="platform-icon">
-                            <img src="img/platforms/ps.png" alt="PlayStation" class="platform-icon">
-                            <img src="img/platforms/xbox.png" alt="Xbox" class="platform-icon">
-                        </div>
-                    </div>
-                </div>
-            </a>
-        </div>
+        <div class="top-rated-grid"></div>
     </section>
 
     <!-- ========== CATEGORY BANNERS ========== -->
@@ -300,7 +115,7 @@
         </div>
     </section>
 
-    <!-- ========== FOOTER (no modal links) ========== -->
+    <!-- ========== FOOTER ========== -->
     <footer class="footer">
         <div class="footer__links">
             <a href="contacts.html" class="footer__link">Contacts</a> ·
@@ -312,6 +127,7 @@
     </footer>
 
     <!-- ========== SCRIPTS ========== -->
+    <script src="js/data.js"></script>
     <script src="js/search.js"></script>
     <script src="js/script.js"></script>
 </body>

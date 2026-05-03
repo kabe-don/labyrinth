@@ -40,12 +40,12 @@
         <div class="game-hero__content">
             <div class="game-hero__left">
                 <div class="game-hero__cover">
-                    <img src="../img/games/alttl-thumb_tall.jpg" alt="Cover" onerror="this.style.background='#1a2740'">
+                    <img src="../img/games/alttl-thumb_tall.jpg" alt="Cover">
                 </div>
                 <div class="hero-dev-badge"><strong>DEVELOPER</strong> / Max Inferno</div>
                 <div class="hero-dev-badge"><strong>PUBLISHER</strong> / Secret Mode</div>
                 <a href="https://store.steampowered.com/app/1629520/A_Little_to_the_Left/" target="_blank" class="hero-steam-btn">
-                    <img src="../img/platforms/steam.png" alt="Steam" onerror="this.style.display='none'"> STEAM REDIRECT
+                    <img src="../img/platforms/steam.png" alt="Steam"> STEAM REDIRECT
                 </a>
                 <div class="hero-release-date">Release Date: November 8, 2022</div>
             </div>
@@ -55,10 +55,10 @@
                     <span class="very-positive-badge">very positive</span>
                     <div class="platform-icons-wrapper">
                         <img src="../img/platforms/win.png" alt="Windows" class="platform-icon">
-                       <img src="../img/platforms/mac.png" alt="MacOS" class="platform-icon">
-                       <img src="../img/platforms/ps.png" alt="PlayStation" class="platform-icon">
-                       <img src="../img/platforms/xbox.png" alt="Xbox" class="platform-icon">
-                       <img src="../img/platforms/ns.png" alt="Nintendo Switch" class="platform-icon">
+                        <img src="../img/platforms/mac.png" alt="MacOS" class="platform-icon">
+                        <img src="../img/platforms/ps.png" alt="PlayStation" class="platform-icon">
+                        <img src="../img/platforms/xbox.png" alt="Xbox" class="platform-icon">
+                        <img src="../img/platforms/ns.png" alt="Nintendo Switch" class="platform-icon">
                     </div>
                 </div>
                 <div class="rating-info">
@@ -102,16 +102,7 @@
         <div class="gallery-container">
             <h2 class="section-title">Game Screenshots Gallery</h2>
             <div class="carousel-container">
-                <div class="carousel-track">
-                    <div class="carousel-card"><img src="../img/games/alttl-1.png" alt="Screenshot 1" loading="lazy"><span class="carousel-card__label">Game Screenshot 1</span></div>
-                    <div class="carousel-card"><img src="../img/games/alttl-2.png" alt="Screenshot 2" loading="lazy"><span class="carousel-card__label">Game Screenshot 2</span></div>
-                    <div class="carousel-card"><img src="../img/games/alttl-3.jpg" alt="Screenshot 3" loading="lazy"><span class="carousel-card__label">Game Screenshot 3</span></div>
-                    <div class="carousel-card"><img src="../img/games/alttl-4.jpg" alt="Screenshot 4" loading="lazy"><span class="carousel-card__label">Game Screenshot 4</span></div>
-                    <div class="carousel-card"><img src="../img/games/alttl-1.png" alt="Screenshot 1" loading="lazy"><span class="carousel-card__label">Game Screenshot 1</span></div>
-                    <div class="carousel-card"><img src="../img/games/alttl-2.png" alt="Screenshot 2" loading="lazy"><span class="carousel-card__label">Game Screenshot 2</span></div>
-                    <div class="carousel-card"><img src="../img/games/alttl-3.jpg" alt="Screenshot 3" loading="lazy"><span class="carousel-card__label">Game Screenshot 3</span></div>
-                    <div class="carousel-card"><img src="../img/games/alttl-4.jpg" alt="Screenshot 4" loading="lazy"><span class="carousel-card__label">Game Screenshot 4</span></div>
-                </div>
+                <div class="carousel-track"></div>
             </div>
         </div>
     </section>
@@ -148,11 +139,31 @@
         <div class="footer__copy">&copy; 2026 Labyrinth. All rights reserved.</div>
     </footer>
 
+    <script src="../js/data.js"></script>
     <script src="../js/search.js"></script>
     <script>
-        window.addEventListener('scroll', () => {
-            document.getElementById('header').classList.toggle('scrolled', window.scrollY > 20);
-        });
+    window.addEventListener('scroll', () => {
+        document.getElementById('header').classList.toggle('scrolled', window.scrollY > 20);
+    });
+    (function() {
+        const gameId = window.location.pathname.split('/').pop().replace('.html', '');
+        const game = GAMES_CATALOG.find(g => g.id === gameId);
+        if (!game) return;
+        const galleryImages = game.gallery;
+        const track = document.querySelector('.carousel-track');
+        if (track) {
+            track.innerHTML = '';
+            const imagesToShow = [...galleryImages, ...galleryImages];
+            imagesToShow.forEach((src, idx) => {
+                const card = document.createElement('div');
+                card.className = 'carousel-card';
+                // 🔧 FIX: prepend '../' to make path relative to /game/ folder
+                const fixedSrc = src.startsWith('/') ? src : `../${src}`;
+                card.innerHTML = `<img src="${fixedSrc}" alt="Screenshot ${idx+1}" loading="lazy"><span class="carousel-card__label">Game Screenshot ${(idx % galleryImages.length)+1}</span>`;
+                track.appendChild(card);
+            });
+        }
+    })();
     </script>
 </body>
 </html>
