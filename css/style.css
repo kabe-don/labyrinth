@@ -745,9 +745,13 @@ main::before {
 }
 .creators-title {
   font-family: var(--font-heading);
-  font-size: 40px;
+  font-size: 80px;
   margin-bottom: 50px;
-  color: #fff;
+  background: linear-gradient(135deg, #fff 35%, #4C8CE4 50%, #00C950 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-align: center;
 }
 .creators-grid {
   display: flex;
