@@ -1,4 +1,4 @@
-// js/category-script.js – Category slideshow (singleplayer / multiplayer)
+// js/category-script.js – Category slideshow with proper path encoding
 (function() {
   const category = document.body.dataset.category || 'singleplayer';
   const gamesInCategory = GAMES_CATALOG.filter(g => g.category === (category === 'singleplayer' ? 'single' : 'multi'));
@@ -24,6 +24,18 @@
   const videoOverlay = document.getElementById('videoOverlay');
   const videoOverlayContainer = document.getElementById('videoOverlayContainer');
   const videoOverlayClose = document.getElementById('videoOverlayClose');
+
+  // Fix path for category pages (add ../ and encode spaces)
+  function fixPath(path) {
+    if (!path) return '';
+    if (path.startsWith('http://') || path.startsWith('https://')) return path;
+    let newPath = path;
+    if (!path.startsWith('../') && !path.startsWith('/')) {
+      newPath = '../' + newPath;
+    }
+    // Encode spaces and other special characters
+    return encodeURI(newPath);
+  }
 
   function buildDots() {
     dotsContainer.innerHTML = '';
@@ -104,36 +116,43 @@
   function updateSlide(index) {
     if (isExpanded) collapseVideo();
     const slide = slides[index];
-    slideCover.src = slide.categoryThumb || slide.topThumb;
+    // Use topThumb for cover image (most reliable)
+    const coverSrc = slide.topThumb || slide.categoryThumb || slide.thumb;
+    const fixedCover = fixPath(coverSrc);
+    slideCover.src = fixedCover;
     slideDescription.textContent = slide.description;
     slideMeta.innerHTML = `<strong>Developer:</strong> ${slide.developer}<br><strong>Publisher:</strong> ${slide.publisher}<br><strong>Release Date:</strong> ${slide.releaseDate}`;
     slideStars.textContent = slide.stars;
     slideRatingText.textContent = `${slide.rating} / 5`;
-    heroBgImage.style.backgroundImage = `url('${slide.bgImage || slide.topThumb}')`;
+    const bgSrc = fixPath(slide.bgImage || coverSrc);
+    heroBgImage.style.backgroundImage = `url('${bgSrc}')`;
 
-    // ========== MAKE LEFT PANEL CLICKABLE ==========
+    // Make left panel clickable
     if (slideLeft) {
       slideLeft.style.cursor = 'pointer';
-      // Remove any previous listener by assigning a new onclick
       slideLeft.onclick = () => {
         window.location.href = `game/${slide.id}.html`;
       };
     }
 
+    // Set up video with encoded path
     stopVideoLoop();
     slideVideo.loop = false;
     slideVideo.autoplay = true;
     slideVideo.controls = false;
     slideVideo.muted = !userInteracted;
+    const videoSrc = fixPath(slide.video);
+    // Clear previous sources and append new one
+    while (slideVideo.firstChild) slideVideo.removeChild(slideVideo.firstChild);
     const source = document.createElement('source');
-    source.src = slide.video;
+    source.src = videoSrc;
     source.type = 'video/mp4';
-    slideVideo.innerHTML = '';
     slideVideo.appendChild(source);
     slideVideo.load();
     startVideoLoop();
-    slideVideo.play().catch(() => {});
+    slideVideo.play().catch(e => console.warn('Video autoplay blocked:', e));
 
+    // Update dots
     document.querySelectorAll('.dot').forEach((dot, i) => dot.classList.toggle('active', i === index));
     currentSlide = index;
     startAutoAdvance();
@@ -151,13 +170,4 @@
   window.addEventListener('scroll', () => {
     document.getElementById('header').classList.toggle('scrolled', window.scrollY > 20);
   });
-
-  // Make category heading clickable (reload same page)
-  const categoryHeading = document.getElementById('categoryHeading');
-  if (categoryHeading) {
-    categoryHeading.style.cursor = 'pointer';
-    categoryHeading.addEventListener('click', () => {
-      window.location.href = window.location.href;
-    });
-  }
 })();

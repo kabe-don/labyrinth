@@ -8,7 +8,7 @@ html {
     --bg-deep: #05204e; --bg-darker: #0f172a; --accent-blue: #4c8ce4; --accent-green: #00c950;
     --text-light: #e9efff; --text-muted: rgba(233, 239, 255, 0.55); --text-subtle: rgba(233, 239, 255, 0.75);
     --card-light: #e9efff; --font-heading: 'Bruno Ace', sans-serif; --font-body: 'Reddit Sans', sans-serif;
-    --font-ui: 'Inter', sans-serif; --font-nav: 'REM', sans-serif; --header-height: 68px;
+    --font-ui: 'Inter', sans-serif; --header-height: 68px;
     --transition-smooth: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 body { font-family: var(--font-body); background: var(--bg-deep); color: var(--text-light); min-height: 100vh; line-height: 1.5; -webkit-font-smoothing: antialiased; margin: 0; padding-top: 0; }

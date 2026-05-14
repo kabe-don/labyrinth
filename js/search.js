@@ -1,12 +1,30 @@
-// js/search.js – Global search using GAMES_CATALOG
+// js/search.js – Global search (relative paths)
 (function() {
   const searchInput = document.getElementById('globalSearch');
   const searchDropdown = document.getElementById('searchDropdown');
   if (!searchInput || !searchDropdown) return;
 
+  // Determine base path depending on current location
+  const isRoot = window.location.pathname === '/' || window.location.pathname.endsWith('index.html');
+  const isGlobalPage = window.location.pathname.includes('/global_pages/') && !window.location.pathname.includes('/game/');
   const isGamePage = window.location.pathname.includes('/game/');
-  const imgBase = isGamePage ? '../img/games/' : 'img/games/';
-  const linkBase = isGamePage ? '' : 'game/';
+
+  let imgBase = '';
+  let linkBase = '';
+
+  if (isRoot) {
+    imgBase = 'assets/img/games/';
+    linkBase = 'global_pages/game/';
+  } else if (isGlobalPage) {
+    imgBase = '../assets/img/games/';
+    linkBase = 'game/';
+  } else if (isGamePage) {
+    imgBase = '../../assets/img/games/';
+    linkBase = '';
+  } else {
+    imgBase = '../assets/img/games/';
+    linkBase = 'game/';
+  }
 
   function showDropdown(results) {
     searchDropdown.innerHTML = '';
@@ -17,10 +35,9 @@
     results.forEach(game => {
       const item = document.createElement('div');
       item.className = 'search-dropdown-item';
+      const thumbFile = game.thumb.split('/').pop();
       item.innerHTML = `
-        <div class="game-thumb-small">
-          <img src="${imgBase}${game.thumb.split('/').pop()}" alt="${game.title}" class="game-thumb-small-img">
-        </div>
+        <div class="game-thumb-small"><img src="${imgBase}${thumbFile}" alt="${game.title}" class="game-thumb-small-img"></div>
         <span class="game-title-small">${game.title}</span>
         <span class="game-price-small">${game.releaseDate}</span>
       `;

@@ -1,134 +1,113 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>LABYRINTH · Discover & Play</title>
-
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@400;700;900&family=Baloo+Bhaijaan+2:wght@500;700;800&family=Bruno+Ace&family=Inter:wght@200;300;400;500;600;700;800;900&family=Reddit+Sans:wght@300;400;500;600;700&family=REM:wght@400;500;600;700&display=swap" rel="stylesheet">
-
-    <!-- Main stylesheet -->
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/responsive.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>LABYRINTH · Discover & Play</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bruno+Ace&family=Inter:wght@200;300;400;500;600;700;800;900&family=Reddit+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/responsive.css">
 </head>
 <body>
 
-    <!-- ========== SPLASH SCREEN ========== -->
-    <div class="splash-screen" id="splashScreen">
-        <div class="splash-logo">
-            <img src="img/web_logo.png" alt="LABYRINTH" class="splash-logo-img">
-        </div>
-        <div class="splash-title">LABYRINTH</div>
-        <div class="splash-loader">
-            <div class="splash-loader-bar"></div>
-        </div>
+  <div class="splash-screen" id="splashScreen">
+    <div class="splash-logo">
+      <img src="assets/img/web_logo.png" alt="LABYRINTH" class="splash-logo-img">
     </div>
+    <div class="splash-title">LABYRINTH</div>
+    <div class="splash-loader">
+      <div class="splash-loader-bar"></div>
+    </div>
+  </div>
 
-    <!-- ========== HEADER ========== -->
-    <header class="header" id="header">
-        <a class="header__logo-group" id="logoTop" href="index.html">
-            <div class="header__logo-icon">
-                <img src="img/web_logo.png" alt="LABYRINTH" class="logo-img">
-            </div>
-            <span class="header__brand">LABYRINTH</span>
-        </a>
-        <nav class="header__nav">
-            <div class="nav-search">
-                <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <circle cx="11" cy="11" r="8"/>
-                    <line x1="21" y1="21" x2="16.65" y2="16.65"/>
-                </svg>
-                <input type="text" id="globalSearch" placeholder="Search games..." autocomplete="off">
-                <div class="search-dropdown" id="searchDropdown"></div>
-            </div>
-            <div class="header__nav-dropdown">
-                <span class="header__nav-link header__nav-dropdown-trigger">CATEGORY <span class="dropdown-arrow">▾</span></span>
-                <div class="header__dropdown-menu">
-                    <a class="header__dropdown-item" href="singleplayer.html">Single Player</a>
-                    <a class="header__dropdown-item" href="multiplayer.html">Multiplayer</a>
-                </div>
-            </div>
-            <a class="header__nav-link" href="about.html">About</a>
-        </nav>
-    </header>
-
-    <!-- ========== HERO CAROUSEL (dynamic placeholder) ========== -->
-    <section class="hero" id="hero">
-        <div class="hero__slides" id="heroSlides"></div>
-        <div class="hero__controls">
-            <button class="hero__arrow" id="heroPrev">◂</button>
-            <div class="hero__dots" id="heroDots"></div>
-            <button class="hero__arrow" id="heroNext">▸</button>
+  <header class="header" id="header">
+    <a class="header__logo-group" id="logoTop" href="index.html">
+      <div class="header__logo-icon">
+        <img src="assets/img/web_logo.png" alt="LABYRINTH" class="logo-img">
+      </div>
+      <span class="header__brand">LABYRINTH</span>
+    </a>
+    <nav class="header__nav">
+      <div class="nav-search">
+        <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"/>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+        </svg>
+        <input type="text" id="globalSearch" placeholder="Search games..." autocomplete="off">
+        <div class="search-dropdown" id="searchDropdown"></div>
+      </div>
+      <div class="header__nav-dropdown">
+        <span class="header__nav-link header__nav-dropdown-trigger">CATEGORY <span class="dropdown-arrow">▾</span></span>
+        <div class="header__dropdown-menu">
+          <a class="header__dropdown-item" href="global_pages/singleplayer.html">Single Player</a>
+          <a class="header__dropdown-item" href="global_pages/multiplayer.html">Multiplayer</a>
         </div>
-    </section>
+      </div>
+      <a class="header__nav-link" href="global_pages/about.html">About</a>
+    </nav>
+  </header>
 
-    <!-- ========== TOP RATED & TRENDING (dynamic) ========== -->
-    <section class="section-top-rated">
-        <h2 class="section-heading">Top Rated and Trending</h2>
-        <div class="top-rated-grid"></div>
-    </section>
+  <section class="hero" id="hero">
+    <div class="hero__slides" id="heroSlides"></div>
+    <div class="hero__controls">
+      <button class="hero__arrow" id="heroPrev">◂</button>
+      <div class="hero__dots" id="heroDots"></div>
+      <button class="hero__arrow" id="heroNext">▸</button>
+    </div>
+  </section>
 
-    <!-- ========== CATEGORY BANNERS ========== -->
-    <section class="section-categories">
-        <h2 class="section-heading">Collection / Categories</h2>
-        <div class="categories-grid">
-            <a class="category-banner category-banner--single" href="singleplayer.html">
-                <div class="category-banner__bg" style="background-image: url('img/banners/singleplayer-bg.jpg');"></div>
-                <div class="category-banner__overlay"></div>
-                <span class="category-banner__text">SINGLE PLAYER</span>
-            </a>
-            <a class="category-banner category-banner--multi" href="multiplayer.html">
-                <div class="category-banner__bg" style="background-image: url('img/banners/multiplayer-bg.jpg');"></div>
-                <div class="category-banner__overlay"></div>
-                <span class="category-banner__text">MULTIPLAYER</span>
-            </a>
+  <section class="section-top-rated">
+    <h2 class="section-heading">Top Rated and Trending</h2>
+    <div class="top-rated-grid"></div>
+  </section>
+
+  <section class="section-categories">
+    <h2 class="section-heading">Collection / Categories</h2>
+    <div class="categories-grid">
+      <a class="category-banner category-banner--single" href="global_pages/singleplayer.html">
+        <div class="category-banner__bg" style="background-image: url('assets/img/banners/singleplayer-bg.jpg');"></div>
+        <div class="category-banner__overlay"></div>
+        <span class="category-banner__text">SINGLE PLAYER</span>
+      </a>
+      <a class="category-banner category-banner--multi" href="global_pages/multiplayer.html">
+        <div class="category-banner__bg" style="background-image: url('assets/img/banners/multiplayer-bg.jpg');"></div>
+        <div class="category-banner__overlay"></div>
+        <span class="category-banner__text">MULTIPLAYER</span>
+      </a>
+    </div>
+  </section>
+
+  <section class="page-section active" id="page-all">
+    <div class="browse-container">
+      <div class="browse-left">
+        <h2 class="section-heading" style="position:sticky;top:0;background:var(--bg-deep);z-index:1;padding-bottom:12px;">All Games</h2>
+        <div class="game-list" id="gameListAll"></div>
+      </div>
+      <div class="browse-right">
+        <div class="preview-panel" id="previewPanelAll">
+          <div class="preview-content" id="previewContentAll">
+            <div class="preview-title">Select a Game</div>
+            <p style="color:var(--text-muted); margin-top:6px;">Hover over any game to see details</p>
+          </div>
         </div>
-    </section>
+      </div>
+    </div>
+  </section>
 
-    <!-- ========== ALL GAMES LIST ========== -->
-    <section class="page-section active" id="page-all">
-        <div class="browse-container">
-            <div class="browse-left">
-                <h2 class="section-heading" style="position:sticky;top:0;background:var(--bg-deep);z-index:1;padding-bottom:12px;">All Games</h2>
-                <div class="game-list" id="gameListAll"></div>
-            </div>
-            <div class="browse-right">
-                <div class="preview-panel" id="previewPanelAll">
-                    <div class="preview-content" id="previewContentAll">
-                        <div class="preview-title">Select a Game</div>
-                        <p style="color:var(--text-muted); margin-top:6px;">Hover over any game to see details</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+  <footer class="footer">
+    <div class="footer__links">
+      <a href="global_pages/contacts.html" class="footer__link">Contacts</a> ·
+      <a href="global_pages/faqs.html" class="footer__link">FAQs</a> ·
+      <a href="global_pages/references.html" class="footer__link">References</a> ·
+      <a href="global_pages/creator.html" class="footer__link">Creator Information</a>
+    </div>
+    <div class="footer__copy">&copy; 2026 Labyrinth. All rights reserved.</div>
+  </footer>
 
-    <!-- ========== ABOUT (in‑page) ========== -->
-    <section class="page-section" id="page-about">
-        <div class="about-content">
-            <h2>About LABYRINTH</h2>
-            <p>LABYRINTH is a modern game discovery platform built to connect players with extraordinary interactive experiences. We believe that the journey of finding your next adventure should be as thrilling as playing it.</p>
-            <p>Created by a passionate team of gamers and developers, this platform combines sleek design with powerful curation to bring you the best titles across all genres.</p>
-        </div>
-    </section>
-
-    <!-- ========== FOOTER ========== -->
-    <footer class="footer">
-        <div class="footer__links">
-            <a href="contacts.html" class="footer__link">Contacts</a> ·
-            <a href="faqs.html" class="footer__link">FAQs</a> ·
-            <a href="references.html" class="footer__link">References</a> ·
-            <a href="creator.html" class="footer__link">Creator Information</a>
-        </div>
-        <div class="footer__copy">&copy; 2026 Labyrinth. All rights reserved.</div>
-    </footer>
-
-    <!-- ========== SCRIPTS ========== -->
-    <script src="js/data.js"></script>
-    <script src="js/search.js"></script>
-    <script src="js/script.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/search.js"></script>
+  <script src="js/script.js"></script>
 </body>
 </html>

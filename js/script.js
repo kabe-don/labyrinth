@@ -1,6 +1,5 @@
-// js/script.js – Homepage logic (splash, hero carousel, dynamic sections)
+// js/script.js – Homepage logic (relative paths)
 (function() {
-  // ---------- Splash Screen ----------
   const splashScreen = document.getElementById('splashScreen');
   if (!sessionStorage.getItem('splashShown')) {
     sessionStorage.setItem('splashShown', 'true');
@@ -11,39 +10,32 @@
     splashScreen.classList.add('hidden');
   }
 
-  // ---------- Platform icons helper ----------
   const platformIcons = {
-    win: '<img src="img/platforms/win.png" alt="Windows" class="platform-icon">',
-    mac: '<img src="img/platforms/mac.png" alt="Mac" class="platform-icon">',
-    ps: '<img src="img/platforms/ps.png" alt="PlayStation" class="platform-icon">',
-    xbox: '<img src="img/platforms/xbox.png" alt="Xbox" class="platform-icon">',
-    ns: '<img src="img/platforms/ns.png" alt="Nintendo Switch" class="platform-icon">'
+    win: '<img src="assets/img/platforms/win.png" alt="Windows" class="platform-icon">',
+    mac: '<img src="assets/img/platforms/mac.png" alt="Mac" class="platform-icon">',
+    ps: '<img src="assets/img/platforms/ps.png" alt="PlayStation" class="platform-icon">',
+    xbox: '<img src="assets/img/platforms/xbox.png" alt="Xbox" class="platform-icon">',
+    ns: '<img src="assets/img/platforms/ns.png" alt="Nintendo Switch" class="platform-icon">'
   };
 
-  // ---------- Render Top Rated & Trending (custom selection) ----------
   const topRatedGrid = document.querySelector('.top-rated-grid');
   if (topRatedGrid && typeof TOP_RATED_GAMES !== 'undefined' && typeof GAMES_CATALOG !== 'undefined') {
     const topGames = TOP_RATED_GAMES.map(id => GAMES_CATALOG.find(g => g.id === id)).filter(g => g);
     topRatedGrid.innerHTML = topGames.map(game => `
-      <a href="game/${game.id}.html" class="top-rated-card">
-        <div class="top-rated-card__thumb">
-          <img src="${game.topThumb}" alt="${game.title}" class="top-rated-card__img" loading="lazy">
-        </div>
+      <a href="global_pages/game/${game.id}.html" class="top-rated-card">
+        <div class="top-rated-card__thumb"><img src="${game.topThumb}" alt="${game.title}" class="top-rated-card__img" loading="lazy"></div>
         <div class="top-rated-card__body">
           <span class="top-rated-card__title">${game.title}</span>
           <span class="top-rated-card__review">${game.review}</span>
           <div class="top-rated-card__meta">
             <span class="top-rated-card__price">${game.releaseDate}</span>
-            <div class="top-rated-card__platforms">
-              ${game.platforms.map(p => platformIcons[p] || '').join('')}
-            </div>
+            <div class="top-rated-card__platforms">${game.platforms.map(p => platformIcons[p] || '').join('')}</div>
           </div>
         </div>
       </a>
     `).join('');
   }
 
-  // ---------- Render All Games List & Preview Panel ----------
   let activeGameId = null;
   let hoverTimeout = null;
 
@@ -54,7 +46,7 @@
     GAMES_CATALOG.forEach(game => {
       const item = document.createElement('a');
       item.className = 'game-item';
-      item.href = `game/${game.id}.html`;
+      item.href = `global_pages/game/${game.id}.html`;
       item.dataset.gameId = game.id;
       const thumbDiv = document.createElement('div');
       thumbDiv.className = 'game-thumb';
@@ -117,10 +109,7 @@
         <div class="preview-description">${game.description}</div>
         <div class="preview-release">📅 ${game.releaseDate}</div>
         <div class="preview-gallery">
-          ${game.gallery.map((c,i) => `
-            <div class="preview-gallery-thumb${i===0?' active':''}">
-              <img src="${c}" alt="Screenshot ${i+1}" class="preview-gallery-img" loading="lazy">
-            </div>`).join('')}
+          ${game.gallery.map((c,i) => `<div class="preview-gallery-thumb${i===0?' active':''}"><img src="${c}" alt="Screenshot ${i+1}" class="preview-gallery-img" loading="lazy"></div>`).join('')}
         </div>`;
       contentEl.classList.remove('fading');
       contentEl.querySelectorAll('.preview-gallery-thumb').forEach(thumb => {
@@ -134,39 +123,31 @@
 
   renderGameList();
 
-  // ---------- Hero Carousel (dynamic from GAMES_CATALOG) ----------
   const heroSlidesData = GAMES_CATALOG.slice(0,8);
   const heroSlidesContainer = document.getElementById('heroSlides');
   const heroDotsContainer = document.getElementById('heroDots');
   let currentSlide = 0;
 
   function buildHeroCarousel() {
-    if (!heroSlidesContainer || !heroDotsContainer) {
-      console.error('Hero containers missing');
-      return;
-    }
+    if (!heroSlidesContainer || !heroDotsContainer) return;
     heroSlidesContainer.innerHTML = '';
     heroDotsContainer.innerHTML = '';
     heroSlidesData.forEach((game, idx) => {
       const slideDiv = document.createElement('div');
       slideDiv.className = `hero__slide ${idx === 0 ? 'hero__slide--active' : ''}`;
       slideDiv.dataset.index = idx;
-      // Use heroVideo or fallback to video
       const videoSrc = game.heroVideo || game.video;
       slideDiv.innerHTML = `
-        <video class="hero__slide-video" autoplay muted loop playsinline>
-          <source src="${videoSrc}" type="video/mp4">
-        </video>
+        <video class="hero__slide-video" autoplay muted loop playsinline><source src="${videoSrc}" type="video/mp4"></video>
         <div class="hero__slide-overlay"></div>
         <div class="hero__slide-content">
           <h1 class="hero__slide-title">${game.titleWhite || game.title.split(' ')[0]}<br><span class="hero__slide-title-accent">${game.titleGradient || (game.title.split(' ').slice(1).join(' ') || game.title)}</span></h1>
           <p class="hero__slide-desc">${game.description.substring(0, 100)}...</p>
           <div class="hero__slide-meta"><span class="hero__badge">${game.review}</span><span class="hero__year">${game.releaseDate.split(' ')[2] || game.releaseDate}</span></div>
-          <a href="game/${game.id}.html" class="hero__btn">DETAILS →</a>
+          <a href="global_pages/game/${game.id}.html" class="hero__btn">DETAILS →</a>
         </div>
       `;
       heroSlidesContainer.appendChild(slideDiv);
-
       const dot = document.createElement('button');
       dot.className = `hero__dot ${idx === 0 ? 'hero__dot--active' : ''}`;
       dot.dataset.slide = idx;
@@ -193,7 +174,6 @@
   if (prevBtn) prevBtn.addEventListener('click', () => goToSlide((currentSlide - 1 + heroSlidesData.length) % heroSlidesData.length));
   setInterval(() => goToSlide((currentSlide + 1) % heroSlidesData.length), 5000);
 
-  // ---------- Navigation between "All Games" and "About" ----------
   function navigateTo(pageKey, skipScroll = false) {
     document.querySelectorAll('.page-section').forEach(s => s.classList.remove('active'));
     const section = document.getElementById(`page-${pageKey}`);
@@ -223,7 +203,6 @@
   const initialHash = window.location.hash.replace('#', '');
   navigateTo(initialHash === 'about' ? 'about' : 'all', true);
 
-  // Logo scroll to top (only on homepage)
   const logoTop = document.getElementById('logoTop');
   if (logoTop) {
     logoTop.addEventListener('click', (e) => {
@@ -234,7 +213,6 @@
     });
   }
 
-  // Sticky header
   window.addEventListener('scroll', () => {
     const header = document.getElementById('header');
     if (header) header.classList.toggle('scrolled', window.scrollY > 20);

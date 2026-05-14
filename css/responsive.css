@@ -1,112 +1,124 @@
 /* =============================================
-   RESPONSIVE STYLES – LABYRINTH
+   RESPONSIVE STYLES – LABYRINTH (Streamlined)
    ============================================= */
 
-/* ---------- BASE OVERRIDES (all devices) ---------- */
+/* ---------- Base responsive behaviour ---------- */
 html {
     overflow-x: hidden;
     overflow-y: scroll;
 }
 body {
-    overflow: visible !important;
     width: 100%;
     max-width: 100%;
     position: relative;
-}
-
-*, *::before, *::after {
-    box-sizing: border-box;
+    overflow-x: hidden;
 }
 img, video {
     max-width: 100%;
     height: auto;
 }
+* {
+    box-sizing: border-box;
+}
 
-/* ========== UP TO 900px (Tablets & Small Desktops) ========== */
-@media (max-width: 900px) {
+/* ========== Large desktop (1200px and down) ========== */
+@media (max-width: 1200px) {
+    .hero__slide-title {
+        font-size: 42px;
+    }
+    .hero__slide-title-accent {
+        font-size: 48px;
+    }
+    .top-rated-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* ========== Tablet landscape / small desktop (992px) ========== */
+@media (max-width: 992px) {
+    /* Header */
     .header {
-        padding: 0 20px;
-        gap: 12px;
+        padding: 0 24px;
     }
     .header__brand {
         font-size: 22px;
     }
-    .header__nav {
-        gap: 12px;
+    .nav-search input {
+        width: 140px;
     }
-    .header__nav-link {
-        font-size: 14px;
+    .nav-search input:focus {
+        width: 180px;
     }
+    /* Hero */
+    .hero {
+        height: 500px;
+    }
+    .hero__slide-title {
+        font-size: 36px;
+    }
+    .hero__slide-title-accent {
+        font-size: 42px;
+    }
+    .hero__slide-content {
+        padding: 0 40px;
+        max-width: 600px;
+    }
+    /* Category pages: slideshow */
+    .slideshow-content {
+        height: 380px;
+    }
+    .slideshow-left {
+        padding: 20px;
+    }
+    .game-cover {
+        height: 140px;
+    }
+    /* Game pages */
     .game-hero__content {
-        padding: 30px 20px !important;
-        gap: 24px !important;
+        grid-template-columns: 280px 1fr;
+        gap: 32px;
+        padding: 40px;
     }
     .game-hero__cover {
-        width: 200px !important;
-        height: 280px !important;
+        width: 280px;
+        height: 400px;
     }
     .hero-dev-badge, .hero-steam-btn {
-        width: auto !important;
-        min-width: 200px;
-    }
-    .game-hero__title {
-        font-size: 28px !important;
+        width: 280px;
     }
     .carousel-card {
-        width: 320px !important;
-        height: 180px !important;
-    }
-    .carousel-track {
-        gap: 16px !important;
-    }
-    .sysreq-card {
-        padding: 20px !important;
-        gap: 20px !important;
-    }
-    .review-card, .video-card {
-        padding: 24px !important;
-    }
-    .footer {
-        padding: 24px 20px 20px !important;
-    }
-    .footer__links {
-        gap: 6px;
-        font-size: 13px;
+        width: 400px;
+        height: 225px;
     }
 }
 
-/* ========== UP TO 768px (Tablets Portrait) ========== */
+/* ========== Tablet portrait (768px) ========== */
 @media (max-width: 768px) {
+    /* Header */
     .header {
         padding: 0 16px;
         height: 60px;
     }
     .header__logo-icon {
-        width: 34px;
-        height: 34px;
+        width: 32px;
+        height: 32px;
     }
     .header__brand {
         font-size: 18px;
     }
     .header__nav {
-        gap: 8px;
+        gap: 10px;
     }
     .header__nav-link {
         font-size: 13px;
-        padding: 4px 0;
     }
     .nav-search input {
-        width: 120px;
+        width: 110px;
         font-size: 12px;
         padding: 6px 10px 6px 32px;
     }
     .nav-search input:focus {
-        width: 150px;
-    }
-    .nav-search .search-icon {
-        width: 14px;
-        height: 14px;
-        left: 10px;
+        width: 140px;
     }
     .search-dropdown {
         position: fixed;
@@ -117,371 +129,349 @@ img, video {
         max-width: calc(100vw - 32px);
         min-width: auto;
     }
+    /* Hero */
     .hero {
-        height: 420px !important;
+        height: 420px;
     }
     .hero__slide-content {
-        padding: 0 24px !important;
+        padding: 0 24px;
+        gap: 12px;
     }
     .hero__slide-title {
-        font-size: 28px !important;
+        font-size: 28px;
     }
     .hero__slide-title-accent {
-        font-size: 32px !important;
+        font-size: 32px;
     }
     .hero__slide-desc {
-        font-size: 14px !important;
+        font-size: 14px;
     }
     .hero__btn {
-        width: 180px !important;
-        height: 48px !important;
-        font-size: 24px !important;
+        width: 180px;
+        height: 48px;
+        font-size: 24px;
     }
     .hero__controls {
-        bottom: 20px !important;
-        right: 20px !important;
+        bottom: 20px;
+        right: 20px;
+    }
+    /* Sections */
+    .section-top-rated, .section-categories {
+        padding: 24px 20px;
     }
     .top-rated-grid {
-        grid-template-columns: 1fr !important;
-        gap: 16px !important;
+        grid-template-columns: 1fr;
+        gap: 16px;
     }
     .top-rated-card {
-        height: auto !important;
+        height: auto;
         min-height: 160px;
     }
     .top-rated-card__thumb {
-        width: 140px !important;
+        width: 140px;
     }
     .categories-grid {
-        grid-template-columns: 1fr !important;
-        gap: 16px !important;
+        grid-template-columns: 1fr;
+        gap: 16px;
     }
     .category-banner {
-        height: 160px !important;
-        font-size: 32px !important;
+        height: 160px;
+        font-size: 32px;
     }
+    /* All Games browse */
     .browse-container {
-        flex-direction: column !important;
-        padding: 16px !important;
-        gap: 24px !important;
+        flex-direction: column;
+        padding: 20px;
+        gap: 24px;
     }
-    .browse-left {
-        width: 100% !important;
-        flex: none !important;
+    .browse-left, .browse-right {
+        width: 100%;
+        flex: none;
     }
     .browse-right {
-        position: static !important;
-        width: 100% !important;
-        flex: none !important;
+        position: static;
     }
     .game-item {
-        padding: 8px 12px !important;
-        gap: 12px !important;
+        padding: 8px 12px;
+        gap: 12px;
     }
     .game-thumb {
-        width: 80px !important;
-        height: 60px !important;
+        width: 80px;
+        height: 60px;
     }
     .game-title {
-        font-size: 14px !important;
+        font-size: 14px;
     }
     .game-tag {
-        font-size: 9px !important;
-        padding: 2px 6px !important;
+        font-size: 9px;
+        padding: 2px 6px;
     }
     .game-release {
-        font-size: 11px !important;
+        font-size: 11px;
     }
     .preview-panel {
-        padding: 20px 16px !important;
+        padding: 20px 16px;
     }
     .preview-title {
-        font-size: 24px !important;
+        font-size: 24px;
     }
     .preview-gallery-thumb {
-        height: 140px !important;
+        height: 140px;
     }
+    /* Category pages */
     .hero-bg-section {
-        padding: 20px 16px 40px !important;
+        padding: 20px 16px 40px;
     }
     .page-title {
-        font-size: 32px !important;
-        margin-bottom: 20px !important;
+        font-size: 32px;
+        margin-bottom: 20px;
     }
     .slideshow-container {
-        gap: 8px !important;
+        gap: 8px;
     }
     .slideshow-arrow {
-        width: 36px !important;
-        height: 36px !important;
-        font-size: 18px !important;
+        width: 36px;
+        height: 36px;
+        font-size: 18px;
     }
     .slideshow-content {
-        flex-direction: column !important;
-        height: auto !important;
+        flex-direction: column;
+        height: auto;
     }
     .slideshow-left, .slideshow-right {
-        width: 100% !important;
+        width: 100%;
     }
     .slideshow-right {
-        height: 240px !important;
+        height: 240px;
     }
     .slideshow-left {
-        padding: 20px !important;
+        padding: 20px;
     }
     .game-cover {
-        height: 120px !important;
+        height: 120px;
     }
     .slide-bottom-row {
-        flex-direction: column !important;
-        align-items: flex-start !important;
-        gap: 12px !important;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
     }
     .game-rating {
-        text-align: left !important;
+        text-align: left;
     }
     .games-grid {
-        grid-template-columns: 1fr !important;
-        gap: 16px !important;
+        grid-template-columns: 1fr;
+        gap: 16px;
     }
     .game-card {
-        height: auto !important;
+        height: auto;
         min-height: 140px;
     }
     .card-image {
-        width: 120px !important;
+        width: 120px;
     }
     .card-title {
-        font-size: 16px !important;
+        font-size: 16px;
     }
     .card-description {
-        font-size: 10px !important;
-        -webkit-line-clamp: 3 !important;
+        font-size: 10px;
+        -webkit-line-clamp: 3;
     }
-    .faq-container {
-        padding: 40px 16px !important;
+    /* Game detail pages */
+    .game-hero__content {
+        grid-template-columns: 1fr;
+        text-align: center;
+        padding: 30px 20px;
+        gap: 24px;
+    }
+    .game-hero__left {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 16px;
+    }
+    .game-hero__cover {
+        width: 200px;
+        height: 300px;
+    }
+    .hero-dev-badge, .hero-steam-btn {
+        width: auto;
+        min-width: 200px;
+    }
+    .game-hero__title {
+        font-size: 28px;
+    }
+    .badge-platform-row, .rating-info, .game-hero__tags {
+        justify-content: center;
+    }
+    .sysreq-card {
+        grid-template-columns: 1fr;
+        padding: 20px;
+        gap: 20px;
+    }
+    .carousel-card {
+        width: 320px;
+        height: 180px;
+    }
+    .review-card, .video-card {
+        padding: 24px;
+    }
+    /* FAQ & Contact */
+    .faq-container, .contact-container {
+        padding: 40px 20px;
     }
     .faq-questions {
-        padding: 20px 16px !important;
+        padding: 20px 16px;
     }
     .faq-question {
-        padding: 16px !important;
+        padding: 16px;
     }
     .faq-question-text {
-        font-size: 14px !important;
+        font-size: 14px;
     }
     .questions-card {
-        padding: 40px 24px !important;
-    }
-    .contact-container {
-        padding: 40px 20px !important;
+        padding: 40px 24px;
     }
     .contact-card {
-        padding: 32px 24px !important;
+        padding: 32px 24px;
     }
     .detail-item {
-        gap: 16px !important;
+        gap: 16px;
     }
     .detail-icon {
-        width: 48px !important;
-        height: 48px !important;
+        width: 48px;
+        height: 48px;
     }
     .detail-icon i {
-        font-size: 1.3rem !important;
+        font-size: 1.3rem;
     }
     .contact-hero h1 {
-        font-size: 2.2rem !important;
+        font-size: 2.2rem;
     }
-    .section-heading {
-        font-size: 18px !important;
+    /* Footer */
+    .footer {
+        padding: 24px 20px 20px;
+    }
+    .footer__links {
+        gap: 6px;
+        font-size: 13px;
     }
 }
 
-/* ========== UP TO 600px (Large Phones) ========== */
-@media (max-width: 600px) {
+/* ========== Large phones (576px) ========== */
+@media (max-width: 576px) {
     .header__nav {
         gap: 6px;
     }
     .header__nav-link {
-        font-size: 12px;
-    }
-    .nav-search input {
-        width: 100px;
         font-size: 11px;
     }
-    .game-hero__left {
-        flex-direction: column !important;
-        align-items: center !important;
-    }
-    .game-hero__cover {
-        width: 160px !important;
-        height: 220px !important;
-    }
-    .hero-dev-badge, .hero-steam-btn {
-        width: 100% !important;
-        max-width: 280px;
-    }
-    .game-hero__info {
-        text-align: center;
-    }
-    .badge-platform-row {
-        justify-content: center;
-    }
-    .rating-info {
-        justify-content: center;
-    }
-    .game-hero__tags {
-        justify-content: center;
-    }
-    .game-hero__desc {
-        font-size: 14px !important;
-        text-align: center;
-    }
-    .gallery-section {
-        padding: 24px 16px 40px !important;
-    }
-    .carousel-card {
-        width: 240px !important;
-        height: 135px !important;
-    }
-    .carousel-track {
-        gap: 12px !important;
-    }
-    .review-section, .tutorial-section {
-        padding: 24px 16px 40px !important;
-    }
-    .review-card p, .video-card__text {
-        font-size: 14px !important;
-    }
-    .sysreq-section {
-        padding: 40px 20px !important;
-    }
-    .sysreq-col p {
-        flex-wrap: wrap !important;
-    }
-    .sysreq-col strong {
-        min-width: 80px !important;
+    .nav-search input {
+        width: 90px;
+        font-size: 10px;
     }
     .hero {
-        height: 360px !important;
+        height: 380px;
     }
     .hero__slide-title {
-        font-size: 24px !important;
+        font-size: 22px;
     }
     .hero__slide-title-accent {
-        font-size: 26px !important;
+        font-size: 26px;
     }
     .hero__slide-desc {
-        font-size: 12px !important;
+        font-size: 12px;
         display: -webkit-box;
         -webkit-line-clamp: 2;
         -webkit-box-orient: vertical;
         overflow: hidden;
     }
     .hero__badge {
-        font-size: 12px !important;
-        padding: 4px 10px !important;
+        font-size: 11px;
+        padding: 4px 10px;
     }
     .hero__year {
-        font-size: 12px !important;
+        font-size: 11px;
     }
     .hero__btn {
-        width: 160px !important;
-        height: 44px !important;
-        font-size: 20px !important;
+        width: 150px;
+        height: 44px;
+        font-size: 20px;
     }
     .hero__arrow {
-        width: 30px !important;
-        height: 30px !important;
-        font-size: 14px !important;
+        width: 32px;
+        height: 32px;
+        font-size: 14px;
     }
-    .section-top-rated, .section-categories {
-        padding: 20px 16px !important;
+    .section-heading {
+        font-size: 18px;
     }
     .slideshow-right {
-        height: 200px !important;
+        height: 200px;
     }
     .game-description-text {
-        font-size: 12px !important;
+        font-size: 12px;
         -webkit-line-clamp: 3;
-        display: -webkit-box;
-        -webkit-box-orient: vertical;
-        overflow: hidden;
     }
     .game-meta-info {
-        font-size: 11px !important;
+        font-size: 11px;
     }
     .stars {
-        font-size: 14px !important;
+        font-size: 14px;
     }
     .dot {
-        width: 8px !important;
-        height: 8px !important;
+        width: 8px;
+        height: 8px;
     }
     .dot.active {
-        width: 20px !important;
+        width: 20px;
     }
     .game-card {
-        flex-direction: column !important;
+        flex-direction: column;
     }
     .card-image {
-        width: 100% !important;
-        height: 140px !important;
+        width: 100%;
+        height: 140px;
     }
     .card-content {
-        padding: 12px !important;
+        padding: 12px;
     }
     .card-header {
         flex-wrap: wrap;
         gap: 8px;
     }
-    .card-footer {
-        margin-top: 8px;
+    .game-hero__title {
+        font-size: 24px;
     }
-    .faq-hero h1 {
-        font-size: 1.8rem !important;
+    .very-positive-badge {
+        font-size: 12px;
+        padding: 4px 12px;
     }
-    .faq-hero p {
-        font-size: 14px !important;
+    .stars-row {
+        font-size: 16px;
     }
-    .faq-icon {
-        width: 28px !important;
-        height: 28px !important;
-    }
-    .faq-icon .small-arrow {
-        border-top: 4px solid transparent !important;
-        border-bottom: 4px solid transparent !important;
-        border-left: 6px solid currentColor !important;
-    }
-    .contact-btn {
-        padding: 10px 24px !important;
-        font-size: 14px !important;
-        width: 100%;
-        justify-content: center;
-    }
-    .footer {
-        padding: 20px 16px 16px !important;
+    .faq-hero h1, .contact-hero h1 {
+        font-size: 1.8rem;
     }
     .footer__links {
         gap: 4px;
         font-size: 11px;
     }
     .footer__copy {
-        font-size: 11px !important;
+        font-size: 11px;
     }
 }
 
-/* ========== UP TO 480px (Small Phones) ========== */
+/* ========== Small phones (480px) ========== */
 @media (max-width: 480px) {
     .header {
         padding: 0 12px;
     }
-    .header__brand {
-        font-size: 16px;
-    }
     .header__logo-icon {
         width: 28px;
         height: 28px;
+    }
+    .header__brand {
+        font-size: 16px;
     }
     .header__nav {
         gap: 4px;
@@ -491,128 +481,92 @@ img, video {
         padding: 2px 0;
     }
     .nav-search input {
-        width: 80px;
-        font-size: 10px;
-        padding: 5px 8px 5px 28px;
-    }
-    .nav-search input:focus {
-        width: 110px;
+        width: 70px;
+        font-size: 9px;
+        padding: 4px 6px 4px 24px;
     }
     .nav-search .search-icon {
         width: 12px;
         height: 12px;
         left: 8px;
     }
-    .game-hero__title {
-        font-size: 22px !important;
-    }
-    .very-positive-badge {
-        font-size: 12px !important;
-        padding: 4px 10px !important;
-    }
-    .stars-row {
-        font-size: 14px !important;
-    }
-    .badge-recommend, .read-reviews-link {
-        font-size: 11px !important;
-        padding: 3px 10px !important;
-    }
-    .game-hero__tag {
-        font-size: 11px !important;
-        padding: 4px 10px !important;
-    }
-    .hero-steam-btn {
-        font-size: 13px !important;
-        padding: 10px 16px !important;
-    }
-    .hero-steam-btn img {
-        width: 18px !important;
-        height: 18px !important;
-    }
-    .carousel-card {
-        width: 200px !important;
-        height: 112px !important;
-    }
-    .carousel-card__label {
-        font-size: 10px !important;
-        padding: 8px 12px !important;
-    }
-    .review-card p {
-        font-size: 13px !important;
-        line-height: 1.5 !important;
+    .hero {
+        height: 340px;
     }
     .hero__slide-title {
-        font-size: 20px !important;
+        font-size: 20px;
     }
     .hero__slide-title-accent {
-        font-size: 22px !important;
-    }
-    .hero__slide-meta {
-        gap: 8px !important;
-    }
-    .hero__badge {
-        font-size: 10px !important;
+        font-size: 24px;
     }
     .hero__btn {
-        width: 140px !important;
-        height: 40px !important;
-        font-size: 18px !important;
+        width: 130px;
+        height: 40px;
+        font-size: 18px;
     }
     .preview-title {
-        font-size: 20px !important;
+        font-size: 20px;
     }
     .preview-description {
-        font-size: 12px !important;
+        font-size: 12px;
     }
     .page-title {
-        font-size: 24px !important;
+        font-size: 24px;
     }
     .slideshow-arrow {
-        width: 28px !important;
-        height: 28px !important;
-        font-size: 14px !important;
+        width: 28px;
+        height: 28px;
+        font-size: 14px;
     }
     .slideshow-left {
-        padding: 12px !important;
+        padding: 12px;
     }
     .game-cover {
-        height: 100px !important;
+        height: 100px;
     }
     .game-description-text {
-        font-size: 11px !important;
+        font-size: 11px;
         -webkit-line-clamp: 2;
     }
     .game-meta-info {
-        font-size: 10px !important;
+        font-size: 10px;
     }
     .tag {
-        font-size: 9px !important;
-        padding: 2px 6px !important;
+        font-size: 9px;
+        padding: 2px 6px;
     }
     .faq-question-text {
-        font-size: 13px !important;
+        font-size: 13px;
     }
     .faq-answer-content p {
-        font-size: 12px !important;
+        font-size: 12px;
     }
     .questions-card h3 {
-        font-size: 1.2rem !important;
+        font-size: 1.2rem;
     }
-    .questions-card p {
-        font-size: 13px !important;
-    }
-    .contact-hero h1 {
-        font-size: 1.8rem !important;
+    .contact-btn {
+        padding: 10px 20px;
+        font-size: 14px;
+        width: 100%;
+        justify-content: center;
     }
     .detail-info p, .detail-info a {
-        font-size: 13px !important;
+        font-size: 13px;
     }
     .section-title {
-        font-size: 18px !important;
+        font-size: 18px;
+    }
+    .carousel-card {
+        width: 240px;
+        height: 135px;
+    }
+    .carousel-card__label {
+        font-size: 10px;
+        padding: 6px 12px;
     }
 }
 
-/* ========== EXTREMELY SMALL DEVICES (320px) ========== */
+/* ========== Extremely small devices (360px) ========== */
 @media (max-width: 360px) {
     .header__brand {
         display: none;
@@ -621,27 +575,29 @@ img, video {
         font-size: 9px;
     }
     .nav-search input {
-        width: 70px;
-        font-size: 9px;
-    }
-    .game-hero__title {
-        font-size: 18px !important;
+        width: 60px;
     }
     .hero__slide-title {
-        font-size: 18px !important;
+        font-size: 18px;
+    }
+    .hero__slide-title-accent {
+        font-size: 20px;
     }
     .hero__btn {
-        width: 120px !important;
-        height: 36px !important;
-        font-size: 16px !important;
+        width: 110px;
+        height: 36px;
+        font-size: 16px;
+    }
+    .game-hero__title {
+        font-size: 20px;
     }
     .carousel-card {
-        width: 180px !important;
-        height: 100px !important;
+        width: 200px;
+        height: 112px;
     }
 }
 
-/* ========== TOUCH-FRIENDLY IMPROVEMENTS ========== */
+/* ========== Touch-friendly improvements ========== */
 @media (hover: none) and (pointer: coarse) {
     .header__nav-link,
     .header__dropdown-item,
@@ -660,51 +616,36 @@ img, video {
         cursor: pointer;
         -webkit-tap-highlight-color: rgba(76, 140, 228, 0.3);
     }
-    .hero__controls {
-        gap: 12px !important;
-    }
-    .hero__arrow {
-        width: 44px !important;
-        height: 44px !important;
+    .hero__arrow, .slideshow-arrow {
+        min-width: 44px;
+        min-height: 44px;
     }
     .hero__dot {
-        width: 12px !important;
-        height: 12px !important;
+        width: 12px;
+        height: 12px;
     }
     .hero__dot--active {
-        width: 36px !important;
-    }
-    .slideshow-arrow {
-        min-width: 40px !important;
-        min-height: 40px !important;
+        width: 36px;
     }
     .faq-question {
-        padding: 18px !important;
+        padding: 18px;
     }
     .contact-btn {
         min-height: 48px;
     }
 }
 
-/* ========== FINAL OVERRIDES ========== */
-/* Ensure no horizontal scroll on any container */
-body, .carousel-container, .hero, .gallery-section,
-.sysreq-section, .review-section, .browse-container,
-.section-top-rated, .section-categories {
-    overflow-x: hidden;
-}
-
-/* Video overlay fix */
+/* ========== Misc overrides ========== */
 .video-overlay-wrapper {
-    width: 95vw !important;
-    max-width: 95vw !important;
+    width: 95vw;
+    max-width: 95vw;
 }
 .video-overlay-close {
-    top: 12px !important;
-    right: 12px !important;
-    width: 40px !important;
-    height: 40px !important;
-    font-size: 24px !important;
+    top: 12px;
+    right: 12px;
+    width: 40px;
+    height: 40px;
+    font-size: 24px;
 }
 
 /* Improve text readability on small screens */

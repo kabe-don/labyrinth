@@ -1,4 +1,4 @@
-/* category-styles.css – slideshow and curated picks grid (no duplicate global styles) */
+/* category-styles.css – slideshow and curated picks grid (consistent fonts with main page) */
 
 /* Hero background section */
 .hero-bg-section {
@@ -31,13 +31,14 @@
   margin: 0 auto;
 }
 .page-title {
-  font-family: var(--font-display);
+  font-family: var(--font-heading); /* Bruno Ace */
   font-size: 48px;
   text-align: center;
   margin-bottom: 30px;
   letter-spacing: 2px;
   text-transform: uppercase;
   font-weight: 800;
+  color: #fff;
 }
 .hero-section {
   max-width: 1100px;
@@ -98,7 +99,7 @@
   object-fit: cover;
 }
 .game-description-text {
-  font-family: var(--font-body);
+  font-family: var(--font-body); /* Reddit Sans */
   font-size: 13.5px;
   color: var(--text-subtle);
   line-height: 1.55;
@@ -111,7 +112,7 @@
   gap: 20px;
 }
 .game-meta-info {
-  font-family: var(--font-body);
+  font-family: var(--font-body); /* Reddit Sans */
   font-size: 12.5px;
   color: var(--text-muted);
   line-height: 1.7;
@@ -119,6 +120,7 @@
 .game-meta-info strong {
   color: var(--text-light);
   font-weight: 600;
+  font-family: var(--font-ui); /* Inter for labels */
 }
 .game-rating {
   text-align: right;
@@ -127,6 +129,7 @@
   color: #FFD700;
   font-size: 18px;
   letter-spacing: 2px;
+  font-family: var(--font-body);
 }
 .rating-text {
   font-family: var(--font-body);
@@ -305,7 +308,7 @@
   margin-bottom: 24px;
 }
 .section-title {
-  font-family: var(--font-body);
+  font-family: var(--font-ui); /* Inter */
   font-size: 22px;
   font-weight: 700;
   letter-spacing: 1px;
@@ -364,7 +367,7 @@
   margin-bottom: 6px;
 }
 .card-title {
-  font-family: var(--font-heading);
+  font-family: var(--font-heading); /* Bruno Ace */
   font-size: 20px;
   font-weight: 400;
   line-height: 1.1;
@@ -387,7 +390,7 @@
   flex-wrap: wrap;
 }
 .tag {
-  font-family: var(--font-ui);
+  font-family: var(--font-ui); /* Inter */
   font-size: 10px;
   font-weight: 600;
   padding: 3px 8px;
@@ -398,7 +401,7 @@
   border: 1px solid rgba(126, 184, 255, 0.2);
 }
 .card-description {
-  font-family: var(--font-body);
+  font-family: var(--font-body); /* Reddit Sans */
   font-size: 11.5px;
   color: #1E3A5F;
   line-height: 1.5;
@@ -415,8 +418,23 @@
   font-size: 11px;
   color: #3B5998;
   flex-shrink: 0;
+  font-family: var(--font-ui);
 }
 .card-size {
   font-weight: 700;
   color: var(--bg-darker);
+}
+
+/* Ensure the left panel (game cover area) text uses correct fonts */
+.game-description-text {
+  font-family: var(--font-body);
+}
+.game-meta-info {
+  font-family: var(--font-body);
+}
+.game-meta-info strong {
+  font-family: var(--font-ui);
+}
+.stars, .rating-text {
+  font-family: var(--font-body);
 }
