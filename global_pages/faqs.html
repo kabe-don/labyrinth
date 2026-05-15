@@ -1,31 +1,89 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- ==========================================================================
+       LABYRINTH · FAQs Page (global_pages/faqs.html)
+       --------------------------------------------------------------------------
+       This page answers the most common questions about the Labyrinth platform.
+       It uses an accordion pattern driven entirely by CSS – hidden checkboxes
+       toggle the visibility of each answer via the :checked pseudo‑class and
+       a max‑height transition.  No JavaScript is required for the accordion
+       behaviour.
+
+       The page is inside the /global_pages/ subdirectory, so all asset paths
+       (CSS, JS, images) are prefixed with '../' to reach the root folder.
+       Font Awesome icons are loaded from a CDN for visual decoration.
+
+       At the bottom, a "Still have questions?" card encourages users to visit
+       the Contact page, with a gradient CTA button linking to contacts.html.
+       ========================================================================== -->
   <meta charset="UTF-8">
+  <!-- Mobile‑first responsive meta tag.  viewport-fit=cover helps with notched displays. -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>LABYRINTH | FAQs</title>
+
+  <!-- Preconnect to external origins for faster font and icon delivery -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!--
+    Primary typefaces loaded from Google Fonts:
+      Bruno Ace   →  --font-heading  (large titles)
+      Inter       →  --font-ui        (buttons, labels, question text)
+      Reddit Sans →  --font-body      (answer paragraphs, general text)
+    All weights from 200–900 are loaded.
+  -->
   <link href="https://fonts.googleapis.com/css2?family=Bruno+Ace&family=Inter:wght@200;300;400;500;600;700;800;900&family=Reddit+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome 6 for icons (comment dots, arrow, etc.) -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!--
+    Main stylesheet and responsive overrides.
+    Path is '../css/' because we are inside /global_pages/.
+    style.css contains the global design system and all FAQ component styles.
+    responsive.css handles breakpoints, touch improvements, and accessibility.
+  -->
   <link rel="stylesheet" href="../css/style.css">
   <link rel="stylesheet" href="../css/responsive.css">
 </head>
 <body>
 
+  <!-- ==========================================================================
+       HEADER
+       --------------------------------------------------------------------------
+       Identical to other subpages.  The fixed navigation bar uses a frosted‑glass
+       effect.  The logo links back to the homepage (../index.html).
+       The search bar, category dropdown, and About link function identically
+       across all pages.
+       ========================================================================== -->
   <header class="header" id="header">
+    <!-- Logo group: clicking returns to the homepage -->
     <a class="header__logo-group" href="../index.html">
-      <div class="header__logo-icon"><img src="../assets/img/web_logo.png" alt="LABYRINTH" class="logo-img"></div>
+      <div class="header__logo-icon">
+        <img src="../assets/img/web_logo.png" alt="LABYRINTH" class="logo-img">
+      </div>
       <span class="header__brand">LABYRINTH</span>
     </a>
+
     <nav class="header__nav">
+      <!-- ===== SEARCH BAR ===== -->
       <div class="nav-search">
+        <!-- Inline SVG magnifying glass -->
         <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+          <circle cx="11" cy="11" r="8"/>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"/>
         </svg>
+        <!--
+          search.js enables live game filtering.  As this page is inside
+          /global_pages/, search.js automatically calculates the correct
+          relative paths for thumbnails and game links.
+        -->
         <input type="text" id="globalSearch" placeholder="Search games..." autocomplete="off">
         <div class="search-dropdown" id="searchDropdown"></div>
       </div>
+
+      <!-- ===== CATEGORY DROPDOWN ===== -->
       <div class="header__nav-dropdown">
         <span class="header__nav-link header__nav-dropdown-trigger">CATEGORY <span class="dropdown-arrow">▾</span></span>
         <div class="header__dropdown-menu">
@@ -33,41 +91,257 @@
           <a class="header__dropdown-item" href="multiplayer.html">Multiplayer</a>
         </div>
       </div>
+
+      <!-- About link – navigates to the About page in the same directory -->
       <a class="header__nav-link" href="about.html">About</a>
     </nav>
   </header>
 
   <main>
+    <!-- ==========================================================================
+         FAQ CONTAINER
+         --------------------------------------------------------------------------
+         A centered, max‑width wrapper that holds the hero text, the accordion
+         list of questions, and the "Still have questions?" card.
+         The main element has a decorative radial gradient background glow
+         (defined in CSS via main::before) that is shared with the Contact page.
+         ========================================================================== -->
     <div class="faq-container">
+      <!-- ===== FAQ HERO ===== -->
+      <!--
+        Brief heading and subtitle.  The title uses the Bruno Ace display font.
+        The paragraph provides context and a gentle nudge toward the contact page.
+      -->
       <div class="faq-hero">
         <h1>Frequently Asked Questions</h1>
         <p>Everything you need to know about Labyrinth. Can't find what you're looking for? Reach out to our team.</p>
       </div>
+
+      <!-- ===== ACCORDION LIST ===== -->
+      <!--
+        Each FAQ item consists of:
+          - A hidden <input type="checkbox"> that controls the open/close state
+          - A <label> styled as the clickable question bar
+          - A .faq-answer div whose max-height transitions between 0 and 500px
+            when the checkbox is :checked
+
+        The checkbox is visually hidden (opacity: 0, position: absolute) but
+        remains keyboard‑accessible.  The label has tabindex="0" to ensure it
+        can receive focus even without the native checkbox focus.
+
+        The small arrow inside .faq-icon rotates 90° when the item is expanded,
+        giving a clear visual affordance.
+
+        All text is structured with semantic HTML for screen‑reader clarity.
+      -->
       <div class="faq-questions">
-        <div class="faq-item"><input type="checkbox" id="faq1" class="faq-checkbox"><label for="faq1" class="faq-question" tabindex="0"><span class="faq-question-text">How are games selected for Labyrinth?</span><span class="faq-icon"><span class="small-arrow"></span></span></label><div class="faq-answer"><div class="faq-answer-content"><p>Games are carefully selected based on popularity, player reviews, gameplay quality, and overall relevance within the gaming community. We aim to feature titles that provide engaging experiences across different genres and play styles.</p></div></div></div>
-        <div class="faq-item"><input type="checkbox" id="faq2" class="faq-checkbox"><label for="faq2" class="faq-question" tabindex="0"><span class="faq-question-text">Are the reviews on Labyrinth official?</span><span class="faq-icon"><span class="small-arrow"></span></span></label><div class="faq-answer"><div class="faq-answer-content"><p>No. The reviews published on Labyrinth are created for informational purposes only. They are based on research, public ratings, gameplay analysis, and available player feedback rather than official developer statements.</p></div></div></div>
-        <div class="faq-item"><input type="checkbox" id="faq3" class="faq-checkbox"><label for="faq3" class="faq-question" tabindex="0"><span class="faq-question-text">Can users suggest games to be added?</span><span class="faq-icon"><span class="small-arrow"></span></span></label><div class="faq-answer"><div class="faq-answer-content"><p>Yes. Users may share game suggestions by reaching out through the provided email address or contact number listed on the Contact page. Suggested titles may be considered for future inclusion based on relevance and quality.</p></div></div></div>
-        <div class="faq-item"><input type="checkbox" id="faq4" class="faq-checkbox"><label for="faq4" class="faq-question" tabindex="0"><span class="faq-question-text">How often is the game list updated?</span><span class="faq-icon"><span class="small-arrow"></span></span></label><div class="faq-answer"><div class="faq-answer-content"><p>Labyrinth's game collection, ratings, and trending sections are updated regularly to reflect newly released titles, rising trends, and changes in player interest.</p></div></div></div>
-        <div class="faq-item"><input type="checkbox" id="faq5" class="faq-checkbox"><label for="faq5" class="faq-question" tabindex="0"><span class="faq-question-text">Does Labyrinth only feature popular games?</span><span class="faq-icon"><span class="small-arrow"></span></span></label><div class="faq-answer"><div class="faq-answer-content"><p>No. While popular games are included, Labyrinth also highlights underrated titles and hidden gems to give users a wider variety of choices.</p></div></div></div>
-        <div class="faq-item"><input type="checkbox" id="faq6" class="faq-checkbox"><label for="faq6" class="faq-question" tabindex="0"><span class="faq-question-text">Do I need to create an account to use Labyrinth?</span><span class="faq-icon"><span class="small-arrow"></span></span></label><div class="faq-answer"><div class="faq-answer-content"><p>No. Labyrinth is fully accessible without requiring account registration. Users can freely browse games, reviews, and recommendations.</p></div></div></div>
-        <div class="faq-item"><input type="checkbox" id="faq7" class="faq-checkbox"><label for="faq7" class="faq-question" tabindex="0"><span class="faq-question-text">Are the ratings based on community feedback?</span><span class="faq-icon"><span class="small-arrow"></span></span></label><div class="faq-answer"><div class="faq-answer-content"><p>Ratings are based on a combination of public reviews, player feedback, research findings, and overall game performance to provide balanced recommendations.</p></div></div></div>
-        <div class="faq-item"><input type="checkbox" id="faq8" class="faq-checkbox"><label for="faq8" class="faq-question" tabindex="0"><span class="faq-question-text">Can I find both single-player and multiplayer games?</span><span class="faq-icon"><span class="small-arrow"></span></span></label><div class="faq-answer"><div class="faq-answer-content"><p>Yes. Labyrinth features both single-player and multiplayer categories to cater to different gaming preferences and experiences.</p></div></div></div>
-        <div class="faq-item"><input type="checkbox" id="faq9" class="faq-checkbox"><label for="faq9" class="faq-question" tabindex="0"><span class="faq-question-text">Does Labyrinth sell games or in-game items?</span><span class="faq-icon"><span class="small-arrow"></span></span></label><div class="faq-answer"><div class="faq-answer-content"><p>No. Labyrinth is strictly a gaming information and recommendation platform. It does not sell games, downloadable content, or in-game purchases.</p></div></div></div>
-        <div class="faq-item"><input type="checkbox" id="faq10" class="faq-checkbox"><label for="faq10" class="faq-question" tabindex="0"><span class="faq-question-text">How can I contact the Labyrinth team?</span><span class="faq-icon"><span class="small-arrow"></span></span></label><div class="faq-answer"><div class="faq-answer-content"><p>Users can reach the Labyrinth team through the Contact page for inquiries, feedback, or suggestions regarding the platform.</p></div></div></div>
-        <div class="faq-item"><input type="checkbox" id="faq11" class="faq-checkbox"><label for="faq11" class="faq-question" tabindex="0"><span class="faq-question-text">Are external guides and tutorials available for the games?</span><span class="faq-icon"><span class="small-arrow"></span></span></label><div class="faq-answer"><div class="faq-answer-content"><p>Yes. Each game page includes an external beginner guide resource to help users better understand gameplay mechanics and improve their experience.</p></div></div></div>
-        <div class="faq-item"><input type="checkbox" id="faq12" class="faq-checkbox"><label for="faq12" class="faq-question" tabindex="0"><span class="faq-question-text">What makes Labyrinth different from other gaming websites?</span><span class="faq-icon"><span class="small-arrow"></span></span></label><div class="faq-answer"><div class="faq-answer-content"><p>Labyrinth focuses on organized recommendations, concise reviews, and beginner-friendly resources, making it easier for users to discover games suited to their interests and skill levels.</p></div></div></div>
-      </div>
+        <!-- ---------- FAQ 1 ---------- -->
+        <div class="faq-item">
+          <!-- Hidden checkbox: checked = expanded, unchecked = collapsed -->
+          <input type="checkbox" id="faq1" class="faq-checkbox">
+          <!-- The label acts as the clickable question bar -->
+          <label for="faq1" class="faq-question" tabindex="0">
+            <span class="faq-question-text">How are games selected for Labyrinth?</span>
+            <span class="faq-icon"><span class="small-arrow"></span></span>
+          </label>
+          <!-- Answer panel: max-height animates from 0 to 500px -->
+          <div class="faq-answer">
+            <div class="faq-answer-content">
+              <p>Games are carefully selected based on popularity, player reviews, gameplay quality, and overall relevance within the gaming community. We aim to feature titles that provide engaging experiences across different genres and play styles.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- ---------- FAQ 2 ---------- -->
+        <div class="faq-item">
+          <input type="checkbox" id="faq2" class="faq-checkbox">
+          <label for="faq2" class="faq-question" tabindex="0">
+            <span class="faq-question-text">Are the reviews on Labyrinth official?</span>
+            <span class="faq-icon"><span class="small-arrow"></span></span>
+          </label>
+          <div class="faq-answer">
+            <div class="faq-answer-content">
+              <p>No. The reviews published on Labyrinth are created for informational purposes only. They are based on research, public ratings, gameplay analysis, and available player feedback rather than official developer statements.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- ---------- FAQ 3 ---------- -->
+        <div class="faq-item">
+          <input type="checkbox" id="faq3" class="faq-checkbox">
+          <label for="faq3" class="faq-question" tabindex="0">
+            <span class="faq-question-text">Can users suggest games to be added?</span>
+            <span class="faq-icon"><span class="small-arrow"></span></span>
+          </label>
+          <div class="faq-answer">
+            <div class="faq-answer-content">
+              <p>Yes. Users may share game suggestions by reaching out through the provided email address or contact number listed on the Contact page. Suggested titles may be considered for future inclusion based on relevance and quality.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- ---------- FAQ 4 ---------- -->
+        <div class="faq-item">
+          <input type="checkbox" id="faq4" class="faq-checkbox">
+          <label for="faq4" class="faq-question" tabindex="0">
+            <span class="faq-question-text">How often is the game list updated?</span>
+            <span class="faq-icon"><span class="small-arrow"></span></span>
+          </label>
+          <div class="faq-answer">
+            <div class="faq-answer-content">
+              <p>Labyrinth's game collection, ratings, and trending sections are updated regularly to reflect newly released titles, rising trends, and changes in player interest.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- ---------- FAQ 5 ---------- -->
+        <div class="faq-item">
+          <input type="checkbox" id="faq5" class="faq-checkbox">
+          <label for="faq5" class="faq-question" tabindex="0">
+            <span class="faq-question-text">Does Labyrinth only feature popular games?</span>
+            <span class="faq-icon"><span class="small-arrow"></span></span>
+          </label>
+          <div class="faq-answer">
+            <div class="faq-answer-content">
+              <p>No. While popular games are included, Labyrinth also highlights underrated titles and hidden gems to give users a wider variety of choices.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- ---------- FAQ 6 ---------- -->
+        <div class="faq-item">
+          <input type="checkbox" id="faq6" class="faq-checkbox">
+          <label for="faq6" class="faq-question" tabindex="0">
+            <span class="faq-question-text">Do I need to create an account to use Labyrinth?</span>
+            <span class="faq-icon"><span class="small-arrow"></span></span>
+          </label>
+          <div class="faq-answer">
+            <div class="faq-answer-content">
+              <p>No. Labyrinth is fully accessible without requiring account registration. Users can freely browse games, reviews, and recommendations.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- ---------- FAQ 7 ---------- -->
+        <div class="faq-item">
+          <input type="checkbox" id="faq7" class="faq-checkbox">
+          <label for="faq7" class="faq-question" tabindex="0">
+            <span class="faq-question-text">Are the ratings based on community feedback?</span>
+            <span class="faq-icon"><span class="small-arrow"></span></span>
+          </label>
+          <div class="faq-answer">
+            <div class="faq-answer-content">
+              <p>Ratings are based on a combination of public reviews, player feedback, research findings, and overall game performance to provide balanced recommendations.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- ---------- FAQ 8 ---------- -->
+        <div class="faq-item">
+          <input type="checkbox" id="faq8" class="faq-checkbox">
+          <label for="faq8" class="faq-question" tabindex="0">
+            <span class="faq-question-text">Can I find both single-player and multiplayer games?</span>
+            <span class="faq-icon"><span class="small-arrow"></span></span>
+          </label>
+          <div class="faq-answer">
+            <div class="faq-answer-content">
+              <p>Yes. Labyrinth features both single-player and multiplayer categories to cater to different gaming preferences and experiences.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- ---------- FAQ 9 ---------- -->
+        <div class="faq-item">
+          <input type="checkbox" id="faq9" class="faq-checkbox">
+          <label for="faq9" class="faq-question" tabindex="0">
+            <span class="faq-question-text">Does Labyrinth sell games or in-game items?</span>
+            <span class="faq-icon"><span class="small-arrow"></span></span>
+          </label>
+          <div class="faq-answer">
+            <div class="faq-answer-content">
+              <p>No. Labyrinth is strictly a gaming information and recommendation platform. It does not sell games, downloadable content, or in-game purchases.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- ---------- FAQ 10 ---------- -->
+        <div class="faq-item">
+          <input type="checkbox" id="faq10" class="faq-checkbox">
+          <label for="faq10" class="faq-question" tabindex="0">
+            <span class="faq-question-text">How can I contact the Labyrinth team?</span>
+            <span class="faq-icon"><span class="small-arrow"></span></span>
+          </label>
+          <div class="faq-answer">
+            <div class="faq-answer-content">
+              <p>Users can reach the Labyrinth team through the Contact page for inquiries, feedback, or suggestions regarding the platform.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- ---------- FAQ 11 ---------- -->
+        <div class="faq-item">
+          <input type="checkbox" id="faq11" class="faq-checkbox">
+          <label for="faq11" class="faq-question" tabindex="0">
+            <span class="faq-question-text">Are external guides and tutorials available for the games?</span>
+            <span class="faq-icon"><span class="small-arrow"></span></span>
+          </label>
+          <div class="faq-answer">
+            <div class="faq-answer-content">
+              <p>Yes. Each game page includes an external beginner guide resource to help users better understand gameplay mechanics and improve their experience.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- ---------- FAQ 12 ---------- -->
+        <div class="faq-item">
+          <input type="checkbox" id="faq12" class="faq-checkbox">
+          <label for="faq12" class="faq-question" tabindex="0">
+            <span class="faq-question-text">What makes Labyrinth different from other gaming websites?</span>
+            <span class="faq-icon"><span class="small-arrow"></span></span>
+          </label>
+          <div class="faq-answer">
+            <div class="faq-answer-content">
+              <p>Labyrinth focuses on organized recommendations, concise reviews, and beginner-friendly resources, making it easier for users to discover games suited to their interests and skill levels.</p>
+            </div>
+          </div>
+        </div>
+      </div> <!-- /faq-questions -->
+
+      <!-- ===== STILL HAVE QUESTIONS? CARD ===== -->
+      <!--
+        A visually distinct card (gradient background, frosted glass, rounded
+        corners) that acts as a soft call‑to‑action.  It includes:
+          - A circular icon with a chat bubble
+          - A heading and a short paragraph
+          - A gradient "Contact Support" button with an arrow icon
+        On hover, the card lifts slightly and its border glows.
+      -->
       <div class="still-questions">
         <div class="questions-card">
-          <div class="questions-card-icon"><i class="fas fa-comment-dots"></i></div>
+          <!-- Icon container: large circle with gradient background -->
+          <div class="questions-card-icon">
+            <i class="fas fa-comment-dots"></i>
+          </div>
           <h3>Still have questions?</h3>
           <p>Can't find the answer you're looking for? Our support team is ready to help you with anything you need.</p>
-          <a href="contacts.html" class="contact-btn">Contact Support <i class="fas fa-arrow-right"></i></a>
+          <!--
+            The contact button links to the Contact page.  It uses a multi‑stop
+            gradient (blue → green) and a right‑arrow icon that slides on hover.
+          -->
+          <a href="contacts.html" class="contact-btn">
+            Contact Support <i class="fas fa-arrow-right"></i>
+          </a>
         </div>
       </div>
-    </div>
+    </div> <!-- /faq-container -->
   </main>
 
+  <!-- ==========================================================================
+       FOOTER
+       --------------------------------------------------------------------------
+       Gradient footer with links to other essential pages.  All links are
+       relative to the current directory (global_pages/).
+       ========================================================================== -->
   <footer class="footer">
     <div class="footer__links">
       <a href="contacts.html" class="footer__link">Contacts</a> ·
@@ -78,6 +352,19 @@
     <div class="footer__copy">&copy; 2026 Labyrinth. All rights reserved.</div>
   </footer>
 
+  <!-- ==========================================================================
+       SCRIPTS
+       --------------------------------------------------------------------------
+       All three JavaScript files are loaded with '../' to reach the root /js/ folder.
+         1. data.js   – Defines the global GAMES_CATALOG and TOP_RATED_GAMES arrays
+                        (needed by search.js).
+         2. search.js – Enables live search in the header (path‑aware).  On this
+                        page it auto‑detects the /global_pages/ location and adjusts
+                        image and link paths accordingly.
+         3. script.js – Handles splash screen logic (hidden on subpages) and header
+                        scroll effect (adds .scrolled class).  The FAQ accordion
+                        uses CSS only, so no additional JavaScript is required.
+       ========================================================================== -->
   <script src="../js/data.js"></script>
   <script src="../js/search.js"></script>
   <script src="../js/script.js"></script>

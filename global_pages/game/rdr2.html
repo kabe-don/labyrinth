@@ -1,28 +1,95 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- ==========================================================================
+       LABYRINTH · Game Detail Page – Red Dead Redemption 2
+       --------------------------------------------------------------------------
+       This page presents detailed information about the game "Red Dead Redemption 2".
+       It resides in the /global_pages/game/ subdirectory, so all asset paths
+       (CSS, JS, images) are prefixed with '../../' to go up two levels
+       (game/ → global_pages/ → root).
+
+       The page includes:
+         • Full‑width hero with banner background, cover art, developer/publisher
+           badges, a Steam redirect button, rating info, tags, and description.
+         • System requirements card displaying minimum specs.
+         • Auto‑scrolling screenshot gallery (carousel with duplicated images for
+           a seamless infinite loop).
+         • Written game review.
+         • Link to an external beginner guide / tutorial.
+         • Standard footer with links going up one level (../).
+       
+       The gallery is built dynamically from the global GAMES_CATALOG array
+       (provided by data.js) by extracting the game’s ID from the URL
+       (rdr2.html → "rdr2"). The gallery images are duplicated so that the CSS
+       `pan-left` animation can loop smoothly without visible gaps.
+       
+       The page title is "Red Dead Redemption 2 — LABYRINTH".
+       ========================================================================== -->
   <meta charset="UTF-8">
+  <!-- Mobile‑first responsive meta tag; viewport-fit=cover improves display on notched screens. -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Red Dead Redemption 2 — LABYRINTH</title>
+
+  <!-- Preconnect to Google Fonts for faster font delivery -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!--
+    Primary typefaces loaded from Google Fonts:
+      Bruno Ace   →  --font-heading  (large titles, logo)
+      Inter       →  --font-ui        (buttons, badges, labels)
+      Reddit Sans →  --font-body      (descriptions, reviews, general text)
+    All weights from 200–900 are loaded to support various UI states.
+  -->
   <link href="https://fonts.googleapis.com/css2?family=Bruno+Ace&family=Inter:wght@200;300;400;500;600;700;800;900&family=Reddit+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!--
+    Stylesheets:
+      ../../css/style.css      – Global design system, variables, reset, header, footer
+      ../../css/game.css       – Game detail page styles (hero, system reqs, gallery, review, tutorial)
+      ../../css/responsive.css – Breakpoints, touch improvements, accessibility overrides
+    The '../../' prefix goes up two directory levels to reach the root css/ folder.
+  -->
   <link rel="stylesheet" href="../../css/style.css">
   <link rel="stylesheet" href="../../css/game.css">
   <link rel="stylesheet" href="../../css/responsive.css">
 </head>
 <body>
+  <!-- ==========================================================================
+       HEADER
+       --------------------------------------------------------------------------
+       Fixed navigation bar with frosted‑glass effect. All paths use '../../'
+       because we are two folders deep (game/ inside global_pages/).
+       The logo links to ../../index.html (the root homepage).
+       Category dropdown links point to ../singleplayer.html and ../multiplayer.html
+       (one level up, in global_pages/). The "About" link goes to ../about.html.
+       The search bar is wired to search.js, which will detect this location
+       and adjust thumbnail/game link paths accordingly.
+       ========================================================================== -->
   <header class="header" id="header">
+    <!-- Logo group – clicking returns to the homepage -->
     <a class="header__logo-group" href="../../index.html">
       <div class="header__logo-icon"><img src="../../assets/img/web_logo.png" alt="LABYRINTH" class="logo-img"></div>
       <span class="header__brand">LABYRINTH</span>
     </a>
     <nav class="header__nav">
+      <!-- ===== SEARCH BAR ===== -->
       <div class="nav-search">
-        <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <!-- Inline SVG magnifying glass -->
+        <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"/>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+        </svg>
+        <!--
+          search.js attaches live filtering. Because we're inside /global_pages/game/,
+          search.js will use '../../' for image bases and an empty link base
+          (since game detail pages are in the same directory).
+        -->
         <input type="text" id="globalSearch" placeholder="Search games..." autocomplete="off">
         <div class="search-dropdown" id="searchDropdown"></div>
       </div>
+      <!-- ===== CATEGORY DROPDOWN ===== -->
       <div class="header__nav-dropdown">
         <span class="header__nav-link header__nav-dropdown-trigger">CATEGORY <span class="dropdown-arrow">▾</span></span>
         <div class="header__dropdown-menu">
@@ -30,77 +97,192 @@
           <a class="header__dropdown-item" href="../multiplayer.html">Multiplayer</a>
         </div>
       </div>
+      <!-- About link (one level up) -->
       <a class="header__nav-link" href="../about.html">About</a>
     </nav>
   </header>
 
+  <!-- ==========================================================================
+       GAME HERO SECTION
+       --------------------------------------------------------------------------
+       Full‑width hero with a background image, gradient overlay, and a two‑column
+       grid layout:
+         - Left: cover art, developer/publisher badges, Steam button, release date.
+         - Right: game title, review badge, platform icons, rating, tags, description.
+       The background image is loaded via an <img> tag for easier fallback handling
+       (onerror hides it if the file is missing). The overlay gradient ensures
+       text readability regardless of the background.
+       ========================================================================== -->
   <section class="game-hero">
+    <!--
+      Banner background image. The onerror attribute hides the image if it fails
+      to load, falling back to the solid overlay gradient and background colour.
+    -->
     <img class="game-hero__banner-bg" src="../../assets/img/games/rdr2-thumb.jpg" alt="Red Dead Redemption 2" onerror="this.style.display='none'">
+    <!-- Semi‑transparent gradient overlay: navy → almost opaque -->
     <div class="game-hero__overlay"></div>
+    <!-- Content grid: two columns (320px fixed left + flexible right) -->
     <div class="game-hero__content">
+      <!-- ===== LEFT COLUMN ===== -->
       <div class="game-hero__left">
-        <div class="game-hero__cover"><img src="../../assets/img/games/rdr2-thumb_tall.jpg" alt="Cover"></div>
+        <!-- Box‑art cover with hover lift and glow effect -->
+        <div class="game-hero__cover">
+          <img src="../../assets/img/games/rdr2-thumb_tall.jpg" alt="Cover">
+        </div>
+        <!-- Developer badge (frosted glass) -->
         <div class="hero-dev-badge"><strong>DEVELOPER</strong> / Rockstar Games</div>
+        <!-- Publisher badge -->
         <div class="hero-dev-badge"><strong>PUBLISHER</strong> / Rockstar Games</div>
-        <a href="https://store.steampowered.com/app/1174180/Red_Dead_Redemption_2/" target="_blank" class="hero-steam-btn"><img src="../../assets/img/platforms/steam.png" alt="Steam"> STEAM REDIRECT</a>
+        <!-- Steam redirect button (gradient, prominent CTA) -->
+        <a href="https://store.steampowered.com/app/1174180/Red_Dead_Redemption_2/" target="_blank" class="hero-steam-btn">
+          <img src="../../assets/img/platforms/steam.png" alt="Steam"> STEAM REDIRECT
+        </a>
+        <!-- Release date text -->
         <div class="hero-release-date">Release Date: October 26, 2018</div>
       </div>
+
+      <!-- ===== RIGHT COLUMN ===== -->
       <div class="game-hero__info">
+        <!-- Game title (responsive font size) -->
         <h1 class="game-hero__title">Red Dead Redemption 2</h1>
+        <!-- Row containing review badge and platform icons -->
         <div class="badge-platform-row">
+          <!-- Steam review summary badge (blue) -->
           <span class="very-positive-badge">very positive</span>
+          <!-- Platform icons inside a light pill container -->
           <div class="platform-icons-wrapper">
             <img src="../../assets/img/platforms/win.png" alt="Windows" class="platform-icon">
             <img src="../../assets/img/platforms/ps.png" alt="PlayStation" class="platform-icon">
             <img src="../../assets/img/platforms/xbox.png" alt="Xbox" class="platform-icon">
           </div>
         </div>
+        <!-- Rating section: stars, numeric rating, recommend badge, link to reviews -->
         <div class="rating-info">
           <div class="rate-review-heading">RATE AND REVIEW</div>
-          <div class="stars-row"><span class="stars-gold">★★★★☆</span><span class="rating-number">4.6 / 5</span></div>
+          <div class="stars-row">
+            <span class="stars-gold">★★★★☆</span>
+            <span class="rating-number">4.6 / 5</span>
+          </div>
+          <!-- Green "recommend" pill -->
           <span class="badge-recommend">91% recommend</span>
+          <!-- Link that scrolls to the review section (anchor #reviews) -->
           <a href="#reviews" class="read-reviews-link">Read reviews ></a>
         </div>
+        <!-- Genre / feature tags -->
         <div class="game-hero__tags">
-          <span class="game-hero__tag">Action</span><span class="game-hero__tag">Adventure</span><span class="game-hero__tag">Open World</span><span class="game-hero__tag">Western</span><span class="game-hero__tag">Story Rich</span>
+          <span class="game-hero__tag">Action</span>
+          <span class="game-hero__tag">Adventure</span>
+          <span class="game-hero__tag">Open World</span>
+          <span class="game-hero__tag">Western</span>
+          <span class="game-hero__tag">Story Rich</span>
         </div>
+        <!-- Full game description -->
         <p class="game-hero__desc">Red Dead Redemption 2 is an epic action‑adventure game set in the rugged landscapes of America during the decline of the Wild West. Players step into the role of Arthur Morgan, a loyal member of the Van der Linde gang, as he navigates a world filled with conflict, survival, and personal struggles. The game offers a vast open world with dynamic events and meaningful choices.</p>
       </div>
     </div>
   </section>
 
+  <!-- ==========================================================================
+       SYSTEM REQUIREMENTS
+       --------------------------------------------------------------------------
+       A frosted‑glass card split into two columns displaying the minimum specs.
+       Each column lists key requirements (OS, CPU, RAM, GPU, DirectX, Network,
+       Storage, Sound). The layout follows a consistent two‑column grid.
+       ========================================================================== -->
   <section class="sysreq-section">
     <div class="sysreq-container">
+      <!-- Section title with a small blue accent bar (via ::before pseudo‑element) -->
       <h2 class="section-title">System Requirements</h2>
+      <!-- Subtitle in uppercase, muted -->
       <p class="section-subtitle">Minimum specifications needed</p>
+      <!-- The requirements card – two equal columns -->
       <div class="sysreq-card">
-        <div class="sysreq-col"><p><strong>OS</strong> Windows 10 64‑bit</p><p><strong>Processor</strong> Intel Core i5-2500K / AMD FX-6300</p><p><strong>Memory</strong> 8 GB RAM</p><p><strong>Graphics</strong> NVIDIA GeForce GTX 770 2GB / AMD Radeon R9 280 3GB</p></div>
-        <div class="sysreq-col"><p><strong>DirectX</strong> Version 12</p><p><strong>Network</strong> Broadband Internet connection</p><p><strong>Storage</strong> 150 GB available space</p><p><strong>Sound Card</strong> DirectX Compatible</p></div>
+        <!-- Left column: OS, Processor, Memory, Graphics -->
+        <div class="sysreq-col">
+          <p><strong>OS</strong> Windows 10 64‑bit</p>
+          <p><strong>Processor</strong> Intel Core i5-2500K / AMD FX-6300</p>
+          <p><strong>Memory</strong> 8 GB RAM</p>
+          <p><strong>Graphics</strong> NVIDIA GeForce GTX 770 2GB / AMD Radeon R9 280 3GB</p>
+        </div>
+        <!-- Right column: DirectX, Network, Storage, Sound -->
+        <div class="sysreq-col">
+          <p><strong>DirectX</strong> Version 12</p>
+          <p><strong>Network</strong> Broadband Internet connection</p>
+          <p><strong>Storage</strong> 150 GB available space</p>
+          <p><strong>Sound Card</strong> DirectX Compatible</p>
+        </div>
       </div>
     </div>
   </section>
 
+  <!-- ==========================================================================
+       GAME SCREENSHOTS GALLERY (Auto‑scrolling Carousel)
+       --------------------------------------------------------------------------
+       A horizontally scrolling strip of large thumbnails. The images are
+       duplicated in JavaScript to create a seamless infinite scroll.
+       The container uses CSS `mask-image` for smooth fading on the edges.
+       The `pan-left` animation moves the track by half its total width.
+       The gallery is built dynamically by the inline script at the bottom.
+       ========================================================================== -->
   <section class="gallery-section">
     <div class="gallery-container">
+      <!-- Section title with accent bar -->
       <h2 class="section-title">Game Screenshots Gallery</h2>
-      <div class="carousel-container"><div class="carousel-track"></div></div>
+      <!-- Carousel outer wrapper with edge fading -->
+      <div class="carousel-container">
+        <!-- The moving track – populated by the inline script -->
+        <div class="carousel-track"></div>
+      </div>
     </div>
   </section>
 
+  <!-- ==========================================================================
+       GAME REVIEW
+       --------------------------------------------------------------------------
+       A single card containing a written review. It uses the frosted glass style
+       and lifts slightly on hover. The section has id="reviews" so the
+       "Read reviews" link in the hero can scroll directly to it.
+       ========================================================================== -->
   <section class="review-section" id="reviews">
     <div class="review-container">
       <h2 class="section-title">Game Review</h2>
-      <div class="review-card"><p>Red Dead Redemption 2 delivers a gripping narrative experience that blends action, exploration, and character‑driven storytelling in a richly detailed open world. The game captures the harsh beauty of the Wild West through expansive landscapes, dynamic encounters, and authentic period‑inspired design. Combat feels engaging, with classic shootouts and horseback chases adding excitement throughout the journey. Beyond its action elements, the game stands out for its emotional depth and strong character development, making players invested in Arthur Morgan's personal struggle. Its balance of freedom and storytelling creates an unforgettable adventure that continues to resonate with players years after release.</p></div>
+      <!-- Review card: background blur, border, rounded corners -->
+      <div class="review-card">
+        <p>Red Dead Redemption 2 delivers a gripping narrative experience that blends action, exploration, and character‑driven storytelling in a richly detailed open world. The game captures the harsh beauty of the Wild West through expansive landscapes, dynamic encounters, and authentic period‑inspired design. Combat feels engaging, with classic shootouts and horseback chases adding excitement throughout the journey. Beyond its action elements, the game stands out for its emotional depth and strong character development, making players invested in Arthur Morgan's personal struggle. Its balance of freedom and storytelling creates an unforgettable adventure that continues to resonate with players years after release.</p>
+      </div>
     </div>
   </section>
 
+  <!-- ==========================================================================
+       BEGINNER GUIDES / TUTORIALS
+       --------------------------------------------------------------------------
+       A clickable card linking to an external YouTube guide. The card mimics
+       the review card but contains a play icon, text, and an arrow that slides
+       right on hover.
+       ========================================================================== -->
   <section class="tutorial-section">
     <div class="tutorial-container">
       <h2 class="section-title">Beginner Guides / Tutorials</h2>
-      <a href="https://www.youtube.com/watch?v=AcOpiWppO3k" target="_blank" rel="noopener" class="video-card"><div class="video-card__inner"><span class="video-card__play">▶</span><span class="video-card__text">Watch Beginner Guide on YouTube</span><span class="video-card__arrow">→</span></div></a>
+      <!-- Entire card is a link to the external guide -->
+      <a href="https://www.youtube.com/watch?v=AcOpiWppO3k" target="_blank" rel="noopener" class="video-card">
+        <div class="video-card__inner">
+          <!-- Play icon (triangle) -->
+          <span class="video-card__play">▶</span>
+          <!-- Descriptive text -->
+          <span class="video-card__text">Watch Beginner Guide on YouTube</span>
+          <!-- Arrow that moves right on hover -->
+          <span class="video-card__arrow">→</span>
+        </div>
+      </a>
     </div>
   </section>
 
+  <!-- ==========================================================================
+       FOOTER
+       --------------------------------------------------------------------------
+       Gradient footer with links to other essential pages. Links go up one level
+       to the global_pages/ directory (e.g., ../contacts.html).
+       ========================================================================== -->
   <footer class="footer">
     <div class="footer__links">
       <a href="../contacts.html" class="footer__link">Contacts</a> ·
@@ -111,24 +293,62 @@
     <div class="footer__copy">&copy; 2026 Labyrinth. All rights reserved.</div>
   </footer>
 
+  <!-- ==========================================================================
+       SCRIPTS
+       --------------------------------------------------------------------------
+       Loaded with '../../' to reach the root /js/ folder.
+         1. data.js   – Defines GAMES_CATALOG and TOP_RATED_GAMES (needed by search
+                        and the gallery script).
+         2. search.js – Live search in the header (path‑aware). On this page it
+                        detects the /global_pages/game/ location and adjusts
+                        image/link paths accordingly.
+       An inline script handles:
+         - Header scroll effect (adds .scrolled class when scrolled > 20px).
+         - Building the screenshot gallery carousel:
+             • Extracts the game ID from the URL (rdr2 from rdr2.html).
+             • Finds the game object in GAMES_CATALOG.
+             • Duplicates the gallery array to create a seamless loop.
+             • Creates .carousel-card elements with images and labels.
+         - Images are prefixed with '../../' unless they are already absolute.
+       ========================================================================== -->
   <script src="../../js/data.js"></script>
   <script src="../../js/search.js"></script>
   <script>
-    window.addEventListener('scroll', () => { document.getElementById('header').classList.toggle('scrolled', window.scrollY > 20); });
+    // Add/remove 'scrolled' class on the header when the page is scrolled > 20px
+    window.addEventListener('scroll', () => {
+      document.getElementById('header').classList.toggle('scrolled', window.scrollY > 20);
+    });
+
+    // Immediately‑invoked function expression (IIFE) to build the gallery
     (function() {
+      // Extract the game ID from the URL: e.g., "/global_pages/game/rdr2.html" → "rdr2"
       const gameId = window.location.pathname.split('/').pop().replace('.html', '');
+      // Find the corresponding game object in the global catalogue
       const game = GAMES_CATALOG.find(g => g.id === gameId);
-      if (!game) return;
-      const galleryImages = game.gallery;
+      if (!game) return; // Stop if game not found
+
+      const galleryImages = game.gallery; // Array of image paths
       const track = document.querySelector('.carousel-track');
       if (track) {
-        track.innerHTML = '';
+        track.innerHTML = ''; // Clear any existing content
+
+        // Duplicate the gallery images so the animation can loop seamlessly.
+        // The CSS animation moves the track by -50% of its width, so two full sets
+        // are required.
         const imagesToShow = [...galleryImages, ...galleryImages];
+
         imagesToShow.forEach((src, idx) => {
           const card = document.createElement('div');
           card.className = 'carousel-card';
+
+          // Fix path: if not absolute, prefix with '../../' to ascend two levels
           const fixedSrc = src.startsWith('/') ? src : `../../${src}`;
-          card.innerHTML = `<img src="${fixedSrc}" alt="Screenshot ${idx+1}" loading="lazy"><span class="carousel-card__label">Game Screenshot ${(idx % galleryImages.length)+1}</span>`;
+
+          // Build the card: image + a label that appears on hover
+          card.innerHTML = `
+            <img src="${fixedSrc}" alt="Screenshot ${idx + 1}" loading="lazy">
+            <span class="carousel-card__label">Game Screenshot ${(idx % galleryImages.length) + 1}</span>
+          `;
           track.appendChild(card);
         });
       }

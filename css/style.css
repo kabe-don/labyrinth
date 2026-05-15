@@ -1,4 +1,30 @@
+/* ==========================================================================
+   LABYRINTH – Main Stylesheet (styles.css)
+   --------------------------------------------------------------------------
+   This file contains the global design system and core layout styles for
+   the Labyrinth gaming website. It includes:
+   - CSS custom properties (design tokens)
+   - Reset & base typography
+   - Splash screen animation
+   - Fixed header with navigation & search
+   - Homepage hero carousel
+   - Top‑rated cards & category banners
+   - Browse / All Games layout with preview panel
+   - FAQ & Contact page components
+   - Creator cards (3D flip)
+   - References page tables
+   - About page with hero & info blocks
+   --------------------------------------------------------------------------
+   Fonts:
+     --font-heading : 'Bruno Ace'      (large titles, logo)
+     --font-body    : 'Reddit Sans'    (general text)
+     --font-ui      : 'Inter'         (buttons, labels, metadata)
+   --------------------------------------------------------------------------
+   All colours and sizes derive from custom properties defined in :root.
+   ========================================================================== */
+
 /* ========== CSS RESET & VARIABLES ========== */
+/* Remove default margins/paddings, set border‑box sizing globally */
 * {
   margin: 0;
   padding: 0;
@@ -6,29 +32,38 @@
 }
 
 html {
-  overflow-y: scroll;
+  overflow-y: scroll;          /* Always show vertical scrollbar to prevent layout shift */
 }
 
 :root {
-  --bg-deep: #05204E;
-  --bg-darker: #0F172A;
-  --accent-blue: #4C8CE4;
-  --accent-blue-light: #6BA3F5;
-  --accent-green: #00C950;
-  --text-light: #E9EFFF;
-  --text-muted: rgba(233, 239, 255, 0.55);
-  --text-subtle: rgba(233, 239, 255, 0.75);
-  --card-light: #E9EFFF;
-  --card-bg: rgba(15, 23, 42, 0.6);
-  --btn-gray: #667496;
+  /* ---------- Palette ---------- */
+  --bg-deep: #05204E;           /* Deep navy page background */
+  --bg-darker: #0F172A;         /* Darker card / section background */
+  --accent-blue: #4C8CE4;       /* Primary interactive colour */
+  --accent-blue-light: #6BA3F5; /* Lighter blue for gradients */
+  --accent-green: #00C950;      /* Success / CTA colour */
+  --text-light: #E9EFFF;        /* Main light text */
+  --text-muted: rgba(233, 239, 255, 0.55);  /* Secondary muted text */
+  --text-subtle: rgba(233, 239, 255, 0.75); /* Slightly stronger than muted */
+  --card-light: #E9EFFF;        /* Light card surface (used on dark bg) */
+  --card-bg: rgba(15, 23, 42, 0.6); /* Frosted glass card background */
+  --btn-gray: #667496;          /* Neutral button / scrollbar colour */
+
+  /* ---------- Border radii ---------- */
   --border-radius-sm: 6px;
   --border-radius-md: 10px;
   --border-radius-lg: 16px;
   --border-radius-xl: 20px;
+
+  /* ---------- Typography ---------- */
   --font-heading: 'Bruno Ace', sans-serif;
   --font-body: 'Reddit Sans', sans-serif;
   --font-ui: 'Inter', sans-serif;
-  --header-height: 68px;
+
+  /* ---------- Layout ---------- */
+  --header-height: 68px;        /* Fixed header height */
+
+  /* ---------- Animation ---------- */
   --transition-smooth: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -38,17 +73,21 @@ body {
   color: var(--text-light);
   min-height: 100vh;
   line-height: 1.5;
-  overflow-x: hidden;
+  overflow-x: hidden;          /* No horizontal scroll */
   margin: 0;
   padding: 0;
-  padding-top: var(--header-height);
+  padding-top: var(--header-height);  /* Offset for fixed header */
 }
 
+/* Custom thin scrollbar */
 ::-webkit-scrollbar { width: 5px; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: var(--btn-gray); border-radius: 3px; }
 
 /* ========== SPLASH SCREEN ========== */
+/* Full‑screen overlay shown on initial page load. Uses a subtle pulse
+   animation on the logo and a progress bar that fills over 2.5 seconds.
+   The .hidden class fades it out and disables pointer events. */
 .splash-screen {
   position: fixed;
   inset: 0;
@@ -76,7 +115,7 @@ body {
   font-size: 48px;
   letter-spacing: -0.04em;
   color: #fff;
-  animation: fadeInUp 0.8s ease forwards;
+  animation: fadeInUp 0.8s ease forwards;   /* Slide up and fade in */
 }
 .splash-loader {
   width: 200px; height: 6px;
@@ -90,8 +129,9 @@ body {
   width: 0%; height: 100%;
   background: var(--accent-blue);
   border-radius: 3px;
-  animation: loadGrow 2.5s ease-out forwards;
+  animation: loadGrow 2.5s ease-out forwards;  /* Progress bar fill */
 }
+
 @keyframes splashPulse {
   0% { transform: scale(1); }
   100% { transform: scale(1.05); }
@@ -106,11 +146,13 @@ body {
 }
 
 /* ========== HEADER ========== */
+/* Fixed top bar with frosted glass effect. On scroll (via JS class .scrolled)
+   the background becomes more opaque and the bottom border slightly stronger. */
 .header {
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 1100;
+  z-index: 1100;               /* Above everything except splash */
   width: 100%;
   height: var(--header-height);
   background: rgba(15, 23, 42, 0.92);
@@ -125,12 +167,12 @@ body {
   box-shadow: 0 2px 20px rgba(0,0,0,0.15);
   box-sizing: border-box;
 }
-
 .header.scrolled {
   background: rgba(15, 23, 42, 0.98);
   border-bottom-color: rgba(76, 140, 228, 0.35);
 }
 
+/* Logo group: icon + brand name, both link to home */
 .header__logo-group {
   display: flex; align-items: center; gap: 12px;
   cursor: pointer; text-decoration: none; user-select: none; flex-shrink: 0;
@@ -145,12 +187,14 @@ body {
 .header__brand {
   font-family: var(--font-heading); font-size: 26px; letter-spacing: -0.04em; color: #fff; white-space: nowrap;
 }
+
+/* Main navigation row (links + search) */
 .header__nav { display: flex; align-items: center; gap: 20px; }
 
-/* Search bar */
+/* Search input with icon inside a pill */
 .nav-search { position: relative; margin-right: 8px; }
 .nav-search input {
-  padding: 8px 14px 8px 38px;
+  padding: 8px 14px 8px 38px;      /* Left padding makes room for icon */
   background: rgba(255,255,255,0.08);
   border: 1px solid rgba(76,140,228,0.3);
   border-radius: 20px;
@@ -164,7 +208,7 @@ body {
   width: 16px; height: 16px; opacity: 0.6; pointer-events: none;
 }
 
-/* Search dropdown */
+/* Search dropdown – appears below search bar */
 .search-dropdown {
   position: absolute;
   top: 100%;
@@ -210,7 +254,6 @@ body {
   border-radius: 5px;
   display: block;
 }
-
 .search-dropdown-item .game-title-small {
   font-family: var(--font-ui);
   font-weight: 600;
@@ -220,7 +263,6 @@ body {
   overflow: hidden;
   text-overflow: ellipsis;
 }
-
 .search-dropdown-item .game-price-small {
   margin-left: auto;
   font-weight: 700;
@@ -231,6 +273,7 @@ body {
   flex-shrink: 0;
 }
 
+/* Simple nav links with underline animation */
 .header__nav-link {
   font-family: var(--font-body); font-size: 16px; font-weight: 500;
   color: var(--text-subtle); text-decoration: none; padding: 6px 0;
@@ -244,11 +287,12 @@ body {
 .header__nav-link:hover { color: #fff; }
 .header__nav-link:hover::after { transform: scaleX(1); transform-origin: left; }
 
-/* Category dropdown */
+/* Category dropdown – shown on hover of parent */
 .header__nav-dropdown { position: relative; }
 .header__nav-dropdown-trigger { display: flex; align-items: center; gap: 4px; }
 .dropdown-arrow { font-size: 10px; transition: transform 0.3s; }
 .header__nav-dropdown:hover .dropdown-arrow { transform: rotate(180deg); }
+
 .header__dropdown-menu {
   position: absolute; top: 100%; left: 50%; transform: translateX(-50%) translateY(0);
   background: rgba(15, 23, 42, 0.96); backdrop-filter: blur(20px);
@@ -268,30 +312,42 @@ body {
 .header__dropdown-item:hover { background: rgba(76,140,228,0.18); color: #fff; padding-left: 28px; }
 
 /* ========== HERO CAROUSEL (homepage) ========== */
+/* Full‑width hero with sliding background videos. Each slide covers the
+   container; only the active slide is visible (opacity transition). */
 .hero { position: relative; width: 100%; height: 560px; overflow: hidden; background: var(--bg-deep); }
 .hero__slides { position: relative; width: 100%; height: 100%; }
+
 .hero__slide {
   position: absolute; inset: 0; opacity: 0;
   transition: opacity 0.8s var(--transition-smooth), transform 0.8s var(--transition-smooth);
-  transform: scale(1.04); display: flex; align-items: center; z-index: 1;
+  transform: scale(1.04);          /* Slight zoom for inactive slides */
+  display: flex; align-items: center; z-index: 1;
 }
 .hero__slide--active { opacity: 1; transform: scale(1); z-index: 2; }
+
+/* Background video – muted, no interaction */
 .hero__slide-video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; pointer-events: none; z-index: 0; }
+
+/* Semi‑transparent gradient overlay for text readability */
 .hero__slide-overlay {
   position: absolute; inset: 0;
   background: linear-gradient(135deg, rgba(5,32,78,0.65) 0%, rgba(15,23,42,0.45) 40%, rgba(5,32,78,0.6) 100%);
   z-index: 1;
 }
+
+/* Text content (left aligned) */
 .hero__slide-content { position: relative; z-index: 3; padding: 0 80px; max-width: 720px; display: flex; flex-direction: column; gap: 18px; }
+
 .hero__slide-title {
   font-family: var(--font-heading); font-size: 50px; line-height: 1.1; letter-spacing: -0.04em;
   color: #ffffff; text-shadow: 0 4px 30px rgba(76,140,228,0.5);
 }
 .hero__slide-title-accent {
   display: inline-block;
-  color: #fff; /* removed gradient */
+  color: #fff;                  /* Originally a gradient, now solid for simplicity */
 }
 .hero__slide-desc { font-family: var(--font-body); font-size: 17px; line-height: 1.6; color: var(--text-subtle); max-width: 580px; }
+
 .hero__slide-meta { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
 .hero__badge {
   display: inline-flex; align-items: center; gap: 5px;
@@ -299,6 +355,8 @@ body {
   font-weight: 700; font-size: 16px; padding: 6px 14px; border-radius: var(--border-radius-sm);
 }
 .hero__year { font-family: var(--font-ui); font-weight: 700; font-size: 15px; color: var(--text-light); opacity: 0.8; }
+
+/* Main CTA button – green, prominent */
 .hero__btn {
   display: inline-flex; align-items: center; justify-content: center; gap: 8px;
   width: 240px; height: 56px; background: var(--accent-green); color: #fff;
@@ -308,6 +366,8 @@ body {
   transition: all 0.3s; box-shadow: 0 6px 28px rgba(0,201,80,0.3);
 }
 .hero__btn:hover { background: #00e85a; transform: translateY(-3px); box-shadow: 0 12px 36px rgba(0,201,80,0.5); }
+
+/* Carousel controls (arrows + dots) – bottom right */
 .hero__controls { position: absolute; bottom: 50px; right: 60px; z-index: 10; display: flex; align-items: center; gap: 8px; }
 .hero__arrow {
   width: 36px; height: 36px; border-radius: 50%; background: var(--btn-gray);
@@ -315,6 +375,7 @@ body {
   color: #fff; font-size: 16px; font-weight: 700; transition: 0.2s;
 }
 .hero__arrow:hover { background: var(--accent-blue); box-shadow: 0 0 20px rgba(76,140,228,0.5); transform: scale(1.1); }
+
 .hero__dots { display: flex; gap: 6px; }
 .hero__dot {
   width: 10px; height: 10px; border-radius: 50%; background: var(--text-light);
@@ -323,12 +384,14 @@ body {
 .hero__dot--active { width: 38px; border-radius: 20px; background: var(--accent-blue); opacity: 1; box-shadow: 0 0 12px rgba(76,140,228,0.5); }
 
 /* ========== TOP RATED CARDS ========== */
+/* Horizontal cards with thumbnail, title, and price. Grid of 3 columns. */
 .section-top-rated { padding: 32px 40px 20px; max-width: 1440px; margin: 0 auto; }
 .section-heading {
   font-family: var(--font-ui); font-weight: 800; font-size: 22px; color: var(--text-light);
   margin-bottom: 18px; display: flex; align-items: center; gap: 10px;
 }
 .section-heading::before { content: ''; width: 4px; height: 22px; background: var(--accent-blue); border-radius: 2px; }
+
 .top-rated-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 22px; }
 .top-rated-card {
   background: var(--card-light); border-radius: var(--border-radius-lg); height: 200px;
@@ -336,8 +399,10 @@ body {
   transition: all 0.3s; box-shadow: 0 2px 8px rgba(0,0,0,0.15);
 }
 .top-rated-card:hover { transform: translateY(-6px) scale(1.02); box-shadow: 0 16px 40px rgba(76,140,228,0.4); }
+
 .top-rated-card__thumb { width: 180px; flex-shrink: 0; overflow: hidden; }
 .top-rated-card__img { width: 100%; height: 100%; object-fit: cover; }
+
 .top-rated-card__body { flex: 1; padding: 16px; display: flex; flex-direction: column; justify-content: center; gap: 6px; }
 .top-rated-card__title { font-family: var(--font-ui); font-weight: 700; font-size: 18px; color: #0F172A; }
 .top-rated-card__review {
@@ -350,6 +415,7 @@ body {
 .top-rated-card__platforms .platform-icon { width: 18px; height: 18px; opacity: 0.9; }
 
 /* ========== CATEGORY BANNERS ========== */
+/* Two large banners with background images and blur effect on hover */
 .section-categories { padding: 20px 40px 24px; max-width: 1440px; margin: 0 auto; }
 .categories-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
 .category-banner {
@@ -369,9 +435,12 @@ body {
 .category-banner__text { position: relative; z-index: 2; display: flex; gap: 12px; }
 
 /* ========== BROWSE LAYOUT (All Games) ========== */
+/* Two‑column layout: game list on the left, sticky preview panel on the right */
 .browse-container { display: flex; gap: 20px; align-items: flex-start; padding: 24px 40px 50px; max-width: 1440px; margin: 0 auto; }
 .browse-left { flex: 1 1 540px; }
 .game-list { display: flex; flex-direction: column; gap: 6px; }
+
+/* Individual game row */
 .game-item {
   display: flex; align-items: center; gap: 14px;
   background: var(--bg-darker); border-radius: var(--border-radius-md);
@@ -393,7 +462,7 @@ body {
 .platform-icons { display: flex; gap: 4px; align-items: center; }
 .platform-icon { width: 20px; height: 20px; opacity: 0.85; display: inline-block; vertical-align: middle; margin-right: 2px; }
 
-/* Right preview panel */
+/* Right preview panel – sticky, updates on click */
 .browse-right { flex: 0 0 440px; position: sticky; top: calc(var(--header-height) + 20px); }
 .preview-panel {
   background: var(--bg-darker); border-radius: var(--border-radius-lg);
@@ -404,12 +473,14 @@ body {
 .preview-panel.highlight { border-color: var(--accent-blue); box-shadow: 0 0 28px rgba(76,140,228,0.5); }
 .preview-content { transition: opacity 0.2s, transform 0.2s; }
 .preview-content.fading { opacity: 0; transform: translateY(6px); }
+
 .preview-title { font-family: var(--font-ui); font-weight: 800; font-size: 32px; color: #fff; line-height: 1.2; }
 .preview-review { display: inline-flex; align-items: center; gap: 6px; background: var(--accent-blue); color: #fff; font-weight: 700; font-size: 14px; padding: 5px 12px; border-radius: 20px; width: fit-content; }
 .preview-tags { display: flex; flex-wrap: wrap; gap: 8px; margin: 8px 0; }
 .preview-tag { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); padding: 4px 12px; border-radius: 20px; font-size: 13px; color: var(--text-subtle); }
 .preview-description { font-size: 14px; line-height: 1.6; color: var(--text-muted); }
 .preview-release { font-size: 14px; color: var(--text-subtle); margin-top: 4px; }
+
 .preview-gallery { display: flex; flex-direction: column; gap: 12px; margin-top: 6px; }
 .preview-gallery-thumb { width: 100%; height: 180px; border-radius: 8px; cursor: pointer; border: 2px solid transparent; transition: 0.2s; overflow: hidden; }
 .preview-gallery-img { width: 100%; height: 100%; object-fit: cover; display: block; }
@@ -420,6 +491,7 @@ body {
 .page-section.active { display: block; }
 
 /* ========== ABOUT ========== */
+/* Simple centered about text block */
 .about-content { max-width: 800px; margin: 0 auto; padding: 60px 20px; text-align: center; }
 .about-content h2 { font-family: var(--font-heading); font-size: 42px; margin-bottom: 24px; color: #fff; }
 .about-content p { font-size: 17px; color: var(--text-subtle); line-height: 1.7; margin-bottom: 16px; }
@@ -446,6 +518,7 @@ body {
 .footer__copy { font-size: 14px; color: rgba(233, 239, 255, 0.5); }
 
 /* ========== PLATFORM ICONS BACKGROUND ========== */
+/* Light background pill for platform icon groups */
 .platform-icons,
 .top-rated-card__platforms {
   background: #e9efff;
@@ -457,6 +530,7 @@ body {
 }
 
 /* ========== FAQ & CONTACT ========== */
+/* Shared decorative background glow */
 main {
   position: relative;
 }
@@ -488,7 +562,7 @@ main::before {
 .faq-hero h1 {
   font-family: var(--font-heading);
   font-size: clamp(2rem, 5vw, 3rem);
-  color: #fff; /* removed gradient */
+  color: #fff;               /* Solid white, replaced gradient for consistency */
   margin-bottom: 20px;
   letter-spacing: 1px;
   line-height: 1.2;
@@ -499,6 +573,8 @@ main::before {
   max-width: 550px;
   margin: 0 auto;
 }
+
+/* Accordion‑style FAQ items */
 .faq-questions {
   background: var(--card-bg);
   backdrop-filter: blur(12px);
@@ -520,6 +596,8 @@ main::before {
   border-color: rgba(76, 140, 228, 0.4);
   transform: translateX(4px);
 }
+
+/* Hidden checkbox controls answer expansion */
 .faq-checkbox {
   position: absolute;
   opacity: 0;
@@ -539,6 +617,8 @@ main::before {
   color: var(--text-light);
   padding-right: 20px;
 }
+
+/* Icon rotates when checked */
 .faq-icon {
   width: 32px; height: 32px;
   border-radius: 50%;
@@ -557,6 +637,8 @@ main::before {
   transition: transform 0.35s;
 }
 .faq-checkbox:checked ~ .faq-question .faq-icon .small-arrow { transform: rotate(90deg); }
+
+/* Answer slides open via max-height transition */
 .faq-answer {
   max-height: 0;
   overflow: hidden;
@@ -572,6 +654,8 @@ main::before {
   padding: 0 0 24px 0;
 }
 .faq-checkbox:checked ~ .faq-answer { max-height: 500px; }
+
+/* "Still have questions?" card */
 .still-questions { width: 100%; }
 .questions-card {
   background: linear-gradient(135deg, rgba(76, 140, 228, 0.15), rgba(0, 201, 80, 0.08));
@@ -612,6 +696,7 @@ main::before {
   max-width: 500px;
   margin-left: auto; margin-right: auto;
 }
+/* Gradient contact button */
 .contact-btn {
   display: inline-flex;
   align-items: center;
@@ -644,7 +729,7 @@ main::before {
 .contact-hero h1 {
   font-family: var(--font-heading);
   font-size: 3.2rem;
-  color: #fff; /* removed gradient */
+  color: #fff;
   text-transform: uppercase;
 }
 .contact-hero p {
@@ -682,7 +767,7 @@ main::before {
   font-family: var(--font-heading);
   font-size: 2rem;
   margin-bottom: 36px;
-  color: #fff; /* removed gradient */
+  color: #fff;
 }
 .contact-details {
   display: flex;
@@ -728,6 +813,7 @@ main::before {
 }
 
 /* ========== CREATOR SECTION ========== */
+/* 3D flip cards showing team members. Hover rotates the card 180° */
 .creators-section {
   padding: 80px 40px;
   text-align: center;
@@ -737,7 +823,7 @@ main::before {
   font-family: var(--font-heading);
   font-size: 80px;
   margin-bottom: 50px;
-  color: #fff; /* removed gradient */
+  color: #fff;
   text-align: center;
 }
 .creators-grid {
@@ -748,8 +834,9 @@ main::before {
   max-width: 1300px;
   margin: 0 auto;
 }
+
 .creator-card {
-  perspective: 1000px;
+  perspective: 1000px;               /* Enables 3D space */
   width: 320px;
   height: 420px;
 }
@@ -786,7 +873,7 @@ main::before {
   background: rgba(15, 23, 42, 0.75);
   backdrop-filter: blur(16px);
   border: 1px solid rgba(76, 140, 228, 0.35);
-  transform: rotateY(180deg);
+  transform: rotateY(180deg);        /* Initially hidden */
   text-align: center;
 }
 .creator-card-image {
@@ -823,7 +910,8 @@ main::before {
   max-width: 260px;
 }
 
-/* Focus visible */
+/* ========== ACCESSIBILITY & PREFERENCES ========== */
+/* Visible focus outline for keyboard navigation */
 .faq-question:focus-visible,
 .header__nav-link:focus-visible,
 .header__dropdown-item:focus-visible,
@@ -832,7 +920,7 @@ main::before {
   outline-offset: 2px;
 }
 
-/* Reduced motion */
+/* Respect user’s motion preferences */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
@@ -841,6 +929,7 @@ main::before {
 }
 
 /* ========== REFERENCES PAGE STYLES ========== */
+/* Tables listing asset sources, with type badges */
 .references-page {
   max-width: 1200px;
   margin: 0 auto;
@@ -860,6 +949,7 @@ main::before {
   color: var(--text-subtle);
   font-size: 1rem;
 }
+
 .acknowledgment-box {
   background: rgba(15, 23, 42, 0.6);
   backdrop-filter: blur(12px);
@@ -882,6 +972,7 @@ main::before {
   line-height: 1.7;
   margin: 0;
 }
+
 .ref-section-header {
   font-family: var(--font-heading);
   font-size: 1.8rem;
@@ -902,6 +993,7 @@ main::before {
   padding-left: 12px;
   border-left: 3px solid var(--accent-blue);
 }
+
 .ref-table {
   width: 100%;
   border-collapse: collapse;
@@ -941,6 +1033,8 @@ main::before {
   color: var(--accent-green);
   text-decoration: underline;
 }
+
+/* Type badges for information/image/video */
 .type-badge {
   display: inline-block;
   font-size: 0.65rem;
@@ -965,6 +1059,8 @@ main::before {
   border: 1px solid rgba(30, 70, 140, 0.5);
   color: #3A7BCE;
 }
+
+/* Responsive table adjustments */
 @media (max-width: 768px) {
   .references-page {
     padding: 30px 16px 60px;
@@ -981,9 +1077,14 @@ main::before {
 
 /* =============================================
    ABOUT PAGE SPECIFIC STYLES
+   =============================================
+   A refreshed “About” section with a large hero,
+   alternating info blocks, mission/vision cards,
+   and subtle decorative gradients.
    ============================================= */
 
 :root {
+    /* Additional tokens scoped to the About section for easier theming */
     --about-gold: #00C950;
     --about-blue: #4C8CE4;
     --about-dark: #0F172A;
@@ -1006,6 +1107,7 @@ main::before {
     overflow: visible;
 }
 
+/* Bottom fade into the page */
 .about-hero-new::after {
     content: '';
     position: absolute;
@@ -1041,14 +1143,14 @@ main::before {
     font-size: clamp(3rem, 8vw, 5.5rem);
     line-height: 1.1;
     margin-bottom: 24px;
-    color: #fff; /* removed gradient */
+    color: #fff;
     opacity: 0;
     animation: fadeUp 0.8s ease 0.2s forwards;
 }
 
 .hero-title-large span {
     display: block;
-    color: #fff; /* removed gradient */
+    color: #fff;
 }
 
 .hero-sub {
@@ -1061,7 +1163,7 @@ main::before {
     animation: fadeUp 0.8s ease 0.4s forwards;
 }
 
-/* Centered scroll indicator */
+/* Centered scroll indicator with bouncing arrow */
 .hero-scroll-indicator {
     position: absolute;
     bottom: 32px;
@@ -1114,6 +1216,7 @@ main::before {
     width: 100%;
 }
 
+/* Alternating two‑column rows */
 .info-block {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -1122,13 +1225,11 @@ main::before {
 }
 
 .info-block.reverse {
-    direction: rtl;
+    direction: rtl;                /* Swap visual order for every other block */
 }
-
 .info-block.reverse .info-text {
     direction: ltr;
 }
-
 .info-block .info-visual {
     direction: ltr;
 }
@@ -1164,7 +1265,7 @@ main::before {
     border-radius: 20px;
 }
 
-/* Visual cards */
+/* Visual cards with icons and floating text */
 .visual-card {
     background: rgba(15,23,42,0.7);
     backdrop-filter: blur(20px);
@@ -1205,7 +1306,7 @@ main::before {
     left: 30px;
 }
 
-/* Full width block */
+/* Full width text block (centered) */
 .block-full {
     grid-column: 1 / -1;
     text-align: center;
@@ -1280,7 +1381,7 @@ main::before {
     margin-bottom: 10px;
 }
 
-/* Responsive */
+/* ---- About Page Responsive ---- */
 @media (max-width: 768px) {
     .about-content-new {
         gap: 60px;
@@ -1291,7 +1392,7 @@ main::before {
         gap: 32px;
     }
     .info-block.reverse {
-        direction: ltr;
+        direction: ltr;            /* Remove rtl swapping on small screens */
     }
     .visual-card {
         height: 250px;

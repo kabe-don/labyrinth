@@ -1,66 +1,148 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- ==========================================================================
+       LABYRINTH · About Page (global_pages/about.html)
+       --------------------------------------------------------------------------
+       This page describes the platform’s mission, vision, and purpose.
+       It is located in the /global_pages/ subdirectory, so all asset paths
+       (CSS, JS, images) are prefixed with '../' to reach the root folder.
+       Font Awesome icons are loaded from a CDN for visual decoration.
+       ========================================================================== -->
   <meta charset="UTF-8">
+  <!-- Mobile‑first responsive meta tag.  viewport-fit=cover helps with notched displays. -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>LABYRINTH | About — Your Game Discovery Engine</title>
+
+  <!-- Preconnect to external origins for faster font and icon delivery -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!--
+    Primary typefaces:
+      Bruno Ace   →  --font-heading  (large titles, hero text)
+      Inter       →  --font-ui        (buttons, labels, tags)
+      Reddit Sans →  --font-body      (paragraphs, descriptions)
+    All weights from 200–900 are loaded.
+  -->
   <link href="https://fonts.googleapis.com/css2?family=Bruno+Ace&family=Inter:wght@200;300;400;500;600;700;800;900&family=Reddit+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome 6 for icons (compass, gamepad, chevron, etc.) -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!--
+    Main stylesheet and responsive overrides.
+    Path is '../css/' because we are inside /global_pages/.
+    style.css contains the global design system and most component styles.
+    responsive.css handles breakpoints, touch improvements, and accessibility.
+  -->
   <link rel="stylesheet" href="../css/style.css">
   <link rel="stylesheet" href="../css/responsive.css">
 </head>
 <body>
 
+  <!-- ==========================================================================
+       HEADER
+       --------------------------------------------------------------------------
+       Identical to the homepage header, but with paths adjusted for the
+       subdirectory.  The fixed navigation bar uses a frosted‑glass effect.
+       The logo links back to the homepage (../index.html).
+       ========================================================================== -->
   <header class="header" id="header">
+    <!-- Logo group: clicking returns to the homepage -->
     <a class="header__logo-group" id="logoTop" href="../index.html">
       <div class="header__logo-icon">
+        <!-- ../ because we're one folder deep -->
         <img src="../assets/img/web_logo.png" alt="LABYRINTH" class="logo-img">
       </div>
       <span class="header__brand">LABYRINTH</span>
     </a>
+
     <nav class="header__nav">
+      <!-- ===== SEARCH BAR ===== -->
       <div class="nav-search">
+        <!-- Inline SVG magnifying glass -->
         <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <circle cx="11" cy="11" r="8"/>
           <line x1="21" y1="21" x2="16.65" y2="16.65"/>
         </svg>
+        <!--
+          search.js attaches live filtering.  Because this page is inside
+          /global_pages/, search.js will automatically set the correct
+          relative paths for images and game links (see search.js comments).
+        -->
         <input type="text" id="globalSearch" placeholder="Search games..." autocomplete="off">
         <div class="search-dropdown" id="searchDropdown"></div>
       </div>
+
+      <!-- ===== CATEGORY DROPDOWN ===== -->
       <div class="header__nav-dropdown">
         <span class="header__nav-link header__nav-dropdown-trigger">CATEGORY <span class="dropdown-arrow">▾</span></span>
         <div class="header__dropdown-menu">
+          <!-- Links are relative to the current directory (global_pages/) -->
           <a class="header__dropdown-item" href="singleplayer.html">Single Player</a>
           <a class="header__dropdown-item" href="multiplayer.html">Multiplayer</a>
         </div>
       </div>
+
+      <!-- The "About" link is self‑referential when on this page, but keeps the user on the About section -->
       <a class="header__nav-link" href="about.html">About</a>
     </nav>
   </header>
 
   <main>
+    <!-- ==========================================================================
+         ABOUT HERO
+         --------------------------------------------------------------------------
+         A visually impactful hero section with a large title, eyebrow text,
+         and a subtle scroll indicator.  The background uses two radial
+         gradients (defined in CSS) for a soft glowing effect.  The hero
+         content fades in via staggered keyframe animations (fadeUp).
+         ========================================================================== -->
     <section class="about-hero-new">
       <div class="hero-content">
+        <!-- Small uppercase label above the main title -->
         <p class="hero-eyebrow">Welcome to the future of game discovery</p>
+        <!--
+          Main heading split onto two lines.  "ENTER" is plain, "LABYRINTH" is
+          inside a <span> (styled as a block element) for visual emphasis.
+        -->
         <h1 class="hero-title-large">ENTER<br><span>LABYRINTH</span></h1>
+        <!-- Subtitle / brief description -->
         <p class="hero-sub">Jump straight into the fun. Discover, explore, and play the world's most compelling games — all in one place.</p>
       </div>
+
+      <!--
+        Scroll indicator: "Scroll to explore" text + a bouncing chevron.
+        Positioned absolutely at the bottom of the hero.  The arrow uses the
+        bounceDown animation.  pointer-events: none so it doesn’t block clicks.
+      -->
       <div class="hero-scroll-indicator">
         <span>Scroll to explore</span>
         <i class="fas fa-chevron-down"></i>
       </div>
     </section>
 
+    <!-- ==========================================================================
+         ABOUT CONTENT BLOCKS
+         --------------------------------------------------------------------------
+         A series of alternating info blocks, each pairing text with a visual
+         card.  The content explains the platform’s purpose, features, and
+         guiding principles.  The final section contains side‑by‑side mission
+         and vision cards.
+         ========================================================================== -->
     <div class="about-content-new">
+      <!-- ---------- BLOCK 1: Platform ---------- -->
       <div class="info-block">
+        <!-- Text column -->
         <div class="info-text">
+          <!-- Small gold tag indicating the topic -->
           <span class="tag">Platform</span>
           <h2>Discover games, redefined</h2>
           <p>Labyrinth is a curated gaming discovery platform that brings together carefully selected <strong style="color:#00C950;">single‑player and multiplayer</strong> titles. Every game includes key details, authentic reviews, and beginner‑friendly guides — all designed to help you find the perfect match in seconds.</p>
           <p>Built for <strong style="color:#6BA3F5;">accessibility and speed</strong>, Labyrinth transforms the overwhelming choice of modern gaming into a seamless, enjoyable journey.</p>
         </div>
+        <!-- Visual column: frosted glass card with a large compass icon -->
         <div class="info-visual">
           <div class="visual-card">
             <i class="fas fa-compass visual-icon-large"></i>
@@ -69,6 +151,11 @@
         </div>
       </div>
 
+      <!-- ---------- BLOCK 2: Objective (reversed layout) ---------- -->
+      <!--
+        The .reverse class uses CSS direction: rtl to swap the visual order.
+        The text column remains direction: ltr for proper readability.
+      -->
       <div class="info-block reverse">
         <div class="info-text">
           <span class="tag">Objective</span>
@@ -84,12 +171,23 @@
         </div>
       </div>
 
+      <!-- ---------- FULL‑WIDTH TEXT BLOCK ---------- -->
+      <!--
+        The .block-full class spans the entire grid width, with centered text.
+        It reinforces the platform’s core purpose.
+      -->
       <div class="block-full">
         <span class="tag">Purpose</span>
         <h2>Find your next game without the grind.</h2>
         <p>We exist to deliver <strong style="color:#6BA3F5;">clear, organized, and trustworthy</strong> game information. From descriptions and ratings to compatibility and release details, Labyrinth makes sure you know exactly which titles are worth your time — every single time.</p>
       </div>
 
+      <!-- ---------- MISSION & VISION ROW ---------- -->
+      <!--
+        Two side‑by‑side cards: Mission and Vision.  Each card is a frosted‑glass
+        container with a gold label, heading, and descriptive paragraphs.
+        Hover triggers a subtle lift and glow effect.
+      -->
       <div class="mission-vision-row">
         <div class="mission-card">
           <div class="card-label">Mission</div>
@@ -107,8 +205,15 @@
     </div>
   </main>
 
+  <!-- ==========================================================================
+       FOOTER
+       --------------------------------------------------------------------------
+       Gradient footer matching the rest of the site.  Links are relative to
+       the current directory (global_pages/).  The copyright line is included.
+       ========================================================================== -->
   <footer class="footer">
     <div class="footer__links">
+      <!-- All footer pages are in the same folder as this page -->
       <a href="contacts.html" class="footer__link">Contacts</a> ·
       <a href="faqs.html" class="footer__link">FAQs</a> ·
       <a href="references.html" class="footer__link">References</a> ·
@@ -117,6 +222,15 @@
     <div class="footer__copy">&copy; 2026 Labyrinth. All rights reserved.</div>
   </footer>
 
+  <!-- ==========================================================================
+       SCRIPTS
+       --------------------------------------------------------------------------
+       All three JavaScript files are loaded with '../' to reach the root /js/ folder.
+         1. data.js   – Defines the global GAMES_CATALOG and TOP_RATED_GAMES arrays.
+         2. search.js – Enables live search in the header (path‑aware).
+         3. script.js – Handles splash, header scroll, hash navigation (but on
+                        this page it mainly adds the .scrolled class to the header).
+       ========================================================================== -->
   <script src="../js/data.js"></script>
   <script src="../js/search.js"></script>
   <script src="../js/script.js"></script>

@@ -1,28 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- ==========================================================================
+       LABYRINTH · References Page (global_pages/references.html)
+       --------------------------------------------------------------------------
+       This page lists all external sources, media assets (images, videos), and
+       information used to build the Labyrinth website. It is organized by game
+       and category (Single Player / Multiplayer). Each source is presented in a
+       responsive table with a colour‑coded type badge (Information, Image, Video).
+
+       The page is located inside /global_pages/, so all asset paths (CSS, JS, images)
+       are prefixed with '../' to reach the root folder. The same header, search,
+       and footer components are used as on other subpages.
+       ========================================================================== -->
   <meta charset="UTF-8">
+  <!-- Mobile‑first responsive meta tag.  viewport-fit=cover helps with notched displays. -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>LABYRINTH – References</title>
+
+  <!-- Preconnect to external origins for faster font delivery -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!--
+    Primary typefaces loaded from Google Fonts:
+      Bruno Ace   →  --font-heading  (large titles)
+      Inter       →  --font-ui        (buttons, labels, table headers)
+      Reddit Sans →  --font-body      (general text)
+    All weights from 200–900 are loaded.
+  -->
   <link href="https://fonts.googleapis.com/css2?family=Bruno+Ace&family=Inter:wght@200;300;400;500;600;700;800;900&family=Reddit+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!--
+    Main stylesheet and responsive overrides.
+    Path is '../css/' because we are inside /global_pages/.
+    style.css contains the global design system and reference‑specific styles.
+    responsive.css handles breakpoints, touch improvements, and accessibility.
+  -->
   <link rel="stylesheet" href="../css/style.css">
   <link rel="stylesheet" href="../css/responsive.css">
 </head>
 <body>
+
+  <!-- ==========================================================================
+       HEADER
+       --------------------------------------------------------------------------
+       Fixed navigation bar with frosted‑glass effect.
+       All links use paths relative to /global_pages/.
+       ========================================================================== -->
   <header class="header" id="header">
-    <!-- same header as before -->
+    <!-- Logo group: clicking returns to the homepage -->
     <a class="header__logo-group" href="../index.html">
       <div class="header__logo-icon"><img src="../assets/img/web_logo.png" alt="LABYRINTH" class="logo-img"></div>
       <span class="header__brand">LABYRINTH</span>
     </a>
     <nav class="header__nav">
+      <!-- ===== SEARCH BAR ===== -->
       <div class="nav-search">
-        <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <!-- Inline SVG magnifying glass -->
+        <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"/>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+        </svg>
+        <!--
+          search.js attaches live filtering.  It detects the /global_pages/
+          location and adjusts image/link paths automatically.
+        -->
         <input type="text" id="globalSearch" placeholder="Search games..." autocomplete="off">
         <div class="search-dropdown" id="searchDropdown"></div>
       </div>
+
+      <!-- ===== CATEGORY DROPDOWN ===== -->
       <div class="header__nav-dropdown">
         <span class="header__nav-link header__nav-dropdown-trigger">CATEGORY <span class="dropdown-arrow">▾</span></span>
         <div class="header__dropdown-menu">
@@ -30,145 +78,397 @@
           <a class="header__dropdown-item" href="multiplayer.html">Multiplayer</a>
         </div>
       </div>
+      <!-- About link – navigates to the About page in the same directory -->
       <a class="header__nav-link" href="about.html">About</a>
     </nav>
   </header>
 
   <main>
+    <!-- ==========================================================================
+         REFERENCES PAGE CONTAINER
+         --------------------------------------------------------------------------
+         A max‑width wrapper that centres the content and provides vertical padding.
+         The .references-page class applies specific spacing and background styles
+         defined in style.css.
+         ========================================================================== -->
     <div class="references-page">
+      <!-- ===== REFERENCES HERO ===== -->
+      <!--
+        A brief introductory section with the page title and a descriptive line.
+        The title uses the display font (Bruno Ace) via the CSS rule in style.css.
+      -->
       <div class="references-hero">
         <h1>REFERENCES</h1>
         <p>All sources, media, and resources used across the LABYRINTH website</p>
       </div>
+
+      <!-- ===== ACKNOWLEDGMENT BOX ===== -->
+      <!--
+        A frosted glass card with a bold title and explanatory text.
+        It acknowledges that all media and information are used for educational
+        purposes only and belong to their respective owners.
+      -->
       <div class="acknowledgment-box">
         <div class="ack-title">Acknowledgment</div>
         <p>All game information, images, videos, and external resources used in this website are credited to their respective owners and creators. These materials are used for educational purposes only.</p>
       </div>
 
-      <!-- ===== SINGLE PLAYER ===== -->
+      <!-- ===== SINGLE PLAYER SECTION ===== -->
+      <!--
+        Section header with a bottom border and the display font.
+        This divides the references into clear categories.
+      -->
       <div class="ref-section-header">Single Player</div>
 
-      <!-- Stardew Valley -->
-      <div class="ref-game-card"><div class="ref-game-title">Stardew Valley</div>
-        <table class="ref-table"><thead><tr><th>TYPE</th><th>SOURCE</th></tr></thead>
+      <!-- ---------- Stardew Valley ---------- -->
+      <!--
+        Each game is wrapped in a .ref-game-card div containing:
+          - A title styled with a left blue border (via .ref-game-title)
+          - A responsive table (.ref-table) listing all sources
+        The table uses <thead> for semantic structure and <tbody> for the data rows.
+        Each row shows a type badge (Information / Image / Video) and the source
+        description with clickable links (target="_blank" for external URLs).
+        The type badge is an inline‑block span with a class that applies colour
+        coding (e.g., .type-badge.information).
+      -->
+      <div class="ref-game-card">
+        <div class="ref-game-title">Stardew Valley</div>
+        <table class="ref-table">
+          <thead>
+            <tr>
+              <th>TYPE</th>
+              <th>SOURCE</th>
+            </tr>
+          </thead>
           <tbody>
-            <tr><td><span class="type-badge information">Information</span></td><td>ConcernedApe. <em>Stardew Valley.</em> Steam, 2016. <a href="https://store.steampowered.com/app/413150/Stardew_Valley/" target="_blank">https://store.steampowered.com/app/413150/Stardew_Valley/</a></td></tr>
-            <tr><td><span class="type-badge information">Information</span></td><td>ConcernedApe. <em>Stardew Valley Official Site.</em> <a href="https://www.stardewvalley.net/" target="_blank">https://www.stardewvalley.net/</a></td></tr>
-            <tr><td><span class="type-badge image">Image</span></td><td>"Stardew Valley Header Art." Steam Store Assets. <a href="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/413150/header.jpg?t=1754692865" target="_blank">https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/413150/header.jpg?t=1754692865</a></td></tr>
-            <tr><td><span class="type-badge image">Image</span></td><td>"Stardew Valley Logo." Wikimedia Commons. <a href="https://upload.wikimedia.org/wikipedia/en/f/fd/Logo_of_Stardew_Valley.png" target="_blank">https://upload.wikimedia.org/wikipedia/en/f/fd/Logo_of_Stardew_Valley.png</a></td></tr>
-            <tr><td><span class="type-badge image">Image</span></td><td>"Stardew Valley Screenshots." Steam Store Assets. <a href="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/413150/ss_b887651a93b0525739049eb4194f633de2df75be.116x65.jpg?t=1754692865" target="_blank">https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/413150/ss_b887651a93b0525739049eb4194f633de2df75be.116x65.jpg?t=1754692865</a></td></tr>
-            <tr><td><span class="type-badge video">Video</span></td><td>"Stardew Valley Trailer." YouTube. <a href="https://www.youtube.com/watch?v=8A7A1X1TVNc" target="_blank">https://www.youtube.com/watch?v=8A7A1X1TVNc</a></td></tr>
-            <tr><td><span class="type-badge video">Video</span></td><td>"Stardew Valley Guide." YouTube. <a href="https://www.youtube.com/watch?v=VmMLBDwEz4U" target="_blank">https://www.youtube.com/watch?v=VmMLBDwEz4U</a></td></tr>
+            <tr>
+              <td><span class="type-badge information">Information</span></td>
+              <td>ConcernedApe. <em>Stardew Valley.</em> Steam, 2016. <a href="https://store.steampowered.com/app/413150/Stardew_Valley/" target="_blank">https://store.steampowered.com/app/413150/Stardew_Valley/</a></td>
+            </tr>
+            <tr>
+              <td><span class="type-badge information">Information</span></td>
+              <td>ConcernedApe. <em>Stardew Valley Official Site.</em> <a href="https://www.stardewvalley.net/" target="_blank">https://www.stardewvalley.net/</a></td>
+            </tr>
+            <tr>
+              <td><span class="type-badge image">Image</span></td>
+              <td>"Stardew Valley Header Art." Steam Store Assets. <a href="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/413150/header.jpg?t=1754692865" target="_blank">https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/413150/header.jpg?t=1754692865</a></td>
+            </tr>
+            <tr>
+              <td><span class="type-badge image">Image</span></td>
+              <td>"Stardew Valley Logo." Wikimedia Commons. <a href="https://upload.wikimedia.org/wikipedia/en/f/fd/Logo_of_Stardew_Valley.png" target="_blank">https://upload.wikimedia.org/wikipedia/en/f/fd/Logo_of_Stardew_Valley.png</a></td>
+            </tr>
+            <tr>
+              <td><span class="type-badge image">Image</span></td>
+              <td>"Stardew Valley Screenshots." Steam Store Assets. <a href="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/413150/ss_b887651a93b0525739049eb4194f633de2df75be.116x65.jpg?t=1754692865" target="_blank">https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/413150/ss_b887651a93b0525739049eb4194f633de2df75be.116x65.jpg?t=1754692865</a></td>
+            </tr>
+            <tr>
+              <td><span class="type-badge video">Video</span></td>
+              <td>"Stardew Valley Trailer." YouTube. <a href="https://www.youtube.com/watch?v=8A7A1X1TVNc" target="_blank">https://www.youtube.com/watch?v=8A7A1X1TVNc</a></td>
+            </tr>
+            <tr>
+              <td><span class="type-badge video">Video</span></td>
+              <td>"Stardew Valley Guide." YouTube. <a href="https://www.youtube.com/watch?v=VmMLBDwEz4U" target="_blank">https://www.youtube.com/watch?v=VmMLBDwEz4U</a></td>
+            </tr>
           </tbody>
         </table>
       </div>
 
-      <!-- Red Dead Redemption 2 -->
-      <div class="ref-game-card"><div class="ref-game-title">Red Dead Redemption II</div>
-        <table class="ref-table"><thead><tr><th>TYPE</th><th>SOURCE</th></tr></thead>
+      <!-- ---------- Red Dead Redemption 2 ---------- -->
+      <div class="ref-game-card">
+        <div class="ref-game-title">Red Dead Redemption II</div>
+        <table class="ref-table">
+          <thead>
+            <tr>
+              <th>TYPE</th>
+              <th>SOURCE</th>
+            </tr>
+          </thead>
           <tbody>
-            <tr><td><span class="type-badge information">Information</span></td><td>Rockstar Games. <em>Red Dead Redemption 2.</em> Steam, 2018. <a href="https://store.steampowered.com/app/1174180/Red_Dead_Redemption_2/" target="_blank">https://store.steampowered.com/app/1174180/Red_Dead_Redemption_2/</a></td></tr>
-            <tr><td><span class="type-badge information">Information</span></td><td>"Red Dead Redemption 2." <em>Red Dead Wiki.</em> <a href="https://reddead.fandom.com/wiki/Red_Dead_Redemption_2" target="_blank">https://reddead.fandom.com/wiki/Red_Dead_Redemption_2</a></td></tr>
-            <tr><td><span class="type-badge image">Image</span></td><td>"Red Dead Redemption 2 Store Art." Steam Store. <a href="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1174180/capsule_616x353.jpg" target="_blank">https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1174180/capsule_616x353.jpg</a></td></tr>
-            <tr><td><span class="type-badge image">Image</span></td><td>"Red Dead Redemption 2 Logo." Rocket Chainsaw. <a href="https://cdn.rocketchainsaw.com.au/wp-content/uploads/2018/05/Red-Dead-Redemption-2-New-Logo.jpg" target="_blank">https://cdn.rocketchainsaw.com.au/wp-content/uploads/2018/05/Red-Dead-Redemption-2-New-Logo.jpg</a></td></tr>
-            <tr><td><span class="type-badge image">Image</span></td><td>"The Art of Red Dead Redemption II." Behance. <a href="https://www.behance.net/gallery/110453183/THE-ART-OF-RED-DEAD-REDEMPTION-II/modules/632200217" target="_blank">https://www.behance.net/gallery/110453183/THE-ART-OF-RED-DEAD-REDEMPTION-II/modules/632200217</a></td></tr>
-            <tr><td><span class="type-badge video">Video</span></td><td>"Red Dead Redemption 2 Trailer." YouTube. <a href="https://www.youtube.com/watch?v=eaW0tYpxyp0" target="_blank">https://www.youtube.com/watch?v=eaW0tYpxyp0</a></td></tr>
-            <tr><td><span class="type-badge video">Video</span></td><td>"Red Dead Redemption 2 Guide." YouTube. <a href="https://www.youtube.com/watch?v=AcOpiWppO3k" target="_blank">https://www.youtube.com/watch?v=AcOpiWppO3k</a></td></tr>
+            <tr>
+              <td><span class="type-badge information">Information</span></td>
+              <td>Rockstar Games. <em>Red Dead Redemption 2.</em> Steam, 2018. <a href="https://store.steampowered.com/app/1174180/Red_Dead_Redemption_2/" target="_blank">https://store.steampowered.com/app/1174180/Red_Dead_Redemption_2/</a></td>
+            </tr>
+            <tr>
+              <td><span class="type-badge information">Information</span></td>
+              <td>"Red Dead Redemption 2." <em>Red Dead Wiki.</em> <a href="https://reddead.fandom.com/wiki/Red_Dead_Redemption_2" target="_blank">https://reddead.fandom.com/wiki/Red_Dead_Redemption_2</a></td>
+            </tr>
+            <tr>
+              <td><span class="type-badge image">Image</span></td>
+              <td>"Red Dead Redemption 2 Store Art." Steam Store. <a href="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1174180/capsule_616x353.jpg" target="_blank">https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1174180/capsule_616x353.jpg</a></td>
+            </tr>
+            <tr>
+              <td><span class="type-badge image">Image</span></td>
+              <td>"Red Dead Redemption 2 Logo." Rocket Chainsaw. <a href="https://cdn.rocketchainsaw.com.au/wp-content/uploads/2018/05/Red-Dead-Redemption-2-New-Logo.jpg" target="_blank">https://cdn.rocketchainsaw.com.au/wp-content/uploads/2018/05/Red-Dead-Redemption-2-New-Logo.jpg</a></td>
+            </tr>
+            <tr>
+              <td><span class="type-badge image">Image</span></td>
+              <td>"The Art of Red Dead Redemption II." Behance. <a href="https://www.behance.net/gallery/110453183/THE-ART-OF-RED-DEAD-REDEMPTION-II/modules/632200217" target="_blank">https://www.behance.net/gallery/110453183/THE-ART-OF-RED-DEAD-REDEMPTION-II/modules/632200217</a></td>
+            </tr>
+            <tr>
+              <td><span class="type-badge video">Video</span></td>
+              <td>"Red Dead Redemption 2 Trailer." YouTube. <a href="https://www.youtube.com/watch?v=eaW0tYpxyp0" target="_blank">https://www.youtube.com/watch?v=eaW0tYpxyp0</a></td>
+            </tr>
+            <tr>
+              <td><span class="type-badge video">Video</span></td>
+              <td>"Red Dead Redemption 2 Guide." YouTube. <a href="https://www.youtube.com/watch?v=AcOpiWppO3k" target="_blank">https://www.youtube.com/watch?v=AcOpiWppO3k</a></td>
+            </tr>
           </tbody>
         </table>
       </div>
 
-      <!-- Graveyard Keeper -->
-      <div class="ref-game-card"><div class="ref-game-title">Graveyard Keeper</div>
-        <table class="ref-table"><thead><tr><th>TYPE</th><th>SOURCE</th></tr></thead>
+      <!-- ---------- Graveyard Keeper ---------- -->
+      <div class="ref-game-card">
+        <div class="ref-game-title">Graveyard Keeper</div>
+        <table class="ref-table">
+          <thead>
+            <tr>
+              <th>TYPE</th>
+              <th>SOURCE</th>
+            </tr>
+          </thead>
           <tbody>
-            <tr><td><span class="type-badge information">Information</span></td><td>Lazy Bear Games. <em>Graveyard Keeper.</em> Steam, 2018. <a href="https://store.steampowered.com/app/599140/Graveyard_Keeper/" target="_blank">https://store.steampowered.com/app/599140/Graveyard_Keeper/</a></td></tr>
-            <tr><td><span class="type-badge information">Information</span></td><td>tinyBuild. <em>Graveyard Keeper.</em> <a href="https://www.tinybuild.com/graveyard-keeper" target="_blank">https://www.tinybuild.com/graveyard-keeper</a></td></tr>
-            <tr><td><span class="type-badge image">Image</span></td><td>"Graveyard Keeper Artwork." Humble Bundle. <a href="https://hb.imgix.net/376a7ecc2b91fde0d3b880576c4e49ed9da1ce44.jpeg" target="_blank">https://hb.imgix.net/376a7ecc2b91fde0d3b880576c4e49ed9da1ce44.jpeg</a></td></tr>
-            <tr><td><span class="type-badge image">Image</span></td><td>"Graveyard Keeper Promo Art." Dave Chats Games. <a href="https://davechatsgames.wordpress.com/wp-content/uploads/2021/07/graveyard-keeper-full-version-free-download.jpg?w=1200" target="_blank">https://davechatsgames.wordpress.com/wp-content/uploads/2021/07/graveyard-keeper-full-version-free-download.jpg?w=1200</a></td></tr>
-            <tr><td><span class="type-badge image">Image</span></td><td>"Graveyard Keeper Screenshots." Steam Store Assets. <a href="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/599140/ss_7191f1954a57305453299d0e7c8de2e3e87fdce3.116x65.jpg?t=1776259988" target="_blank">https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/599140/ss_7191f1954a57305453299d0e7c8de2e3e87fdce3.116x65.jpg?t=1776259988</a></td></tr>
-            <tr><td><span class="type-badge video">Video</span></td><td>"Graveyard Keeper Trailer." YouTube. <a href="https://www.youtube.com/watch?v=Zd5S5rlKf_M" target="_blank">https://www.youtube.com/watch?v=Zd5S5rlKf_M</a></td></tr>
-            <tr><td><span class="type-badge video">Video</span></td><td>"Graveyard Keeper Guide." YouTube. <a href="https://www.youtube.com/watch?v=zX8HVh2Nru4" target="_blank">https://www.youtube.com/watch?v=zX8HVh2Nru4</a></td></tr>
+            <tr>
+              <td><span class="type-badge information">Information</span></td>
+              <td>Lazy Bear Games. <em>Graveyard Keeper.</em> Steam, 2018. <a href="https://store.steampowered.com/app/599140/Graveyard_Keeper/" target="_blank">https://store.steampowered.com/app/599140/Graveyard_Keeper/</a></td>
+            </tr>
+            <tr>
+              <td><span class="type-badge information">Information</span></td>
+              <td>tinyBuild. <em>Graveyard Keeper.</em> <a href="https://www.tinybuild.com/graveyard-keeper" target="_blank">https://www.tinybuild.com/graveyard-keeper</a></td>
+            </tr>
+            <tr>
+              <td><span class="type-badge image">Image</span></td>
+              <td>"Graveyard Keeper Artwork." Humble Bundle. <a href="https://hb.imgix.net/376a7ecc2b91fde0d3b880576c4e49ed9da1ce44.jpeg" target="_blank">https://hb.imgix.net/376a7ecc2b91fde0d3b880576c4e49ed9da1ce44.jpeg</a></td>
+            </tr>
+            <tr>
+              <td><span class="type-badge image">Image</span></td>
+              <td>"Graveyard Keeper Promo Art." Dave Chats Games. <a href="https://davechatsgames.wordpress.com/wp-content/uploads/2021/07/graveyard-keeper-full-version-free-download.jpg?w=1200" target="_blank">https://davechatsgames.wordpress.com/wp-content/uploads/2021/07/graveyard-keeper-full-version-free-download.jpg?w=1200</a></td>
+            </tr>
+            <tr>
+              <td><span class="type-badge image">Image</span></td>
+              <td>"Graveyard Keeper Screenshots." Steam Store Assets. <a href="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/599140/ss_7191f1954a57305453299d0e7c8de2e3e87fdce3.116x65.jpg?t=1776259988" target="_blank">https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/599140/ss_7191f1954a57305453299d0e7c8de2e3e87fdce3.116x65.jpg?t=1776259988</a></td>
+            </tr>
+            <tr>
+              <td><span class="type-badge video">Video</span></td>
+              <td>"Graveyard Keeper Trailer." YouTube. <a href="https://www.youtube.com/watch?v=Zd5S5rlKf_M" target="_blank">https://www.youtube.com/watch?v=Zd5S5rlKf_M</a></td>
+            </tr>
+            <tr>
+              <td><span class="type-badge video">Video</span></td>
+              <td>"Graveyard Keeper Guide." YouTube. <a href="https://www.youtube.com/watch?v=zX8HVh2Nru4" target="_blank">https://www.youtube.com/watch?v=zX8HVh2Nru4</a></td>
+            </tr>
           </tbody>
         </table>
       </div>
 
-      <!-- A Little to the Left -->
-      <div class="ref-game-card"><div class="ref-game-title">A Little to the Left</div>
-        <table class="ref-table"><thead><tr><th>TYPE</th><th>SOURCE</th></tr></thead>
+      <!-- ---------- A Little to the Left ---------- -->
+      <div class="ref-game-card">
+        <div class="ref-game-title">A Little to the Left</div>
+        <table class="ref-table">
+          <thead>
+            <tr>
+              <th>TYPE</th>
+              <th>SOURCE</th>
+            </tr>
+          </thead>
           <tbody>
-            <tr><td><span class="type-badge information">Information</span></td><td>Max Inferno. <em>A Little to the Left.</em> Steam, 2022. <a href="https://store.steampowered.com/app/1629520/A_Little_to_the_Left/" target="_blank">https://store.steampowered.com/app/1629520/A_Little_to_the_Left/</a></td></tr>
-            <tr><td><span class="type-badge information">Information</span></td><td>Max Inferno Official Site. <a href="https://www.maxinferno.com" target="_blank">https://www.maxinferno.com</a></td></tr>
-            <tr><td><span class="type-badge image">Image</span></td><td>"A Little to the Left Store Art." Steam Store. <a href="https://store.steampowered.com/app/1629520/A_Little_to_the_Left/" target="_blank">https://store.steampowered.com/app/1629520/A_Little_to_the_Left/</a></td></tr>
-            <tr><td><span class="type-badge image">Image</span></td><td>"A Little to the Left Cover Art." Wikimedia Commons. <a href="https://upload.wikimedia.org/wikipedia/en/d/dc/Cover_art_of_A_Little_to_the_Left%2C_2022%2C_Max_Inferno.png" target="_blank">https://upload.wikimedia.org/wikipedia/en/d/dc/Cover_art_of_A_Little_to_the_Left%2C_2022%2C_Max_Inferno.png</a></td></tr>
-            <tr><td><span class="type-badge image">Image</span></td><td>"A Little to the Left Screenshots." Steam Store Assets. <a href="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1629520/ss_dfd3c87efd52db3ea48b4de22de569bd9eb42ca2.1920x1080.jpg?t=1777570730" target="_blank">https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1629520/ss_dfd3c87efd52db3ea48b4de22de569bd9eb42ca2.1920x1080.jpg?t=1777570730</a></td></tr>
-            <tr><td><span class="type-badge video">Video</span></td><td>"A Little to the Left Trailer." YouTube. <a href="https://www.youtube.com/watch?v=NXypG492LJE" target="_blank">https://www.youtube.com/watch?v=NXypG492LJE</a></td></tr>
-            <tr><td><span class="type-badge video">Video</span></td><td>"A Little to the Left Guide." YouTube. <a href="https://www.youtube.com/watch?v=dD_RQUMtHY" target="_blank">https://www.youtube.com/watch?v=dD_RQUMtHY</a></td></tr>
+            <tr>
+              <td><span class="type-badge information">Information</span></td>
+              <td>Max Inferno. <em>A Little to the Left.</em> Steam, 2022. <a href="https://store.steampowered.com/app/1629520/A_Little_to_the_Left/" target="_blank">https://store.steampowered.com/app/1629520/A_Little_to_the_Left/</a></td>
+            </tr>
+            <tr>
+              <td><span class="type-badge information">Information</span></td>
+              <td>Max Inferno Official Site. <a href="https://www.maxinferno.com" target="_blank">https://www.maxinferno.com</a></td>
+            </tr>
+            <tr>
+              <td><span class="type-badge image">Image</span></td>
+              <td>"A Little to the Left Store Art." Steam Store. <a href="https://store.steampowered.com/app/1629520/A_Little_to_the_Left/" target="_blank">https://store.steampowered.com/app/1629520/A_Little_to_the_Left/</a></td>
+            </tr>
+            <tr>
+              <td><span class="type-badge image">Image</span></td>
+              <td>"A Little to the Left Cover Art." Wikimedia Commons. <a href="https://upload.wikimedia.org/wikipedia/en/d/dc/Cover_art_of_A_Little_to_the_Left%2C_2022%2C_Max_Inferno.png" target="_blank">https://upload.wikimedia.org/wikipedia/en/d/dc/Cover_art_of_A_Little_to_the_Left%2C_2022%2C_Max_Inferno.png</a></td>
+            </tr>
+            <tr>
+              <td><span class="type-badge image">Image</span></td>
+              <td>"A Little to the Left Screenshots." Steam Store Assets. <a href="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1629520/ss_dfd3c87efd52db3ea48b4de22de569bd9eb42ca2.1920x1080.jpg?t=1777570730" target="_blank">https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1629520/ss_dfd3c87efd52db3ea48b4de22de569bd9eb42ca2.1920x1080.jpg?t=1777570730</a></td>
+            </tr>
+            <tr>
+              <td><span class="type-badge video">Video</span></td>
+              <td>"A Little to the Left Trailer." YouTube. <a href="https://www.youtube.com/watch?v=NXypG492LJE" target="_blank">https://www.youtube.com/watch?v=NXypG492LJE</a></td>
+            </tr>
+            <tr>
+              <td><span class="type-badge video">Video</span></td>
+              <td>"A Little to the Left Guide." YouTube. <a href="https://www.youtube.com/watch?v=dD_RQUMtHY" target="_blank">https://www.youtube.com/watch?v=dD_RQUMtHY</a></td>
+            </tr>
           </tbody>
         </table>
       </div>
 
-      <!-- ===== MULTIPLAYER ===== -->
+      <!-- ===== MULTIPLAYER SECTION ===== -->
       <div class="ref-section-header">Multiplayer</div>
 
-      <!-- Slay the Spire II -->
-      <div class="ref-game-card"><div class="ref-game-title">Slay the Spire II</div>
-        <table class="ref-table"><thead><tr><th>TYPE</th><th>SOURCE</th></tr></thead>
+      <!-- ---------- Slay the Spire II ---------- -->
+      <div class="ref-game-card">
+        <div class="ref-game-title">Slay the Spire II</div>
+        <table class="ref-table">
+          <thead>
+            <tr>
+              <th>TYPE</th>
+              <th>SOURCE</th>
+            </tr>
+          </thead>
           <tbody>
-            <tr><td><span class="type-badge information">Information</span></td><td>MegaCrit. <em>Slay the Spire 2.</em> Steam. <a href="https://store.steampowered.com/app/2868840/Slay_the_Spire_2/" target="_blank">https://store.steampowered.com/app/2868840/Slay_the_Spire_2/</a></td></tr>
-            <tr><td><span class="type-badge information">Information</span></td><td>MegaCrit Official Site. <a href="https://www.megacrit.com/" target="_blank">https://www.megacrit.com/</a></td></tr>
-            <tr><td><span class="type-badge image">Image</span></td><td>"Slay the Spire 2 Header." Steam Store Assets. <a href="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2868840/b0958d387dc366211e0f353443710cfcf9fdb020/header.jpg?t=1776735385" target="_blank">https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2868840/b0958d387dc366211e0f353443710cfcf9fdb020/header.jpg?t=1776735385</a></td></tr>
-            <tr><td><span class="type-badge image">Image</span></td><td>"Slay the Spire 2 Screenshots." Steam Store Assets. <a href="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2868840/c3db69efd984ef012ae85c5b426663720152f0a4/ss_c3db69efd984ef012ae85c5b426663720152f0a4.116x65.jpg?t=1776735385" target="_blank">https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2868840/c3db69efd984ef012ae85c5b426663720152f0a4/ss_c3db69efd984ef012ae85c5b426663720152f0a4.116x65.jpg?t=1776735385</a></td></tr>
-            <tr><td><span class="type-badge video">Video</span></td><td>"Slay the Spire 2 Trailer." YouTube. <a href="https://www.youtube.com/watch?v=PW22jwFNxU8" target="_blank">https://www.youtube.com/watch?v=PW22jwFNxU8</a></td></tr>
-            <tr><td><span class="type-badge video">Video</span></td><td>"Slay the Spire 2 Guide." YouTube. <a href="https://www.youtube.com/watch?v=YdHxlG8AKv8" target="_blank">https://www.youtube.com/watch?v=YdHxlG8AKv8</a></td></tr>
+            <tr>
+              <td><span class="type-badge information">Information</span></td>
+              <td>MegaCrit. <em>Slay the Spire 2.</em> Steam. <a href="https://store.steampowered.com/app/2868840/Slay_the_Spire_2/" target="_blank">https://store.steampowered.com/app/2868840/Slay_the_Spire_2/</a></td>
+            </tr>
+            <tr>
+              <td><span class="type-badge information">Information</span></td>
+              <td>MegaCrit Official Site. <a href="https://www.megacrit.com/" target="_blank">https://www.megacrit.com/</a></td>
+            </tr>
+            <tr>
+              <td><span class="type-badge image">Image</span></td>
+              <td>"Slay the Spire 2 Header." Steam Store Assets. <a href="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2868840/b0958d387dc366211e0f353443710cfcf9fdb020/header.jpg?t=1776735385" target="_blank">https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2868840/b0958d387dc366211e0f353443710cfcf9fdb020/header.jpg?t=1776735385</a></td>
+            </tr>
+            <tr>
+              <td><span class="type-badge image">Image</span></td>
+              <td>"Slay the Spire 2 Screenshots." Steam Store Assets. <a href="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2868840/c3db69efd984ef012ae85c5b426663720152f0a4/ss_c3db69efd984ef012ae85c5b426663720152f0a4.116x65.jpg?t=1776735385" target="_blank">https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2868840/c3db69efd984ef012ae85c5b426663720152f0a4/ss_c3db69efd984ef012ae85c5b426663720152f0a4.116x65.jpg?t=1776735385</a></td>
+            </tr>
+            <tr>
+              <td><span class="type-badge video">Video</span></td>
+              <td>"Slay the Spire 2 Trailer." YouTube. <a href="https://www.youtube.com/watch?v=PW22jwFNxU8" target="_blank">https://www.youtube.com/watch?v=PW22jwFNxU8</a></td>
+            </tr>
+            <tr>
+              <td><span class="type-badge video">Video</span></td>
+              <td>"Slay the Spire 2 Guide." YouTube. <a href="https://www.youtube.com/watch?v=YdHxlG8AKv8" target="_blank">https://www.youtube.com/watch?v=YdHxlG8AKv8</a></td>
+            </tr>
           </tbody>
         </table>
       </div>
 
-      <!-- It Takes Two -->
-      <div class="ref-game-card"><div class="ref-game-title">It Takes Two</div>
-        <table class="ref-table"><thead><tr><th>TYPE</th><th>SOURCE</th></tr></thead>
+      <!-- ---------- It Takes Two ---------- -->
+      <div class="ref-game-card">
+        <div class="ref-game-title">It Takes Two</div>
+        <table class="ref-table">
+          <thead>
+            <tr>
+              <th>TYPE</th>
+              <th>SOURCE</th>
+            </tr>
+          </thead>
           <tbody>
-            <tr><td><span class="type-badge information">Information</span></td><td>Hazelight Studios. <em>It Takes Two.</em> Steam. <a href="https://store.steampowered.com/app/1426210/It_Takes_Two/" target="_blank">https://store.steampowered.com/app/1426210/It_Takes_Two/</a></td></tr>
-            <tr><td><span class="type-badge information">Information</span></td><td>EA Games. <em>It Takes Two Official Site.</em> <a href="https://www.ea.com/games/it-takes-two" target="_blank">https://www.ea.com/games/it-takes-two</a></td></tr>
-            <tr><td><span class="type-badge image">Image</span></td><td>"It Takes Two Cover Art." Wikimedia Commons. <a href="https://upload.wikimedia.org/wikipedia/en/a/aa/It_Takes_Two_cover_art.png" target="_blank">https://upload.wikimedia.org/wikipedia/en/a/aa/It_Takes_Two_cover_art.png</a></td></tr>
-            <tr><td><span class="type-badge image">Image</span></td><td>"It Takes Two Capsule Art." Steam Store Assets. <a href="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1426210/capsule_616x353.jpg?t=1777395376" target="_blank">https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1426210/capsule_616x353.jpg?t=1777395376</a></td></tr>
-            <tr><td><span class="type-badge video">Video</span></td><td>"It Takes Two Trailer." YouTube. <a href="https://www.youtube.com/watch?v=ohClxMmNLQQ" target="_blank">https://www.youtube.com/watch?v=ohClxMmNLQQ</a></td></tr>
-            <tr><td><span class="type-badge video">Video</span></td><td>"It Takes Two Guide." YouTube. <a href="https://www.youtube.com/watch?v=yZ2VB6nbsUI" target="_blank">https://www.youtube.com/watch?v=yZ2VB6nbsUI</a></td></tr>
+            <tr>
+              <td><span class="type-badge information">Information</span></td>
+              <td>Hazelight Studios. <em>It Takes Two.</em> Steam. <a href="https://store.steampowered.com/app/1426210/It_Takes_Two/" target="_blank">https://store.steampowered.com/app/1426210/It_Takes_Two/</a></td>
+            </tr>
+            <tr>
+              <td><span class="type-badge information">Information</span></td>
+              <td>EA Games. <em>It Takes Two Official Site.</em> <a href="https://www.ea.com/games/it-takes-two" target="_blank">https://www.ea.com/games/it-takes-two</a></td>
+            </tr>
+            <tr>
+              <td><span class="type-badge image">Image</span></td>
+              <td>"It Takes Two Cover Art." Wikimedia Commons. <a href="https://upload.wikimedia.org/wikipedia/en/a/aa/It_Takes_Two_cover_art.png" target="_blank">https://upload.wikimedia.org/wikipedia/en/a/aa/It_Takes_Two_cover_art.png</a></td>
+            </tr>
+            <tr>
+              <td><span class="type-badge image">Image</span></td>
+              <td>"It Takes Two Capsule Art." Steam Store Assets. <a href="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1426210/capsule_616x353.jpg?t=1777395376" target="_blank">https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1426210/capsule_616x353.jpg?t=1777395376</a></td>
+            </tr>
+            <tr>
+              <td><span class="type-badge video">Video</span></td>
+              <td>"It Takes Two Trailer." YouTube. <a href="https://www.youtube.com/watch?v=ohClxMmNLQQ" target="_blank">https://www.youtube.com/watch?v=ohClxMmNLQQ</a></td>
+            </tr>
+            <tr>
+              <td><span class="type-badge video">Video</span></td>
+              <td>"It Takes Two Guide." YouTube. <a href="https://www.youtube.com/watch?v=yZ2VB6nbsUI" target="_blank">https://www.youtube.com/watch?v=yZ2VB6nbsUI</a></td>
+            </tr>
           </tbody>
         </table>
       </div>
 
-      <!-- Pico Park -->
-      <div class="ref-game-card"><div class="ref-game-title">Pico Park</div>
-        <table class="ref-table"><thead><tr><th>TYPE</th><th>SOURCE</th></tr></thead>
+      <!-- ---------- Pico Park ---------- -->
+      <div class="ref-game-card">
+        <div class="ref-game-title">Pico Park</div>
+        <table class="ref-table">
+          <thead>
+            <tr>
+              <th>TYPE</th>
+              <th>SOURCE</th>
+            </tr>
+          </thead>
           <tbody>
-            <tr><td><span class="type-badge information">Information</span></td><td>TECOPARK. <em>PICO PARK.</em> Steam. <a href="https://store.steampowered.com/app/1509960/PICO_PARK/" target="_blank">https://store.steampowered.com/app/1509960/PICO_PARK/</a></td></tr>
-            <tr><td><span class="type-badge information">Information</span></td><td>TECOPARK. <em>Pico Park Official Site.</em> <a href="https://picoparkgame.com/" target="_blank">https://picoparkgame.com/</a></td></tr>
-            <tr><td><span class="type-badge image">Image</span></td><td>"Pico Park Capsule Art." Steam Store Assets. <a href="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1509960/capsule_616x353.jpg?t=1740033204" target="_blank">https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1509960/capsule_616x353.jpg?t=1740033204</a></td></tr>
-            <tr><td><span class="type-badge image">Image</span></td><td>"Pico Park Screenshots." Steam Store Assets. <a href="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1509960/ss_d54c6fd82d8c804939d136356eda364295a788cd.116x65.jpg?t=1740033204" target="_blank">https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1509960/ss_d54c6fd82d8c804939d136356eda364295a788cd.116x65.jpg?t=1740033204</a></td></tr>
-            <tr><td><span class="type-badge video">Video</span></td><td>"Pico Park Trailer." YouTube. <a href="https://www.youtube.com/watch?v=r_-yjKYfp9Y" target="_blank">https://www.youtube.com/watch?v=r_-yjKYfp9Y</a></td></tr>
-            <tr><td><span class="type-badge video">Video</span></td><td>"Pico Park Guide." YouTube. <a href="https://www.youtube.com/watch?v=QI0BvgCULM0" target="_blank">https://www.youtube.com/watch?v=QI0BvgCULM0</a></td></tr>
+            <tr>
+              <td><span class="type-badge information">Information</span></td>
+              <td>TECOPARK. <em>PICO PARK.</em> Steam. <a href="https://store.steampowered.com/app/1509960/PICO_PARK/" target="_blank">https://store.steampowered.com/app/1509960/PICO_PARK/</a></td>
+            </tr>
+            <tr>
+              <td><span class="type-badge information">Information</span></td>
+              <td>TECOPARK. <em>Pico Park Official Site.</em> <a href="https://picoparkgame.com/" target="_blank">https://picoparkgame.com/</a></td>
+            </tr>
+            <tr>
+              <td><span class="type-badge image">Image</span></td>
+              <td>"Pico Park Capsule Art." Steam Store Assets. <a href="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1509960/capsule_616x353.jpg?t=1740033204" target="_blank">https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1509960/capsule_616x353.jpg?t=1740033204</a></td>
+            </tr>
+            <tr>
+              <td><span class="type-badge image">Image</span></td>
+              <td>"Pico Park Screenshots." Steam Store Assets. <a href="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1509960/ss_d54c6fd82d8c804939d136356eda364295a788cd.116x65.jpg?t=1740033204" target="_blank">https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1509960/ss_d54c6fd82d8c804939d136356eda364295a788cd.116x65.jpg?t=1740033204</a></td>
+            </tr>
+            <tr>
+              <td><span class="type-badge video">Video</span></td>
+              <td>"Pico Park Trailer." YouTube. <a href="https://www.youtube.com/watch?v=r_-yjKYfp9Y" target="_blank">https://www.youtube.com/watch?v=r_-yjKYfp9Y</a></td>
+            </tr>
+            <tr>
+              <td><span class="type-badge video">Video</span></td>
+              <td>"Pico Park Guide." YouTube. <a href="https://www.youtube.com/watch?v=QI0BvgCULM0" target="_blank">https://www.youtube.com/watch?v=QI0BvgCULM0</a></td>
+            </tr>
           </tbody>
         </table>
       </div>
 
-      <!-- Call of Duty: Black Ops III -->
-      <div class="ref-game-card"><div class="ref-game-title">Call of Duty: Black Ops III</div>
-        <table class="ref-table"><thead><tr><th>TYPE</th><th>SOURCE</th></tr></thead>
+      <!-- ---------- Call of Duty: Black Ops III ---------- -->
+      <div class="ref-game-card">
+        <div class="ref-game-title">Call of Duty: Black Ops III</div>
+        <table class="ref-table">
+          <thead>
+            <tr>
+              <th>TYPE</th>
+              <th>SOURCE</th>
+            </tr>
+          </thead>
           <tbody>
-            <tr><td><span class="type-badge information">Information</span></td><td>Treyarch / Activision. <em>Call of Duty: Black Ops III.</em> Steam. <a href="https://store.steampowered.com/app/311210/Call_of_Duty_Black_Ops_III/" target="_blank">https://store.steampowered.com/app/311210/Call_of_Duty_Black_Ops_III/</a></td></tr>
-            <tr><td><span class="type-badge information">Information</span></td><td>Activision. <em>Call of Duty Official Site.</em> <a href="https://www.callofduty.com/" target="_blank">https://www.callofduty.com/</a></td></tr>
-            <tr><td><span class="type-badge image">Image</span></td><td>"Black Ops III Header." Steam Store Assets. <a href="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/311210/header.jpg?t=1748022663" target="_blank">https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/311210/header.jpg?t=1748022663</a></td></tr>
-            <tr><td><span class="type-badge image">Image</span></td><td>"Black Ops 3 Cover Art." Wikimedia Commons. <a href="https://upload.wikimedia.org/wikipedia/en/b/b1/Black_Ops_3.jpg" target="_blank">https://upload.wikimedia.org/wikipedia/en/b/b1/Black_Ops_3.jpg</a></td></tr>
-            <tr><td><span class="type-badge video">Video</span></td><td>"Black Ops III Trailer." YouTube. <a href="https://www.youtube.com/watch?v=SseJEiaw6gk" target="_blank">https://www.youtube.com/watch?v=SseJEiaw6gk</a></td></tr>
-            <tr><td><span class="type-badge video">Video</span></td><td>"Black Ops III Guide." YouTube. <a href="https://www.youtube.com/watch?v=hnWRLQpEVko" target="_blank">https://www.youtube.com/watch?v=hnWRLQpEVko</a></td></tr>
+            <tr>
+              <td><span class="type-badge information">Information</span></td>
+              <td>Treyarch / Activision. <em>Call of Duty: Black Ops III.</em> Steam. <a href="https://store.steampowered.com/app/311210/Call_of_Duty_Black_Ops_III/" target="_blank">https://store.steampowered.com/app/311210/Call_of_Duty_Black_Ops_III/</a></td>
+            </tr>
+            <tr>
+              <td><span class="type-badge information">Information</span></td>
+              <td>Activision. <em>Call of Duty Official Site.</em> <a href="https://www.callofduty.com/" target="_blank">https://www.callofduty.com/</a></td>
+            </tr>
+            <tr>
+              <td><span class="type-badge image">Image</span></td>
+              <td>"Black Ops III Header." Steam Store Assets. <a href="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/311210/header.jpg?t=1748022663" target="_blank">https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/311210/header.jpg?t=1748022663</a></td>
+            </tr>
+            <tr>
+              <td><span class="type-badge image">Image</span></td>
+              <td>"Black Ops 3 Cover Art." Wikimedia Commons. <a href="https://upload.wikimedia.org/wikipedia/en/b/b1/Black_Ops_3.jpg" target="_blank">https://upload.wikimedia.org/wikipedia/en/b/b1/Black_Ops_3.jpg</a></td>
+            </tr>
+            <tr>
+              <td><span class="type-badge video">Video</span></td>
+              <td>"Black Ops III Trailer." YouTube. <a href="https://www.youtube.com/watch?v=SseJEiaw6gk" target="_blank">https://www.youtube.com/watch?v=SseJEiaw6gk</a></td>
+            </tr>
+            <tr>
+              <td><span class="type-badge video">Video</span></td>
+              <td>"Black Ops III Guide." YouTube. <a href="https://www.youtube.com/watch?v=hnWRLQpEVko" target="_blank">https://www.youtube.com/watch?v=hnWRLQpEVko</a></td>
+            </tr>
           </tbody>
         </table>
       </div>
-    </div>
+    </div> <!-- /references-page -->
   </main>
 
+  <!-- ==========================================================================
+       FOOTER
+       --------------------------------------------------------------------------
+       Gradient footer with links to other essential pages.  All links are
+       relative to the current directory (global_pages/).
+       ========================================================================== -->
   <footer class="footer">
     <div class="footer__links">
       <a href="contacts.html" class="footer__link">Contacts</a> ·
@@ -179,6 +479,14 @@
     <div class="footer__copy">&copy; 2026 Labyrinth. All rights reserved.</div>
   </footer>
 
+  <!-- ==========================================================================
+       SCRIPTS
+       --------------------------------------------------------------------------
+       All three JavaScript files are loaded with '../' to reach the root /js/ folder.
+         1. data.js   – Defines GAMES_CATALOG and TOP_RATED_GAMES (needed by search.js)
+         2. search.js – Enables live search in the header (path‑aware)
+         3. script.js – Handles splash screen (hidden on subpages) and header scroll effect
+       ========================================================================== -->
   <script src="../js/data.js"></script>
   <script src="../js/search.js"></script>
   <script src="../js/script.js"></script>

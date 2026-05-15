@@ -1,28 +1,85 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- ==========================================================================
+       LABYRINTH · Singleplayer Category Page (global_pages/singleplayer.html)
+       --------------------------------------------------------------------------
+       This page showcases all single‑player games in the Labyrinth catalogue.
+       Its structure mirrors the multiplayer page:
+         • A hero background section with a dynamic background and a slideshow.
+         • A "Curated Picks" grid of horizontal game cards.
+         • A full‑screen video overlay for trailer playback.
+       The body element carries data-category="singleplayer", which tells
+       category-script.js to filter GAMES_CATALOG for games whose .category
+       property equals "single".
+       --------------------------------------------------------------------------
+       Because the page is inside /global_pages/, all asset paths (CSS, JS,
+       images, videos) are prefixed with '../' to reach the root folder.
+       ========================================================================== -->
   <meta charset="UTF-8">
+  <!-- Mobile‑first responsive meta tag.  viewport-fit=cover helps with notched displays. -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>LABYRINTH - SINGLE PLAYER</title>
+
+  <!-- Preconnect to external origins for faster font delivery -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!--
+    Primary typefaces loaded from Google Fonts:
+      Bruno Ace   →  --font-heading  (page title, card titles)
+      Inter       →  --font-ui        (tags, meta info, buttons)
+      Reddit Sans →  --font-body      (descriptions, general text)
+    All weights from 200–900 are loaded.
+  -->
   <link href="https://fonts.googleapis.com/css2?family=Bruno+Ace&family=Inter:wght@200;300;400;500;600;700;800;900&family=Reddit+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!--
+    Stylesheets:
+      ../css/style.css          – Global design system, variables, reset, header, footer
+      ../css/category-styles.css – Slideshow, curated picks grid, video overlay
+      ../css/responsive.css     – Breakpoints, touch, accessibility overrides
+  -->
   <link rel="stylesheet" href="../css/style.css">
   <link rel="stylesheet" href="../css/category-styles.css">
   <link rel="stylesheet" href="../css/responsive.css">
 </head>
+
+<!--
+  data-category="singleplayer"
+  This attribute is read by category-script.js to filter GAMES_CATALOG for
+  games whose .category property equals "single".
+-->
 <body data-category="singleplayer">
+
+  <!-- ==========================================================================
+       HEADER
+       --------------------------------------------------------------------------
+       Fixed navigation bar with frosted‑glass effect.
+       All links use paths relative to /global_pages/.
+       ========================================================================== -->
   <header class="header" id="header">
+    <!-- Logo group: clicking returns to the homepage -->
     <a class="header__logo-group" id="logoTop" href="../index.html">
       <div class="header__logo-icon"><img src="../assets/img/web_logo.png" alt="LABYRINTH" class="logo-img"></div>
       <span class="header__brand">LABYRINTH</span>
     </a>
     <nav class="header__nav">
+      <!-- ===== SEARCH BAR ===== -->
       <div class="nav-search">
-        <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <!-- Inline SVG magnifying glass -->
+        <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"/>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+        </svg>
+        <!--
+          search.js attaches live filtering.  It detects the /global_pages/
+          location and adjusts image/link paths automatically.
+        -->
         <input type="text" id="globalSearch" placeholder="Search games..." autocomplete="off">
         <div class="search-dropdown" id="searchDropdown"></div>
       </div>
+      <!-- ===== CATEGORY DROPDOWN ===== -->
       <div class="header__nav-dropdown">
         <span class="header__nav-link header__nav-dropdown-trigger">CATEGORY <span class="dropdown-arrow">▾</span></span>
         <div class="header__dropdown-menu">
@@ -30,71 +87,298 @@
           <a class="header__dropdown-item" href="multiplayer.html">Multiplayer</a>
         </div>
       </div>
+      <!-- About link -->
       <a class="header__nav-link" href="about.html">About</a>
     </nav>
   </header>
 
   <main>
+    <!-- ==========================================================================
+         HERO BACKGROUND SECTION
+         --------------------------------------------------------------------------
+         A full‑width container that holds:
+           - A dynamic background image (updated by category-script.js when the
+             slide changes)
+           - A gradient overlay for text readability
+           - The page title ("SINGLE PLAYER")
+           - The slideshow (game info + video)
+         The initial background is a Stardew Valley cover as a fallback.
+         ========================================================================== -->
     <div class="hero-bg-section" id="heroBgSection">
+      <!-- Dynamic background image (crossfades via CSS transition) -->
       <div class="hero-bg-image" id="heroBgImage" style="background-image: url('../assets/img/games/sv-cover.jpg');"></div>
+      <!-- Semi‑transparent gradient overlay: navy → opaque -->
       <div class="hero-bg-overlay"></div>
+      <!-- Content sits above the overlay (z‑index 2) -->
       <div class="hero-bg-content">
+        <!-- Category page title in uppercase Bruno Ace -->
         <h1 class="page-title">SINGLE PLAYER</h1>
+
+        <!-- ===== SLIDESHOW SECTION ===== -->
         <section class="hero-section">
           <div class="slideshow-container">
+            <!-- Previous arrow button -->
             <button class="slideshow-arrow" id="prevBtn">&#10094;</button>
+
+            <!--
+              The slideshow content is a flex container split into two halves:
+                - Left:  game info (cover, description, meta, rating)
+                - Right: video or placeholder
+              The contents of both halves are dynamically updated by category-script.js.
+            -->
             <div class="slideshow-content" id="slideshowContent">
+              <!-- ===== LEFT PANEL: Game Information ===== -->
               <div class="slideshow-left" id="slideLeft">
                 <div>
-                  <div class="game-cover"><img id="slideCover" src="../assets/img/games/sv-thumb_tall.jpg" alt="Game Cover"></div>
-                  <p class="game-description-text" id="slideDescription">Stardew Valley is a relaxing farming simulation...</p>
+                  <!-- Game cover image – updated via JS -->
+                  <div class="game-cover">
+                    <img id="slideCover" src="../assets/img/games/sv-thumb_tall.jpg" alt="Game Cover">
+                  </div>
+                  <!-- Short game description – updated via JS -->
+                  <p class="game-description-text" id="slideDescription">
+                    Stardew Valley is a relaxing farming simulation...
+                  </p>
                 </div>
+                <!-- Bottom row: developer/publisher info + star rating -->
                 <div class="slide-bottom-row">
-                  <p class="game-meta-info" id="slideMeta"><strong>Developer:</strong> ConcernedApe<br><strong>Publisher:</strong> ConcernedApe<br><strong>Release Date:</strong> February 27, 2016</p>
-                  <div class="game-rating"><div class="stars" id="slideStars">★★★★★</div><div class="rating-text" id="slideRatingText">4.9 / 5</div></div>
+                  <!-- Meta info: developer, publisher, release date -->
+                  <p class="game-meta-info" id="slideMeta">
+                    <strong>Developer:</strong> ConcernedApe<br>
+                    <strong>Publisher:</strong> ConcernedApe<br>
+                    <strong>Release Date:</strong> February 27, 2016
+                  </p>
+                  <!-- Star rating (gold stars) + numeric rating -->
+                  <div class="game-rating">
+                    <div class="stars" id="slideStars">★★★★★</div>
+                    <div class="rating-text" id="slideRatingText">4.9 / 5</div>
+                  </div>
                 </div>
               </div>
+
+              <!-- ===== RIGHT PANEL: Video ===== -->
               <div class="slideshow-right" id="slideRight">
-                <div class="video-placeholder" id="videoPlaceholder"><div class="video-placeholder-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg></div><span>Click to watch preview</span></div>
-                <video id="slideVideo" muted autoplay loop playsinline><source src="../assets/vid/sp vid/sv vid.mp4" type="video/mp4"></video>
+                <!-- Placeholder with play icon – shown when overlay is active or video can't autoplay -->
+                <div class="video-placeholder" id="videoPlaceholder">
+                  <div class="video-placeholder-icon">
+                    <!-- Play triangle SVG -->
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                    </svg>
+                  </div>
+                  <span>Click to watch preview</span>
+                </div>
+                <!--
+                  The <video> element.  Sources are added dynamically by JS.
+                  Attributes:
+                    muted       – Starts muted for autoplay policy compliance
+                    autoplay    – Begins playing as soon as loaded
+                    loop        – Native loop (overridden by JS for seamless restart)
+                    playsinline – Allows inline playback on iOS
+                -->
+                <video id="slideVideo" muted autoplay loop playsinline>
+                  <source src="../assets/vid/sp vid/sv vid.mp4" type="video/mp4">
+                </video>
               </div>
             </div>
+
+            <!-- Next arrow button -->
             <button class="slideshow-arrow" id="nextBtn">&#10095;</button>
           </div>
+
+          <!-- Navigation dots – built dynamically by category-script.js -->
           <div class="slideshow-dots" id="slideshowDots"></div>
         </section>
       </div>
     </div>
 
+    <!-- ==========================================================================
+         VIDEO OVERLAY (Full‑screen)
+         --------------------------------------------------------------------------
+         Hidden by default (opacity: 0, visibility: hidden).  When .active is
+         added, the overlay fades in and the video is moved into #videoOverlayContainer.
+         Clicking the background, the close button, or pressing Escape collapses it.
+         ========================================================================== -->
     <div id="videoOverlay" class="video-overlay">
+      <!-- Close button (×) – top‑right corner -->
       <button class="video-overlay-close" id="videoOverlayClose">&times;</button>
-      <div class="video-overlay-wrapper"><div id="videoOverlayContainer"></div></div>
+      <!-- Wrapper that scales up when the overlay becomes active -->
+      <div class="video-overlay-wrapper">
+        <!-- The video element is moved here by JS when expanded -->
+        <div id="videoOverlayContainer"></div>
+      </div>
+      <!-- Hint text fades in after a short delay -->
       <div class="video-overlay-hint">Click outside or press X to close</div>
     </div>
 
+    <!-- ==========================================================================
+         CURATED PICKS GRID
+         --------------------------------------------------------------------------
+         A 2‑column grid (on desktop) of horizontal game cards.  Each card is an
+         <a> tag linking to the game's detail page (game/*.html).  Cards show:
+           - Cover image
+           - Title
+           - Platform icons
+           - Tags (genre / features)
+           - Short description (clamped to 5 lines)
+           - File size
+         On hover, cards lift and their border glows blue.
+         ========================================================================== -->
     <section class="curated-section">
-      <div class="section-header"><h2 class="section-title">Curated Picks</h2></div>
-      <div class="games-grid">
-        <a href="game/stardew.html" class="game-card">
-          <div class="card-image"><img src="../assets/img/sp img/sv photoc.png" alt="Stardew Valley"></div>
-          <div class="card-content"><div><div class="card-header"><h3 class="card-title">Stardew<br>Valley</h3><div class="platform-icons"><img src="../assets/img/platforms/win.png" alt="Windows" class="platform-icon"><img src="../assets/img/platforms/mac.png" alt="MacOS" class="platform-icon"><img src="../assets/img/platforms/ps.png" alt="PlayStation" class="platform-icon"><img src="../assets/img/platforms/xbox.png" alt="Xbox" class="platform-icon"><img src="../assets/img/platforms/ns.png" alt="Nintendo Switch" class="platform-icon"></div></div><div class="card-tags"><span class="tag">RPG</span><span class="tag">Simulation</span><span class="tag">Cozy</span></div><p class="card-description"><b>Become part of the local community.</b> <br> With over 30 unique characters...</p></div><div class="card-footer"><span></span><span class="card-size">500 MB</span></div></div>
-        </a>
-        <a href="game/rdr2.html" class="game-card">
-          <div class="card-image"><img src="../assets/img/sp img/rdr2 photoc.png" alt="Red Dead Redemption 2"></div>
-          <div class="card-content"><div><div class="card-header"><h3 class="card-title">Red Dead<br>Redemption 2</h3><div class="platform-icons"><img src="../assets/img/platforms/ps.png" alt="PlayStation" class="platform-icon"><img src="../assets/img/platforms/xbox.png" alt="Xbox" class="platform-icon"><img src="../assets/img/platforms/win.png" alt="Windows" class="platform-icon"></div></div><div class="card-tags"><span class="tag">Action</span><span class="tag">Adventure</span><span class="tag">Open World</span></div><p class="card-description"><b>America, 1899.</b> <br>Van der Linde Gang are outlaws on the run...</p></div><div class="card-footer"><span></span><span class="card-size">120 GB</span></div></div>
-        </a>
-        <a href="game/graveyard.html" class="game-card">
-          <div class="card-image"><img src="../assets/img/sp img/gk photoc.jpg" alt="Graveyard Keeper"></div>
-          <div class="card-content"><div><div class="card-header"><h3 class="card-title">Graveyard<br>Keeper</h3><div class="platform-icons"><img src="../assets/img/platforms/win.png" alt="Windows" class="platform-icon"><img src="../assets/img/platforms/mac.png" alt="MacOS" class="platform-icon"><img src="../assets/img/platforms/ps.png" alt="PlayStation" class="platform-icon"><img src="../assets/img/platforms/xbox.png" alt="Xbox" class="platform-icon"><img src="../assets/img/platforms/ns.png" alt="Nintendo Switch" class="platform-icon"></div></div><div class="card-tags"><span class="tag">RPG</span><span class="tag">Simulation</span><span class="tag">Dark Humor</span></div><p class="card-description"><b>Build and manage your own graveyard.</b> <br>Use all the resources you can find...</p></div><div class="card-footer"><span></span><span class="card-size">1.3 GB</span></div></div>
-        </a>
-        <a href="game/alittle.html" class="game-card">
-          <div class="card-image"><img src="../assets/img/sp img/alttl photoc.png" alt="A Little to the Left"></div>
-          <div class="card-content"><div><div class="card-header"><h3 class="card-title">A Little to<br>the Left</h3><div class="platform-icons"><img src="../assets/img/platforms/win.png" alt="Windows" class="platform-icon"><img src="../assets/img/platforms/mac.png" alt="MacOS" class="platform-icon"><img src="../assets/img/platforms/ps.png" alt="PlayStation" class="platform-icon"><img src="../assets/img/platforms/xbox.png" alt="Xbox" class="platform-icon"><img src="../assets/img/platforms/ns.png" alt="Nintendo Switch" class="platform-icon"></div></div><div class="card-tags"><span class="tag">Puzzle</span><span class="tag">Casual</span><span class="tag">Cozy</span></div><p class="card-description"><b>Sort, stack, and organize.</b> <br>A tidy puzzle game with a mischievous cat...</p></div><div class="card-footer"><span></span><span class="card-size">1.25 GB</span></div></div>
-        </a>
+      <div class="section-header">
+        <h2 class="section-title">Curated Picks</h2>
       </div>
-    </section>
+
+      <div class="games-grid">
+        <!-- ===== Stardew Valley ===== -->
+        <a href="game/stardew.html" class="game-card">
+          <!-- Left cover image (160px wide) -->
+          <div class="card-image">
+            <img src="../assets/img/sp img/sv photoc.png" alt="Stardew Valley">
+          </div>
+          <!-- Right content area -->
+          <div class="card-content">
+            <div>
+              <!-- Title + platform icons -->
+              <div class="card-header">
+                <!-- Title with a line break to fit the card -->
+                <h3 class="card-title">Stardew<br>Valley</h3>
+                <div class="platform-icons">
+                  <img src="../assets/img/platforms/win.png" alt="Windows" class="platform-icon">
+                  <img src="../assets/img/platforms/mac.png" alt="MacOS" class="platform-icon">
+                  <img src="../assets/img/platforms/ps.png" alt="PlayStation" class="platform-icon">
+                  <img src="../assets/img/platforms/xbox.png" alt="Xbox" class="platform-icon">
+                  <img src="../assets/img/platforms/ns.png" alt="Nintendo Switch" class="platform-icon">
+                </div>
+              </div>
+              <!-- Genre tags -->
+              <div class="card-tags">
+                <span class="tag">RPG</span>
+                <span class="tag">Simulation</span>
+                <span class="tag">Cozy</span>
+              </div>
+              <!-- Short description (clamped via -webkit-line-clamp) -->
+              <p class="card-description">
+                <b>Become part of the local community.</b> <br>
+                With over 30 unique characters...
+              </p>
+            </div>
+            <!-- Footer: file size -->
+            <div class="card-footer">
+              <span></span>
+              <span class="card-size">500 MB</span>
+            </div>
+          </div>
+        </a>
+
+        <!-- ===== Red Dead Redemption 2 ===== -->
+        <a href="game/rdr2.html" class="game-card">
+          <div class="card-image">
+            <img src="../assets/img/sp img/rdr2 photoc.png" alt="Red Dead Redemption 2">
+          </div>
+          <div class="card-content">
+            <div>
+              <div class="card-header">
+                <h3 class="card-title">Red Dead<br>Redemption 2</h3>
+                <div class="platform-icons">
+                  <img src="../assets/img/platforms/ps.png" alt="PlayStation" class="platform-icon">
+                  <img src="../assets/img/platforms/xbox.png" alt="Xbox" class="platform-icon">
+                  <img src="../assets/img/platforms/win.png" alt="Windows" class="platform-icon">
+                </div>
+              </div>
+              <div class="card-tags">
+                <span class="tag">Action</span>
+                <span class="tag">Adventure</span>
+                <span class="tag">Open World</span>
+              </div>
+              <p class="card-description">
+                <b>America, 1899.</b> <br>
+                Van der Linde Gang are outlaws on the run...
+              </p>
+            </div>
+            <div class="card-footer">
+              <span></span>
+              <span class="card-size">120 GB</span>
+            </div>
+          </div>
+        </a>
+
+        <!-- ===== Graveyard Keeper ===== -->
+        <a href="game/graveyard.html" class="game-card">
+          <div class="card-image">
+            <img src="../assets/img/sp img/gk photoc.jpg" alt="Graveyard Keeper">
+          </div>
+          <div class="card-content">
+            <div>
+              <div class="card-header">
+                <h3 class="card-title">Graveyard<br>Keeper</h3>
+                <div class="platform-icons">
+                  <img src="../assets/img/platforms/win.png" alt="Windows" class="platform-icon">
+                  <img src="../assets/img/platforms/mac.png" alt="MacOS" class="platform-icon">
+                  <img src="../assets/img/platforms/ps.png" alt="PlayStation" class="platform-icon">
+                  <img src="../assets/img/platforms/xbox.png" alt="Xbox" class="platform-icon">
+                  <img src="../assets/img/platforms/ns.png" alt="Nintendo Switch" class="platform-icon">
+                </div>
+              </div>
+              <div class="card-tags">
+                <span class="tag">RPG</span>
+                <span class="tag">Simulation</span>
+                <span class="tag">Dark Humor</span>
+              </div>
+              <p class="card-description">
+                <b>Build and manage your own graveyard.</b> <br>
+                Use all the resources you can find...
+              </p>
+            </div>
+            <div class="card-footer">
+              <span></span>
+              <span class="card-size">1.3 GB</span>
+            </div>
+          </div>
+        </a>
+
+        <!-- ===== A Little to the Left ===== -->
+        <a href="game/alittle.html" class="game-card">
+          <div class="card-image">
+            <img src="../assets/img/sp img/alttl photoc.png" alt="A Little to the Left">
+          </div>
+          <div class="card-content">
+            <div>
+              <div class="card-header">
+                <h3 class="card-title">A Little to<br>the Left</h3>
+                <div class="platform-icons">
+                  <img src="../assets/img/platforms/win.png" alt="Windows" class="platform-icon">
+                  <img src="../assets/img/platforms/mac.png" alt="MacOS" class="platform-icon">
+                  <img src="../assets/img/platforms/ps.png" alt="PlayStation" class="platform-icon">
+                  <img src="../assets/img/platforms/xbox.png" alt="Xbox" class="platform-icon">
+                  <img src="../assets/img/platforms/ns.png" alt="Nintendo Switch" class="platform-icon">
+                </div>
+              </div>
+              <div class="card-tags">
+                <span class="tag">Puzzle</span>
+                <span class="tag">Casual</span>
+                <span class="tag">Cozy</span>
+              </div>
+              <p class="card-description">
+                <b>Sort, stack, and organize.</b> <br>
+                A tidy puzzle game with a mischievous cat...
+              </p>
+            </div>
+            <div class="card-footer">
+              <span></span>
+              <span class="card-size">1.25 GB</span>
+            </div>
+          </div>
+        </a>
+      </div> <!-- /games-grid -->
+    </section> <!-- /curated-section -->
   </main>
 
+  <!-- ==========================================================================
+       FOOTER
+       --------------------------------------------------------------------------
+       Gradient footer with links to other essential pages.  All links are
+       relative to the current directory (global_pages/).
+       ========================================================================== -->
   <footer class="footer">
     <div class="footer__links">
       <a href="contacts.html" class="footer__link">Contacts</a> ·
@@ -105,6 +389,16 @@
     <div class="footer__copy">&copy; 2026 Labyrinth. All rights reserved.</div>
   </footer>
 
+  <!-- ==========================================================================
+       SCRIPTS
+       --------------------------------------------------------------------------
+       Loaded with '../' to reach the root /js/ folder.
+         1. data.js            – Defines GAMES_CATALOG (needed by search and category scripts)
+         2. search.js          – Live search in the header (path‑aware)
+         3. category-script.js – Powers the slideshow: reads data-category, filters
+                                 games, populates slides, handles video loop and overlay.
+                                 Loaded with `defer` to ensure it runs after the DOM is parsed.
+       ========================================================================== -->
   <script src="../js/data.js"></script>
   <script src="../js/search.js"></script>
   <script src="../js/category-script.js" defer></script>

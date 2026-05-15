@@ -1,8 +1,16 @@
 /* =============================================
    RESPONSIVE STYLES – LABYRINTH (Streamlined)
+   =============================================
+   This file handles all responsive behaviour for the Labyrinth gaming
+   website. It defines breakpoints for large desktops, tablets, phones,
+   and small devices, adjusting layout, typography, and spacing to
+   ensure readability and usability. Touch‑friendly enhancements and
+   accessibility overrides are included at the end.
    ============================================= */
 
 /* ---------- Base responsive behaviour ---------- */
+/* Prevent horizontal scrolling on the entire page; keep vertical scroll
+   always visible to avoid layout shifts when content height changes. */
 html {
     overflow-x: hidden;
     overflow-y: scroll;
@@ -11,17 +19,25 @@ body {
     width: 100%;
     max-width: 100%;
     position: relative;
-    overflow-x: hidden;
+    overflow-x: hidden;      /* Double guard against any child overflow */
 }
+
+/* Ensure images and videos scale down within their containers */
 img, video {
     max-width: 100%;
     height: auto;
 }
+
+/* Universal box‑sizing to make padding and border calculations predictable */
 * {
     box-sizing: border-box;
 }
 
-/* ========== Large desktop (1200px and down) ========== */
+
+/* ========== Large desktop (1200px and down) ==========
+   Slightly reduce hero title sizes and collapse the “Top Rated” grid
+   to two columns as the viewport narrows below 1200px.
+   =================================================== */
 @media (max-width: 1200px) {
     .hero__slide-title {
         font-size: 42px;
@@ -34,7 +50,12 @@ img, video {
     }
 }
 
-/* ========== Tablet landscape / small desktop (992px) ========== */
+
+/* ========== Tablet landscape / small desktop (992px) ==========
+   Adjust header, hero height, game detail layouts, and gallery
+   carousel card sizes. Many components begin to switch to a more
+   compact appearance.
+   ============================================================ */
 @media (max-width: 992px) {
     /* Header */
     .header {
@@ -44,14 +65,15 @@ img, video {
         font-size: 22px;
     }
     .nav-search input {
-        width: 140px;
+        width: 140px;                 /* Slightly smaller search field */
     }
     .nav-search input:focus {
         width: 180px;
     }
+
     /* Hero */
     .hero {
-        height: 500px;
+        height: 500px;               /* Reduce overall hero height */
     }
     .hero__slide-title {
         font-size: 36px;
@@ -63,9 +85,10 @@ img, video {
         padding: 0 40px;
         max-width: 600px;
     }
-    /* Category pages: slideshow */
+
+    /* Category pages – slideshow */
     .slideshow-content {
-        height: 380px;
+        height: 380px;               /* Shorter slideshow */
     }
     .slideshow-left {
         padding: 20px;
@@ -73,9 +96,10 @@ img, video {
     .game-cover {
         height: 140px;
     }
-    /* Game pages */
+
+    /* Game detail pages */
     .game-hero__content {
-        grid-template-columns: 280px 1fr;
+        grid-template-columns: 280px 1fr;  /* Narrower cover column */
         gap: 32px;
         padding: 40px;
     }
@@ -84,20 +108,27 @@ img, video {
         height: 400px;
     }
     .hero-dev-badge, .hero-steam-btn {
-        width: 280px;
+        width: 280px;                /* Match cover width */
     }
+
+    /* Gallery carousel */
     .carousel-card {
         width: 400px;
         height: 225px;
     }
 }
 
-/* ========== Tablet portrait (768px) ========== */
+
+/* ========== Tablet portrait (768px) ==========
+   Switch to a predominantly single‑column layout for the main grids,
+   stack hero information vertically, and adjust navigation for
+   smaller touch targets.
+   ============================================= */
 @media (max-width: 768px) {
     /* Header */
     .header {
         padding: 0 16px;
-        height: 60px;
+        height: 60px;               /* Slimmer header */
     }
     .header__logo-icon {
         width: 32px;
@@ -115,13 +146,13 @@ img, video {
     .nav-search input {
         width: 110px;
         font-size: 12px;
-        padding: 6px 10px 6px 32px;
+        padding: 6px 10px 6px 32px;  /* Adjust padding for smaller icon */
     }
     .nav-search input:focus {
         width: 140px;
     }
     .search-dropdown {
-        position: fixed;
+        position: fixed;             /* Attach to viewport edges */
         top: 60px;
         left: 16px;
         right: 16px;
@@ -129,6 +160,7 @@ img, video {
         max-width: calc(100vw - 32px);
         min-width: auto;
     }
+
     /* Hero */
     .hero {
         height: 420px;
@@ -155,10 +187,13 @@ img, video {
         bottom: 20px;
         right: 20px;
     }
-    /* Sections */
+
+    /* General sections */
     .section-top-rated, .section-categories {
         padding: 24px 20px;
     }
+
+    /* Top Rated grid – single column */
     .top-rated-grid {
         grid-template-columns: 1fr;
         gap: 16px;
@@ -170,6 +205,8 @@ img, video {
     .top-rated-card__thumb {
         width: 140px;
     }
+
+    /* Categories grid – single column */
     .categories-grid {
         grid-template-columns: 1fr;
         gap: 16px;
@@ -178,7 +215,8 @@ img, video {
         height: 160px;
         font-size: 32px;
     }
-    /* All Games browse */
+
+    /* All Games browse – stack sidebar and preview */
     .browse-container {
         flex-direction: column;
         padding: 20px;
@@ -189,7 +227,7 @@ img, video {
         flex: none;
     }
     .browse-right {
-        position: static;
+        position: static;            /* Remove sticky positioning */
     }
     .game-item {
         padding: 8px 12px;
@@ -218,6 +256,7 @@ img, video {
     .preview-gallery-thumb {
         height: 140px;
     }
+
     /* Category pages */
     .hero-bg-section {
         padding: 20px 16px 40px;
@@ -235,14 +274,14 @@ img, video {
         font-size: 18px;
     }
     .slideshow-content {
-        flex-direction: column;
+        flex-direction: column;      /* Stack left and right panels */
         height: auto;
     }
     .slideshow-left, .slideshow-right {
         width: 100%;
     }
     .slideshow-right {
-        height: 240px;
+        height: 240px;               /* Fixed height for video when stacked */
     }
     .slideshow-left {
         padding: 20px;
@@ -256,7 +295,7 @@ img, video {
         gap: 12px;
     }
     .game-rating {
-        text-align: left;
+        text-align: left;            /* Align rating to left when stacked */
     }
     .games-grid {
         grid-template-columns: 1fr;
@@ -274,9 +313,10 @@ img, video {
     }
     .card-description {
         font-size: 10px;
-        -webkit-line-clamp: 3;
+        -webkit-line-clamp: 3;       /* Show fewer lines */
     }
-    /* Game detail pages */
+
+    /* Game detail pages – stack hero vertically */
     .game-hero__content {
         grid-template-columns: 1fr;
         text-align: center;
@@ -301,10 +341,10 @@ img, video {
         font-size: 28px;
     }
     .badge-platform-row, .rating-info, .game-hero__tags {
-        justify-content: center;
+        justify-content: center;     /* Center these rows */
     }
     .sysreq-card {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr;  /* Stack specs columns */
         padding: 20px;
         gap: 20px;
     }
@@ -315,6 +355,7 @@ img, video {
     .review-card, .video-card {
         padding: 24px;
     }
+
     /* FAQ & Contact */
     .faq-container, .contact-container {
         padding: 40px 20px;
@@ -347,6 +388,7 @@ img, video {
     .contact-hero h1 {
         font-size: 2.2rem;
     }
+
     /* Footer */
     .footer {
         padding: 24px 20px 20px;
@@ -357,7 +399,11 @@ img, video {
     }
 }
 
-/* ========== Large phones (576px) ========== */
+
+/* ========== Large phones (576px) ==========
+   Further compact hero and navigation; some elements switch to a
+   vertical stacking (e.g., game cards become column‑oriented).
+   ========================================== */
 @media (max-width: 576px) {
     .header__nav {
         gap: 6px;
@@ -369,6 +415,7 @@ img, video {
         width: 90px;
         font-size: 10px;
     }
+
     .hero {
         height: 380px;
     }
@@ -380,7 +427,7 @@ img, video {
     }
     .hero__slide-desc {
         font-size: 12px;
-        display: -webkit-box;
+        display: -webkit-box;        /* Clamp description to two lines */
         -webkit-line-clamp: 2;
         -webkit-box-orient: vertical;
         overflow: hidden;
@@ -402,9 +449,12 @@ img, video {
         height: 32px;
         font-size: 14px;
     }
+
     .section-heading {
         font-size: 18px;
     }
+
+    /* Category slideshow refinements */
     .slideshow-right {
         height: 200px;
     }
@@ -425,6 +475,8 @@ img, video {
     .dot.active {
         width: 20px;
     }
+
+    /* Curated picks cards – switch to vertical layout */
     .game-card {
         flex-direction: column;
     }
@@ -439,6 +491,8 @@ img, video {
         flex-wrap: wrap;
         gap: 8px;
     }
+
+    /* Game detail page */
     .game-hero__title {
         font-size: 24px;
     }
@@ -449,9 +503,12 @@ img, video {
     .stars-row {
         font-size: 16px;
     }
+
+    /* FAQ & Contact headings */
     .faq-hero h1, .contact-hero h1 {
         font-size: 1.8rem;
     }
+
     .footer__links {
         gap: 4px;
         font-size: 11px;
@@ -461,7 +518,11 @@ img, video {
     }
 }
 
-/* ========== Small phones (480px) ========== */
+
+/* ========== Small phones (480px) ==========
+   Even more compact navigation, hero shrinks further, and many
+   elements receive smaller font sizes and tighter padding.
+   ========================================= */
 @media (max-width: 480px) {
     .header {
         padding: 0 12px;
@@ -490,6 +551,7 @@ img, video {
         height: 12px;
         left: 8px;
     }
+
     .hero {
         height: 340px;
     }
@@ -504,6 +566,7 @@ img, video {
         height: 40px;
         font-size: 18px;
     }
+
     .preview-title {
         font-size: 20px;
     }
@@ -513,6 +576,7 @@ img, video {
     .page-title {
         font-size: 24px;
     }
+
     .slideshow-arrow {
         width: 28px;
         height: 28px;
@@ -535,6 +599,7 @@ img, video {
         font-size: 9px;
         padding: 2px 6px;
     }
+
     .faq-question-text {
         font-size: 13px;
     }
@@ -553,9 +618,11 @@ img, video {
     .detail-info p, .detail-info a {
         font-size: 13px;
     }
+
     .section-title {
         font-size: 18px;
     }
+
     .carousel-card {
         width: 240px;
         height: 135px;
@@ -566,10 +633,14 @@ img, video {
     }
 }
 
-/* ========== Extremely small devices (360px) ========== */
+
+/* ========== Extremely small devices (360px) ==========
+   Hide the brand name to save space, further reduce hero and
+   carousel sizes for very narrow screens.
+   ===================================================== */
 @media (max-width: 360px) {
     .header__brand {
-        display: none;
+        display: none;               /* Only logo remains */
     }
     .header__nav-link {
         font-size: 9px;
@@ -577,6 +648,7 @@ img, video {
     .nav-search input {
         width: 60px;
     }
+
     .hero__slide-title {
         font-size: 18px;
     }
@@ -588,6 +660,7 @@ img, video {
         height: 36px;
         font-size: 16px;
     }
+
     .game-hero__title {
         font-size: 20px;
     }
@@ -597,7 +670,12 @@ img, video {
     }
 }
 
-/* ========== Touch-friendly improvements ========== */
+
+/* ========== Touch‑friendly improvements ==========
+   When the primary input is touch (no hover capability), we enlarge
+   hit areas, add tap highlights, and ensure interactive elements
+   meet minimum touch target sizes (44×44px recommended).
+   ================================================= */
 @media (hover: none) and (pointer: coarse) {
     .header__nav-link,
     .header__dropdown-item,
@@ -616,26 +694,33 @@ img, video {
         cursor: pointer;
         -webkit-tap-highlight-color: rgba(76, 140, 228, 0.3);
     }
+
     .hero__arrow, .slideshow-arrow {
         min-width: 44px;
-        min-height: 44px;
+        min-height: 44px;            /* Ensure arrows are tappable */
     }
+
     .hero__dot {
         width: 12px;
         height: 12px;
     }
     .hero__dot--active {
-        width: 36px;
+        width: 36px;                 /* Larger active dot for touch */
     }
+
     .faq-question {
-        padding: 18px;
+        padding: 18px;               /* More generous tap area */
     }
     .contact-btn {
         min-height: 48px;
     }
 }
 
-/* ========== Misc overrides ========== */
+
+/* ========== Misc overrides ==========
+   Force the video overlay to occupy almost the full viewport width,
+   and reposition the close button for small screens.
+   ===================================== */
 .video-overlay-wrapper {
     width: 95vw;
     max-width: 95vw;
@@ -648,19 +733,24 @@ img, video {
     font-size: 24px;
 }
 
-/* Improve text readability on small screens */
+
+/* Improve text readability on small screens by allowing
+   words to break and hyphens to appear, preventing overflow. */
 @media (max-width: 600px) {
     p, .game-hero__desc, .review-card p, .video-card__text, .card-description {
         word-break: break-word;
         hyphens: auto;
     }
+
     button, .hero__btn, .contact-btn {
-        white-space: normal;
+        white-space: normal;         /* Allow button text to wrap */
         word-break: keep-all;
     }
 }
 
-/* Focus visible for accessibility */
+
+/* Focus visible for accessibility – ensure keyboard users
+   can see a clear focus indicator on navigation and CTA elements. */
 .header__nav-link:focus-visible,
 .header__dropdown-item:focus-visible,
 .contact-btn:focus-visible {

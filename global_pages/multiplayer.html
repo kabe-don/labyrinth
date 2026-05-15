@@ -1,28 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- ==========================================================================
+       LABYRINTH · Multiplayer Category Page (global_pages/multiplayer.html)
+       --------------------------------------------------------------------------
+       This page showcases all multiplayer games in the Labyrinth catalogue.
+       It features:
+         • A full‑width hero section with a dynamic background image and a
+           slideshow that highlights individual games (cover, description,
+           rating, trailer video).
+         • A "Curated Picks" grid displaying selected multiplayer titles as
+           horizontal cards with cover art, tags, platform icons, and size.
+         • A video overlay for watching trailers full‑screen.
+       --------------------------------------------------------------------------
+       The page is located inside /global_pages/, so all asset paths (CSS, JS,
+       images, videos) are prefixed with '../' to reach the root folder.
+       The body element carries a data-category="multiplayer" attribute that
+       tells category-script.js which subset of GAMES_CATALOG to load.
+       ========================================================================== -->
   <meta charset="UTF-8">
+  <!-- Mobile‑first responsive meta tag.  viewport-fit=cover helps with notched displays. -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>LABYRINTH - MULTIPLAYER</title>
+
+  <!-- Preconnect to external origins for faster font delivery -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!--
+    Primary typefaces loaded from Google Fonts:
+      Bruno Ace   →  --font-heading  (page title, card titles)
+      Inter       →  --font-ui        (tags, meta info, buttons)
+      Reddit Sans →  --font-body      (descriptions, general text)
+    All weights from 200–900 are loaded.
+  -->
   <link href="https://fonts.googleapis.com/css2?family=Bruno+Ace&family=Inter:wght@200;300;400;500;600;700;800;900&family=Reddit+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!--
+    Stylesheets:
+      ../css/style.css         – Global design system, variables, reset, header, footer
+      ../css/category-styles.css – Slideshow, curated picks grid, video overlay
+      ../css/responsive.css    – Breakpoints, touch, accessibility overrides
+  -->
   <link rel="stylesheet" href="../css/style.css">
   <link rel="stylesheet" href="../css/category-styles.css">
   <link rel="stylesheet" href="../css/responsive.css">
 </head>
+
+<!--
+  data-category="multiplayer"
+  This attribute is read by category-script.js to filter GAMES_CATALOG for
+  games whose .category property equals "multi".
+-->
 <body data-category="multiplayer">
+
+  <!-- ==========================================================================
+       HEADER
+       --------------------------------------------------------------------------
+       Fixed navigation bar with frosted‑glass effect.
+       All links use paths relative to /global_pages/.
+       ========================================================================== -->
   <header class="header" id="header">
+    <!-- Logo group: clicking returns to the homepage -->
     <a class="header__logo-group" id="logoTop" href="../index.html">
-      <div class="header__logo-icon"><img src="../assets/img/web_logo.png" alt="LABYRINTH" class="logo-img"></div>
+      <div class="header__logo-icon">
+        <img src="../assets/img/web_logo.png" alt="LABYRINTH" class="logo-img">
+      </div>
       <span class="header__brand">LABYRINTH</span>
     </a>
+
     <nav class="header__nav">
+      <!-- ===== SEARCH BAR ===== -->
       <div class="nav-search">
-        <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <!-- Inline SVG magnifying glass -->
+        <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"/>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+        </svg>
+        <!--
+          search.js attaches live filtering.  It detects the /global_pages/
+          location and adjusts image/link paths automatically.
+        -->
         <input type="text" id="globalSearch" placeholder="Search games..." autocomplete="off">
         <div class="search-dropdown" id="searchDropdown"></div>
       </div>
+
+      <!-- ===== CATEGORY DROPDOWN ===== -->
       <div class="header__nav-dropdown">
         <span class="header__nav-link header__nav-dropdown-trigger">CATEGORY <span class="dropdown-arrow">▾</span></span>
         <div class="header__dropdown-menu">
@@ -30,71 +93,310 @@
           <a class="header__dropdown-item" href="multiplayer.html">Multiplayer</a>
         </div>
       </div>
+
+      <!-- About link -->
       <a class="header__nav-link" href="about.html">About</a>
     </nav>
   </header>
 
   <main>
+    <!-- ==========================================================================
+         HERO BACKGROUND SECTION
+         --------------------------------------------------------------------------
+         A full‑width container that holds:
+           - A dynamic background image (changed by category-script.js when the
+             slide changes)
+           - A gradient overlay for text readability
+           - The page title ("MULTIPLAYER")
+           - The slideshow (game info + video)
+         The entire section is built to accommodate the slideshow's 420px height
+         plus padding.
+         ========================================================================== -->
     <div class="hero-bg-section" id="heroBgSection">
+      <!--
+        Dynamic background image.  Its background-image is updated via JavaScript
+        (inline style) when the active slide changes.  A CSS transition of 0.6s
+        creates a smooth crossfade effect.
+        The initial image is a fallback (Slay the Spire II cover).
+      -->
       <div class="hero-bg-image" id="heroBgImage" style="background-image: url('../assets/img/games/sts2-cover.jpg');"></div>
+
+      <!-- Semi‑transparent gradient overlay: navy → opaque -->
       <div class="hero-bg-overlay"></div>
+
+      <!-- Content sits above the overlay (z‑index 2) -->
       <div class="hero-bg-content">
+        <!-- Category page title in uppercase Bruno Ace -->
         <h1 class="page-title">MULTIPLAYER</h1>
+
+        <!-- ===== SLIDESHOW SECTION ===== -->
         <section class="hero-section">
           <div class="slideshow-container">
+            <!-- Previous arrow button -->
             <button class="slideshow-arrow" id="prevBtn">&#10094;</button>
+
+            <!--
+              The slideshow content is a flex container split into two halves:
+                - Left:  game info (cover, description, meta, rating)
+                - Right: video or placeholder
+              The contents of both halves are dynamically updated by category-script.js.
+            -->
             <div class="slideshow-content" id="slideshowContent">
+              <!-- ===== LEFT PANEL: Game Information ===== -->
               <div class="slideshow-left" id="slideLeft">
                 <div>
-                  <div class="game-cover"><img id="slideCover" src="../assets/img/games/sts2-thumb_tall.jpg" alt="Game Cover"></div>
-                  <p class="game-description-text" id="slideDescription">Slay the Spire II is a strategic deck‑building roguelike game...</p>
+                  <!-- Game cover image – updated via JS -->
+                  <div class="game-cover">
+                    <img id="slideCover" src="../assets/img/games/sts2-thumb_tall.jpg" alt="Game Cover">
+                  </div>
+                  <!-- Short game description – updated via JS -->
+                  <p class="game-description-text" id="slideDescription">
+                    Slay the Spire II is a strategic deck‑building roguelike game...
+                  </p>
                 </div>
+
+                <!-- Bottom row: developer/publisher info + star rating -->
                 <div class="slide-bottom-row">
-                  <p class="game-meta-info" id="slideMeta"><strong>Developer:</strong> MegaCrit<br><strong>Publisher:</strong> MegaCrit<br><strong>Release Date:</strong> March 6, 2026</p>
-                  <div class="game-rating"><div class="stars" id="slideStars">★★★★☆</div><div class="rating-text" id="slideRatingText">4.5 / 5</div></div>
+                  <!-- Meta info: developer, publisher, release date -->
+                  <p class="game-meta-info" id="slideMeta">
+                    <strong>Developer:</strong> MegaCrit<br>
+                    <strong>Publisher:</strong> MegaCrit<br>
+                    <strong>Release Date:</strong> March 6, 2026
+                  </p>
+                  <!-- Star rating (gold stars) + numeric rating -->
+                  <div class="game-rating">
+                    <div class="stars" id="slideStars">★★★★☆</div>
+                    <div class="rating-text" id="slideRatingText">4.5 / 5</div>
+                  </div>
                 </div>
               </div>
+
+              <!-- ===== RIGHT PANEL: Video ===== -->
               <div class="slideshow-right" id="slideRight">
-                <div class="video-placeholder" id="videoPlaceholder"><div class="video-placeholder-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg></div><span>Click to watch preview</span></div>
-                <video id="slideVideo" muted autoplay loop playsinline><source src="../assets/vid/mp vid/sts2 vid.mp4" type="video/mp4"></video>
+                <!--
+                  Placeholder with play icon – shown when the video can't autoplay
+                  or when the overlay is active (via CSS class .has-video-expanded).
+                  Clicking it calls expandVideo() in category-script.js.
+                -->
+                <div class="video-placeholder" id="videoPlaceholder">
+                  <div class="video-placeholder-icon">
+                    <!-- Play triangle SVG -->
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                    </svg>
+                  </div>
+                  <span>Click to watch preview</span>
+                </div>
+                <!--
+                  The <video> element.  Sources are added dynamically by JS.
+                  Initial source is a fallback.  The video loops seamlessly
+                  via requestAnimationFrame in category-script.js.
+                  Attributes:
+                    muted       – Starts muted for autoplay policy compliance
+                    autoplay    – Begins playing as soon as loaded
+                    loop        – Native loop (overridden by JS for seamless restart)
+                    playsinline – Allows inline playback on iOS
+                -->
+                <video id="slideVideo" muted autoplay loop playsinline>
+                  <source src="../assets/vid/mp vid/sts2 vid.mp4" type="video/mp4">
+                </video>
               </div>
             </div>
+
+            <!-- Next arrow button -->
             <button class="slideshow-arrow" id="nextBtn">&#10095;</button>
           </div>
+
+          <!-- Navigation dots – built dynamically by category-script.js -->
           <div class="slideshow-dots" id="slideshowDots"></div>
         </section>
       </div>
     </div>
 
+    <!-- ==========================================================================
+         VIDEO OVERLAY (Full‑screen)
+         --------------------------------------------------------------------------
+         Hidden by default (opacity: 0, visibility: hidden).  When .active is
+         added, the overlay fades in and the video is moved into #videoOverlayContainer.
+         Clicking the background, the close button, or pressing Escape collapses it.
+         ========================================================================== -->
     <div id="videoOverlay" class="video-overlay">
+      <!-- Close button (×) – top‑right corner -->
       <button class="video-overlay-close" id="videoOverlayClose">&times;</button>
-      <div class="video-overlay-wrapper"><div id="videoOverlayContainer"></div></div>
+      <!-- Wrapper that scales up when the overlay becomes active -->
+      <div class="video-overlay-wrapper">
+        <!-- The video element is moved here by JS when expanded -->
+        <div id="videoOverlayContainer"></div>
+      </div>
+      <!-- Hint text fades in after a short delay -->
       <div class="video-overlay-hint">Click outside or press X to close</div>
     </div>
 
+    <!-- ==========================================================================
+         CURATED PICKS GRID
+         --------------------------------------------------------------------------
+         A 2‑column grid (on desktop) of horizontal game cards.  Each card is an
+         <a> tag linking to the game's detail page (game/*.html).  Cards show:
+           - Cover image
+           - Title
+           - Platform icons
+           - Tags (genre / features)
+           - Short description (clamped to 5 lines)
+           - File size
+         On hover, cards lift and their border glows blue.
+         ========================================================================== -->
     <section class="curated-section">
-      <div class="section-header"><h2 class="section-title">Curated Picks</h2></div>
-      <div class="games-grid">
-        <a href="game/sts2.html" class="game-card">
-          <div class="card-image"><img src="../assets/img/mp img/sts2 cover.jpg" alt="Slay the Spire II"></div>
-          <div class="card-content"><div><div class="card-header"><h3 class="card-title">Slay the Spire II</h3><div class="platform-icons"><img src="../assets/img/platforms/win.png" alt="Windows" class="platform-icon"><img src="../assets/img/platforms/mac.png" alt="MacOS" class="platform-icon"></div></div><div class="card-tags"><span class="tag">Roguelike</span><span class="tag">Deckbuilding</span><span class="tag">Strategy</span></div><p class="card-description"><b>Climb alone or with allies.</b> <br> Brave the ascent on your own, or play with up to 4 players...</p></div><div class="card-footer"><span></span><span class="card-size">4 GB</span></div></div>
-        </a>
-        <a href="game/itt.html" class="game-card">
-          <div class="card-image"><img src="../assets/img/mp img/itt photoc.webp" alt="It Takes Two"></div>
-          <div class="card-content"><div><div class="card-header"><h3 class="card-title">It Takes Two</h3><div class="platform-icons"><img src="../assets/img/platforms/win.png" alt="Windows" class="platform-icon"><img src="../assets/img/platforms/ps.png" alt="PlayStation" class="platform-icon"><img src="../assets/img/platforms/xbox.png" alt="Xbox" class="platform-icon"><img src="../assets/img/platforms/ns.png" alt="Nintendo Switch" class="platform-icon"></div></div><div class="card-tags"><span class="tag">Co-op</span><span class="tag">Adventure</span><span class="tag">Funny</span></div><p class="card-description"><b>Embark on the craziest journey of your life.</b> <br>Master unique and connected character abilities...</p></div><div class="card-footer"><span></span><span class="card-size">50 GB</span></div></div>
-        </a>
-        <a href="game/picopark.html" class="game-card">
-          <div class="card-image"><img src="../assets/img/mp img/pp photoc2.jpg" alt="Pico Park"></div>
-          <div class="card-content"><div><div class="card-header"><h3 class="card-title">Pico Park</h3><div class="platform-icons"><img src="../assets/img/platforms/win.png" alt="Windows" class="platform-icon"><img src="../assets/img/platforms/mac.png" alt="MacOS" class="platform-icon"><img src="../assets/img/platforms/ps.png" alt="PlayStation" class="platform-icon"><img src="../assets/img/platforms/xbox.png" alt="Xbox" class="platform-icon"><img src="../assets/img/platforms/ns.png" alt="Nintendo Switch" class="platform-icon"></div></div><div class="card-tags"><span class="tag">Co-op</span><span class="tag">Puzzle</span><span class="tag">Cute</span></div><p class="card-description"><b>The rule is quite simple:</b> <br>"Get all the keys and get to the goal and clear"...</p></div><div class="card-footer"><span></span><span class="card-size">~200 MB</span></div></div>
-        </a>
-        <a href="game/cod.html" class="game-card">
-          <div class="card-image"><img src="../assets/img/mp img/cod photoc.webp" alt="Call of Duty: Black Ops III"></div>
-          <div class="card-content"><div><div class="card-header"><h3 class="card-title">Call of Duty:<br>Black Ops III</h3><div class="platform-icons"><img src="../assets/img/platforms/win.png" alt="Windows" class="platform-icon"><img src="../assets/img/platforms/ps.png" alt="PlayStation" class="platform-icon"><img src="../assets/img/platforms/xbox.png" alt="Xbox" class="platform-icon"></div></div><div class="card-tags"><span class="tag">Action</span><span class="tag">FPS</span><span class="tag">Multiplayer</span></div><p class="card-description"><b>Black Ops III</b> <br>combines three unique game modes: Campaign, Multiplayer, and Zombies...</p></div><div class="card-footer"><span></span><span class="card-size">100 GB</span></div></div>
-        </a>
+      <div class="section-header">
+        <h2 class="section-title">Curated Picks</h2>
       </div>
-    </section>
+
+      <div class="games-grid">
+        <!-- ===== Slay the Spire II ===== -->
+        <a href="game/sts2.html" class="game-card">
+          <!-- Left cover image (160px wide) -->
+          <div class="card-image">
+            <img src="../assets/img/mp img/sts2 cover.jpg" alt="Slay the Spire II">
+          </div>
+          <!-- Right content area -->
+          <div class="card-content">
+            <div>
+              <!-- Title + platform icons -->
+              <div class="card-header">
+                <h3 class="card-title">Slay the Spire II</h3>
+                <div class="platform-icons">
+                  <img src="../assets/img/platforms/win.png" alt="Windows" class="platform-icon">
+                  <img src="../assets/img/platforms/mac.png" alt="MacOS" class="platform-icon">
+                </div>
+              </div>
+              <!-- Genre tags -->
+              <div class="card-tags">
+                <span class="tag">Roguelike</span>
+                <span class="tag">Deckbuilding</span>
+                <span class="tag">Strategy</span>
+              </div>
+              <!-- Short description (clamped via -webkit-line-clamp) -->
+              <p class="card-description">
+                <b>Climb alone or with allies.</b> <br>
+                Brave the ascent on your own, or play with up to 4 players...
+              </p>
+            </div>
+            <!-- Footer: file size -->
+            <div class="card-footer">
+              <span></span>
+              <span class="card-size">4 GB</span>
+            </div>
+          </div>
+        </a>
+
+        <!-- ===== It Takes Two ===== -->
+        <a href="game/itt.html" class="game-card">
+          <div class="card-image">
+            <img src="../assets/img/mp img/itt photoc.webp" alt="It Takes Two">
+          </div>
+          <div class="card-content">
+            <div>
+              <div class="card-header">
+                <h3 class="card-title">It Takes Two</h3>
+                <div class="platform-icons">
+                  <img src="../assets/img/platforms/win.png" alt="Windows" class="platform-icon">
+                  <img src="../assets/img/platforms/ps.png" alt="PlayStation" class="platform-icon">
+                  <img src="../assets/img/platforms/xbox.png" alt="Xbox" class="platform-icon">
+                  <img src="../assets/img/platforms/ns.png" alt="Nintendo Switch" class="platform-icon">
+                </div>
+              </div>
+              <div class="card-tags">
+                <span class="tag">Co-op</span>
+                <span class="tag">Adventure</span>
+                <span class="tag">Funny</span>
+              </div>
+              <p class="card-description">
+                <b>Embark on the craziest journey of your life.</b> <br>
+                Master unique and connected character abilities...
+              </p>
+            </div>
+            <div class="card-footer">
+              <span></span>
+              <span class="card-size">50 GB</span>
+            </div>
+          </div>
+        </a>
+
+        <!-- ===== Pico Park ===== -->
+        <a href="game/picopark.html" class="game-card">
+          <div class="card-image">
+            <img src="../assets/img/mp img/pp photoc2.jpg" alt="Pico Park">
+          </div>
+          <div class="card-content">
+            <div>
+              <div class="card-header">
+                <h3 class="card-title">Pico Park</h3>
+                <div class="platform-icons">
+                  <img src="../assets/img/platforms/win.png" alt="Windows" class="platform-icon">
+                  <img src="../assets/img/platforms/mac.png" alt="MacOS" class="platform-icon">
+                  <img src="../assets/img/platforms/ps.png" alt="PlayStation" class="platform-icon">
+                  <img src="../assets/img/platforms/xbox.png" alt="Xbox" class="platform-icon">
+                  <img src="../assets/img/platforms/ns.png" alt="Nintendo Switch" class="platform-icon">
+                </div>
+              </div>
+              <div class="card-tags">
+                <span class="tag">Co-op</span>
+                <span class="tag">Puzzle</span>
+                <span class="tag">Cute</span>
+              </div>
+              <p class="card-description">
+                <b>The rule is quite simple:</b> <br>
+                "Get all the keys and get to the goal and clear"...
+              </p>
+            </div>
+            <div class="card-footer">
+              <span></span>
+              <span class="card-size">~200 MB</span>
+            </div>
+          </div>
+        </a>
+
+        <!-- ===== Call of Duty: Black Ops III ===== -->
+        <a href="game/cod.html" class="game-card">
+          <div class="card-image">
+            <img src="../assets/img/mp img/cod photoc.webp" alt="Call of Duty: Black Ops III">
+          </div>
+          <div class="card-content">
+            <div>
+              <div class="card-header">
+                <!-- Title with line break for long name -->
+                <h3 class="card-title">Call of Duty:<br>Black Ops III</h3>
+                <div class="platform-icons">
+                  <img src="../assets/img/platforms/win.png" alt="Windows" class="platform-icon">
+                  <img src="../assets/img/platforms/ps.png" alt="PlayStation" class="platform-icon">
+                  <img src="../assets/img/platforms/xbox.png" alt="Xbox" class="platform-icon">
+                </div>
+              </div>
+              <div class="card-tags">
+                <span class="tag">Action</span>
+                <span class="tag">FPS</span>
+                <span class="tag">Multiplayer</span>
+              </div>
+              <p class="card-description">
+                <b>Black Ops III</b> <br>
+                combines three unique game modes: Campaign, Multiplayer, and Zombies...
+              </p>
+            </div>
+            <div class="card-footer">
+              <span></span>
+              <span class="card-size">100 GB</span>
+            </div>
+          </div>
+        </a>
+      </div> <!-- /games-grid -->
+    </section> <!-- /curated-section -->
   </main>
 
+  <!-- ==========================================================================
+       FOOTER
+       --------------------------------------------------------------------------
+       Gradient footer with links to other essential pages.  All links are
+       relative to the current directory (global_pages/).
+       ========================================================================== -->
   <footer class="footer">
     <div class="footer__links">
       <a href="contacts.html" class="footer__link">Contacts</a> ·
@@ -105,6 +407,16 @@
     <div class="footer__copy">&copy; 2026 Labyrinth. All rights reserved.</div>
   </footer>
 
+  <!-- ==========================================================================
+       SCRIPTS
+       --------------------------------------------------------------------------
+       Loaded with '../' to reach the root /js/ folder.
+         1. data.js            – Defines GAMES_CATALOG (needed by search and category scripts)
+         2. search.js          – Live search in the header (path‑aware)
+         3. category-script.js – Powers the slideshow: reads data-category, filters
+                                 games, populates slides, handles video loop and overlay.
+                                 Loaded with `defer` to ensure it runs after the DOM is parsed.
+       ========================================================================== -->
   <script src="../js/data.js"></script>
   <script src="../js/search.js"></script>
   <script src="../js/category-script.js" defer></script>

@@ -1,31 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- ==========================================================================
+       LABYRINTH · Contact Page (global_pages/contacts.html)
+       --------------------------------------------------------------------------
+       This page provides multiple ways for users and partners to get in touch
+       with the Labyrinth team.  It includes physical address, email contacts,
+       phone numbers, and supporting details like office hours and response times.
+       The page is located inside the /global_pages/ subdirectory; all asset paths
+       are prefixed with '../' to reach the root folder.
+       Font Awesome icons are loaded from a CDN to visually reinforce each
+       contact method.
+       ========================================================================== -->
   <meta charset="UTF-8">
+  <!-- Mobile‑first responsive meta tag.  viewport-fit=cover improves display on notched screens. -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>LABYRINTH | Contact — Game Reviews & Community</title>
+
+  <!-- Preconnect to external origins for faster font and icon delivery -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!--
+    Primary typefaces:
+      Bruno Ace   →  --font-heading  (large titles)
+      Inter       →  --font-ui        (buttons, labels, badges)
+      Reddit Sans →  --font-body      (paragraphs, descriptions)
+    All weights from 200–900 are loaded.
+  -->
   <link href="https://fonts.googleapis.com/css2?family=Bruno+Ace&family=Inter:wght@200;300;400;500;600;700;800;900&family=Reddit+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome 6 for icons (map marker, envelope, phone, WhatsApp, etc.) -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+  <!--
+    Main stylesheet and responsive overrides.
+    Path is '../css/' because we are inside /global_pages/.
+    style.css holds the design system and most component styles.
+    responsive.css adjusts layouts across breakpoints.
+  -->
   <link rel="stylesheet" href="../css/style.css">
   <link rel="stylesheet" href="../css/responsive.css">
 </head>
 <body>
 
+  <!-- ==========================================================================
+       HEADER
+       --------------------------------------------------------------------------
+       Identical to other subpages.  The fixed navigation bar uses a frosted‑glass
+       effect.  The logo links back to the homepage (../index.html).
+       ========================================================================== -->
   <header class="header" id="header">
+    <!-- Logo group: clicking returns to the homepage -->
     <a class="header__logo-group" href="../index.html">
-      <div class="header__logo-icon"><img src="../assets/img/web_logo.png" alt="LABYRINTH" class="logo-img"></div>
+      <div class="header__logo-icon">
+        <img src="../assets/img/web_logo.png" alt="LABYRINTH" class="logo-img">
+      </div>
       <span class="header__brand">LABYRINTH</span>
     </a>
+
     <nav class="header__nav">
+      <!-- ===== SEARCH BAR ===== -->
       <div class="nav-search">
+        <!-- Inline SVG magnifying glass -->
         <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+          <circle cx="11" cy="11" r="8"/>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"/>
         </svg>
+        <!--
+          search.js attaches live filtering.  Because this page is inside
+          /global_pages/, search.js will automatically set the correct
+          relative paths for images and game links.
+        -->
         <input type="text" id="globalSearch" placeholder="Search games..." autocomplete="off">
         <div class="search-dropdown" id="searchDropdown"></div>
       </div>
+
+      <!-- ===== CATEGORY DROPDOWN ===== -->
       <div class="header__nav-dropdown">
         <span class="header__nav-link header__nav-dropdown-trigger">CATEGORY <span class="dropdown-arrow">▾</span></span>
         <div class="header__dropdown-menu">
@@ -33,60 +84,111 @@
           <a class="header__dropdown-item" href="multiplayer.html">Multiplayer</a>
         </div>
       </div>
+
+      <!-- About link – navigates to the About page in the same directory -->
       <a class="header__nav-link" href="about.html">About</a>
     </nav>
   </header>
 
   <main>
+    <!-- ==========================================================================
+         CONTACT CONTAINER
+         --------------------------------------------------------------------------
+         A centered, max‑width wrapper that holds the hero text and the main
+         contact card.  Decorative background glows are provided by CSS
+         (main::before pseudo‑element).
+         ========================================================================== -->
     <div class="contact-container">
+      <!-- ===== CONTACT HERO ===== -->
+      <!--
+        Brief, bold introduction encouraging visitors to reach out.
+        The main heading uses the Bruno Ace font (--font-heading).
+        The paragraph provides a short supporting description.
+      -->
       <div class="contact-hero">
         <h1>CONNECT WITH LABYRINTH</h1>
         <p>Your gateway to honest game reviews and a thriving community of players.</p>
       </div>
+
+      <!-- ===== CONTACT CARD ===== -->
+      <!--
+        The core contact information is presented inside a frosted‑glass card
+        with rounded corners, a subtle border, and a lift‑on‑hover effect.
+        It is divided into a "get in touch" area containing three detail items.
+      -->
       <div class="contact-card">
         <div class="get-in-touch">
-          <div class="section-badge"><i class="fas fa-paper-plane"></i> REACH OUT DIRECTLY</div>
+          <!-- Small pill‑shaped badge above the heading -->
+          <div class="section-badge">
+            <i class="fas fa-paper-plane"></i> REACH OUT DIRECTLY
+          </div>
+          <!-- Section heading split onto two lines for visual rhythm -->
           <h2>Let's talk games,<br>collabs & feedback</h2>
+
+          <!-- ===== CONTACT DETAILS LIST ===== -->
+          <!--
+            Each detail item combines an icon, a heading, body text,
+            and extra contextual information (e.g., office hours, response time).
+            The layout uses flexbox for horizontal alignment.
+          -->
           <div class="contact-details">
+            <!-- ---------- LOCATION ---------- -->
             <div class="detail-item">
               <div class="detail-icon"><i class="fas fa-map-marker-alt"></i></div>
               <div class="detail-info">
                 <h4>HEAD OFFICE & STUDIO</h4>
                 <p>Pampanga State University, Pampanga, PH</p>
                 <div class="detail-extra">
+                  <!-- Building icon and office hours -->
                   <span><i class="far fa-building"></i> Creative Media Wing</span>
                   <span><i class="fas fa-clock"></i> Mon-Fri: 10AM - 7PM</span>
                 </div>
               </div>
             </div>
+
+            <!-- ---------- EMAIL ---------- -->
             <div class="detail-item">
               <div class="detail-icon"><i class="fas fa-envelope"></i></div>
               <div class="detail-info">
                 <h4>EMAIL SUPPORT</h4>
-                <p><a href="mailto:reviews@labyrinth.com">reviews@labyrinth.com</a><br><a href="mailto:hello@labyrinth.com">hello@labyrinth.com</a></p>
+                <!-- Email addresses as clickable mailto: links -->
+                <p>
+                  <a href="mailto:reviews@labyrinth.com">reviews@labyrinth.com</a><br>
+                  <a href="mailto:hello@labyrinth.com">hello@labyrinth.com</a>
+                </p>
                 <div class="detail-extra">
+                  <!-- Icons for response time and press/business indication -->
                   <span><i class="fas fa-envelope-open-text"></i> Response within 24h</span>
                   <span><i class="fas fa-paperclip"></i> Press & Business</span>
                 </div>
               </div>
             </div>
+
+            <!-- ---------- PHONE / FAX ---------- -->
             <div class="detail-item">
               <div class="detail-icon"><i class="fas fa-phone-alt"></i></div>
               <div class="detail-info">
                 <h4>LET'S TALK</h4>
                 <p>Phone: +63 917 123 4567<br>Fax: +63 45 123 4567</p>
                 <div class="detail-extra">
+                  <!-- Additional contact channels: WhatsApp and a 24/7 hotline -->
                   <span><i class="fab fa-whatsapp"></i> WhatsApp Business</span>
                   <span><i class="fas fa-headset"></i> Hotline: 24/7 support</span>
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-      </div>
-    </div>
+          </div> <!-- /contact-details -->
+        </div> <!-- /get-in-touch -->
+      </div> <!-- /contact-card -->
+    </div> <!-- /contact-container -->
   </main>
 
+  <!-- ==========================================================================
+       FOOTER
+       --------------------------------------------------------------------------
+       Gradient footer with links to other essential pages.  All links are
+       relative to the current directory (global_pages/).
+       ========================================================================== -->
   <footer class="footer">
     <div class="footer__links">
       <a href="contacts.html" class="footer__link">Contacts</a> ·
@@ -97,6 +199,15 @@
     <div class="footer__copy">&copy; 2026 Labyrinth. All rights reserved.</div>
   </footer>
 
+  <!-- ==========================================================================
+       SCRIPTS
+       --------------------------------------------------------------------------
+       All three JavaScript files are loaded with '../' to reach the root /js/ folder.
+         1. data.js   – Defines the global GAMES_CATALOG and TOP_RATED_GAMES arrays.
+         2. search.js – Enables live search in the header (path‑aware).
+         3. script.js – Handles splash screen logic (hidden on subpages) and header
+                        scroll effect.
+       ========================================================================== -->
   <script src="../js/data.js"></script>
   <script src="../js/search.js"></script>
   <script src="../js/script.js"></script>

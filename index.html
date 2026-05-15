@@ -1,43 +1,114 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- ==========================================================================
+       LABYRINTH · Homepage (index.html)
+       --------------------------------------------------------------------------
+       This is the main entry point for the Labyrinth gaming website.  It features:
+         • A branded splash screen shown once per session
+         • A fixed header with search, category dropdown, and navigation
+         • A full‑width hero carousel with video‑backed slides
+         • "Top Rated and Trending" game cards
+         • Category banners linking to Singleplayer / Multiplayer pages
+         • An "All Games" browse section with a live preview panel
+         • A footer with essential links
+       --------------------------------------------------------------------------
+       Fonts are loaded from Google Fonts (Bruno Ace, Inter, Reddit Sans).
+       Styles are split into style.css (main) and responsive.css (breakpoints).
+       Three JavaScript files handle data, search, and homepage interactions.
+       ========================================================================== -->
   <meta charset="UTF-8">
+  <!-- Mobile‑first responsive meta tag.  viewport-fit=cover helps with notched displays. -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>LABYRINTH · Discover & Play</title>
+
+  <!-- Preconnect to Google Fonts for faster font delivery -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!--
+    Font families used across the site:
+      Bruno Ace   →  --font-heading  (hero titles, logo, large display text)
+      Inter       →  --font-ui        (buttons, badges, labels, navigation)
+      Reddit Sans →  --font-body      (paragraphs, descriptions, general text)
+    All weights from 200–900 are loaded to support various UI states.
+  -->
   <link href="https://fonts.googleapis.com/css2?family=Bruno+Ace&family=Inter:wght@200;300;400;500;600;700;800;900&family=Reddit+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Main stylesheet: CSS reset, variables, layout, components, splash, header, hero, cards, etc. -->
   <link rel="stylesheet" href="css/style.css">
+  <!-- Responsive stylesheet: breakpoints from 1200px down to 360px, plus touch and accessibility overrides -->
   <link rel="stylesheet" href="css/responsive.css">
 </head>
 <body>
 
+  <!-- ==========================================================================
+       SPLASH SCREEN
+       --------------------------------------------------------------------------
+       A full‑page overlay that displays the Labyrinth logo, title, and a
+       loading progress bar.  Controlled by js/script.js:
+         - First visit in a session: shown for ~2.5 seconds, then fades out.
+         - Subsequent visits: hidden immediately (via the .hidden class).
+       The .hidden class triggers CSS opacity/visibility transitions.
+       ========================================================================== -->
   <div class="splash-screen" id="splashScreen">
     <div class="splash-logo">
+      <!-- The circular logo image; animation: subtle pulsing scale -->
       <img src="assets/img/web_logo.png" alt="LABYRINTH" class="splash-logo-img">
     </div>
     <div class="splash-title">LABYRINTH</div>
     <div class="splash-loader">
+      <!-- The progress bar fills from 0% to 100% over ~2.5 seconds -->
       <div class="splash-loader-bar"></div>
     </div>
   </div>
 
+  <!-- ==========================================================================
+       HEADER
+       --------------------------------------------------------------------------
+       Fixed top navigation bar with frosted‑glass effect.  Contains:
+         • Logo + brand name (links to homepage / scrolls to top)
+         • Search input with live dropdown results
+         • "CATEGORY" dropdown (Singleplayer / Multiplayer)
+         • "About" link
+       On scroll past 20px, the .scrolled class is added by JavaScript to
+       increase background opacity and strengthen the bottom border.
+       ========================================================================== -->
   <header class="header" id="header">
+    <!-- Logo group: clicking either the icon or the brand name navigates to
+         the homepage.  On the homepage itself, JavaScript intercepts the click
+         to perform a smooth scroll to the top instead of a full reload. -->
     <a class="header__logo-group" id="logoTop" href="index.html">
       <div class="header__logo-icon">
         <img src="assets/img/web_logo.png" alt="LABYRINTH" class="logo-img">
       </div>
       <span class="header__brand">LABYRINTH</span>
     </a>
+
     <nav class="header__nav">
+      <!-- ===== SEARCH BAR ===== -->
       <div class="nav-search">
+        <!-- Inline SVG search icon (magnifying glass) -->
         <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <circle cx="11" cy="11" r="8"/>
           <line x1="21" y1="21" x2="16.65" y2="16.65"/>
         </svg>
+        <!--
+          The search input triggers js/search.js on every keystroke.
+          autocomplete="off" prevents the browser’s own suggestion popup.
+          Results appear in #searchDropdown immediately below the input.
+        -->
         <input type="text" id="globalSearch" placeholder="Search games..." autocomplete="off">
+        <!-- Dropdown container populated dynamically by search.js -->
         <div class="search-dropdown" id="searchDropdown"></div>
       </div>
+
+      <!-- ===== CATEGORY DROPDOWN ===== -->
+      <!--
+        Hovering over the "CATEGORY" link reveals a dropdown menu with links
+        to the Singleplayer and Multiplayer category pages.
+        The arrow (▾) rotates 180° on hover via CSS.
+      -->
       <div class="header__nav-dropdown">
         <span class="header__nav-link header__nav-dropdown-trigger">CATEGORY <span class="dropdown-arrow">▾</span></span>
         <div class="header__dropdown-menu">
@@ -45,12 +116,35 @@
           <a class="header__dropdown-item" href="global_pages/multiplayer.html">Multiplayer</a>
         </div>
       </div>
+
+      <!-- ===== ABOUT LINK ===== -->
+      <!--
+        Simple navigation link.  On the homepage, this triggers hash‑based
+        navigation to the About section (handled by script.js).  On other pages,
+        it navigates directly to global_pages/about.html.
+      -->
       <a class="header__nav-link" href="global_pages/about.html">About</a>
     </nav>
   </header>
 
+  <!-- ==========================================================================
+       HERO CAROUSEL
+       --------------------------------------------------------------------------
+       Full‑width, 560px‑tall carousel that displays up to 8 video‑backed slides.
+       Each slide contains:
+         • A looping background video (muted, autoplay, playsinline)
+         • A semi‑transparent gradient overlay for text readability
+         • Game title (split into white and accent parts), description, badge,
+           release year, and a "DETAILS →" CTA button
+       The slides and dots are built dynamically by script.js from the first
+       8 entries in GAMES_CATALOG.
+       Navigation: left/right arrows, clickable dots, and 5‑second auto‑advance.
+       ========================================================================== -->
   <section class="hero" id="hero">
+    <!-- Container for all slide divs (built by script.js) -->
     <div class="hero__slides" id="heroSlides"></div>
+
+    <!-- Carousel controls: previous arrow, dots, next arrow -->
     <div class="hero__controls">
       <button class="hero__arrow" id="heroPrev">◂</button>
       <div class="hero__dots" id="heroDots"></div>
@@ -58,19 +152,41 @@
     </div>
   </section>
 
+  <!-- ==========================================================================
+       TOP RATED AND TRENDING
+       --------------------------------------------------------------------------
+       A 3‑column grid (on desktop) of horizontal game cards.  Each card shows
+       a thumbnail, title, review badge, release date, and platform icons.
+       The cards are populated by script.js from the TOP_RATED_GAMES array,
+       which contains game IDs matched against GAMES_CATALOG.
+       Each card is a clickable <a> tag linking to the game’s detail page.
+       ========================================================================== -->
   <section class="section-top-rated">
+    <!-- Section heading with a small blue accent bar (::before pseudo‑element) -->
     <h2 class="section-heading">Top Rated and Trending</h2>
+    <!-- Grid populated by script.js -->
     <div class="top-rated-grid"></div>
   </section>
 
+  <!-- ==========================================================================
+       CATEGORY BANNERS
+       --------------------------------------------------------------------------
+       Two large, visually striking banners linking to the Singleplayer and
+       Multiplayer category pages.  Each banner has:
+         • A background image with a blur effect that intensifies on hover
+         • A dark semi‑transparent overlay
+         • Large "SINGLE PLAYER" / "MULTIPLAYER" text in Bruno Ace font
+       ========================================================================== -->
   <section class="section-categories">
     <h2 class="section-heading">Collection / Categories</h2>
     <div class="categories-grid">
+      <!-- Singleplayer banner -->
       <a class="category-banner category-banner--single" href="global_pages/singleplayer.html">
         <div class="category-banner__bg" style="background-image: url('assets/img/banners/singleplayer-bg.jpg');"></div>
         <div class="category-banner__overlay"></div>
         <span class="category-banner__text">SINGLE PLAYER</span>
       </a>
+      <!-- Multiplayer banner -->
       <a class="category-banner category-banner--multi" href="global_pages/multiplayer.html">
         <div class="category-banner__bg" style="background-image: url('assets/img/banners/multiplayer-bg.jpg');"></div>
         <div class="category-banner__overlay"></div>
@@ -79,14 +195,36 @@
     </div>
   </section>
 
+  <!-- ==========================================================================
+       ALL GAMES BROWSE SECTION
+       --------------------------------------------------------------------------
+       A two‑column layout:
+         Left (browse-left):  A scrollable list of all games from GAMES_CATALOG.
+                              Each item shows a thumbnail, title, tags, release
+                              date, and platform icons.  Hovering highlights the
+                              row and updates the preview panel.
+         Right (browse-right): A sticky preview panel that displays detailed
+                               information (title, review, description, gallery)
+                               for the currently hovered or selected game.
+       The entire list is dynamically generated by script.js.
+       ========================================================================== -->
   <section class="page-section active" id="page-all">
     <div class="browse-container">
+      <!-- Left column: game list -->
       <div class="browse-left">
+        <!-- Sticky heading that stays visible while scrolling the game list -->
         <h2 class="section-heading" style="position:sticky;top:0;background:var(--bg-deep);z-index:1;padding-bottom:12px;">All Games</h2>
+        <!-- The game list is injected here by renderGameList() -->
         <div class="game-list" id="gameListAll"></div>
       </div>
+
+      <!-- Right column: sticky preview panel -->
       <div class="browse-right">
         <div class="preview-panel" id="previewPanelAll">
+          <!--
+            previewContentAll is updated dynamically when hovering over a game.
+            Initial state shows placeholder text prompting the user to interact.
+          -->
           <div class="preview-content" id="previewContentAll">
             <div class="preview-title">Select a Game</div>
             <p style="color:var(--text-muted); margin-top:6px;">Hover over any game to see details</p>
@@ -96,6 +234,13 @@
     </div>
   </section>
 
+  <!-- ==========================================================================
+       FOOTER
+       --------------------------------------------------------------------------
+       A gradient footer (dark navy to deeper navy) with centered links and
+       copyright information.  Links point to Contacts, FAQs, References, and
+       Creator Information pages.  Each is separated by a middle dot (·).
+       ========================================================================== -->
   <footer class="footer">
     <div class="footer__links">
       <a href="global_pages/contacts.html" class="footer__link">Contacts</a> ·
@@ -106,6 +251,16 @@
     <div class="footer__copy">&copy; 2026 Labyrinth. All rights reserved.</div>
   </footer>
 
+  <!-- ==========================================================================
+       SCRIPTS
+       --------------------------------------------------------------------------
+       Loaded at the end of <body> to avoid blocking the initial render.
+       Order matters:
+         1. data.js   – Defines GAMES_CATALOG and TOP_RATED_GAMES (global arrays)
+         2. search.js – Attaches live search functionality to #globalSearch
+         3. script.js – Homepage logic: splash, top rated, game list, hero
+                        carousel, hash navigation, header scroll effect
+       ========================================================================== -->
   <script src="js/data.js"></script>
   <script src="js/search.js"></script>
   <script src="js/script.js"></script>

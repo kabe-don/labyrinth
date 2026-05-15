@@ -1,114 +1,747 @@
-/* game.css – shared styles, gallery aligned with review */
+/* ==========================================================================
+   game.css
+   --------------------------------------------------------------------------
+   Shared styles for individual game detail pages.
+   Provides the hero area with banner, cover art, metadata, a system
+   requirements card, an auto‑scrolling image gallery, review / tutorial
+   sections, and a footer.
+   --------------------------------------------------------------------------
+   Fonts used (defined in :root):
+     --font-heading : 'Bruno Ace'     (primary display / game titles)
+     --font-body    : 'Reddit Sans'   (descriptions, general text)
+     --font-ui      : 'Inter'        (buttons, labels, badges)
+   Colour tokens (--bg-deep, --accent-blue, etc.) are shared globally.
+   ========================================================================== */
 
+/* Force vertical scrollbar to prevent layout shift when navigating
+   between pages of different heights */
 html {
   overflow-y: scroll;
 }
 
+/* --------------------------------------------------------------------------
+   CSS Custom Properties (Design Tokens)
+   Centralised values for colours, typography, spacing, and transitions.
+   Updated from a global source; replicated here for clarity and component
+   isolation.
+   -------------------------------------------------------------------------- */
 :root {
-    --bg-deep: #05204e; --bg-darker: #0f172a; --accent-blue: #4c8ce4; --accent-green: #00c950;
-    --text-light: #e9efff; --text-muted: rgba(233, 239, 255, 0.55); --text-subtle: rgba(233, 239, 255, 0.75);
-    --card-light: #e9efff; --font-heading: 'Bruno Ace', sans-serif; --font-body: 'Reddit Sans', sans-serif;
-    --font-ui: 'Inter', sans-serif; --header-height: 68px;
-    --transition-smooth: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --bg-deep: #05204e;                       /* Deep navy page background */
+  --bg-darker: #0f172a;                     /* Darker card / section background */
+  --accent-blue: #4c8ce4;                   /* Primary interactive colour */
+  --accent-green: #00c950;                  /* Success / positive indication */
+  --text-light: #e9efff;                    /* Primary white‑leaning text */
+  --text-muted: rgba(233, 239, 255, 0.55);  /* Secondary muted text */
+  --text-subtle: rgba(233, 239, 255, 0.75); /* Slightly stronger than muted */
+  --card-light: #e9efff;                    /* Light card surface (used in other files) */
+  --font-heading: 'Bruno Ace', sans-serif;
+  --font-body: 'Reddit Sans', sans-serif;
+  --font-ui: 'Inter', sans-serif;
+  --header-height: 68px;                    /* Fixed header height for offset */
+  --transition-smooth: 0.3s cubic-bezier(0.4, 0, 0.2, 1); /* Consistent easing */
 }
-body { font-family: var(--font-body); background: var(--bg-deep); color: var(--text-light); min-height: 100vh; line-height: 1.5; -webkit-font-smoothing: antialiased; margin: 0; padding-top: var(--header-height) }
 
+/* Base body styles – background, typography, and offset for fixed header */
+body {
+  font-family: var(--font-body);
+  background: var(--bg-deep);
+  color: var(--text-light);
+  min-height: 100vh;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  margin: 0;
+  padding-top: var(--header-height);  /* Push content below fixed header */
+}
 
-/* Hero section */
-.game-hero { position: relative; width: 100%; min-height: 650px; overflow: hidden; }
-.game-hero__banner-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 30%; opacity: 0.55; pointer-events: none; z-index: 0; }
-.game-hero__overlay { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(5,32,78,0.4) 0%, rgba(15,23,42,0.7) 70%, rgba(15,23,42,0.9) 100%); z-index: 1; }
-.game-hero__content { position: relative; z-index: 2; max-width: 1400px; margin: 0 auto; padding: 50px 60px; display: grid; grid-template-columns: 320px 1fr; gap: 48px; min-height: 650px; }
-.game-hero__left { display: flex; flex-direction: column; align-items: center; gap: 20px; }
-.game-hero__cover { width: 320px; height: 450px; border-radius: 16px; overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,0.6),0 0 0 2px rgba(76,140,228,0.25); transition: transform 0.3s, box-shadow 0.3s; }
-.game-hero__cover:hover { transform: translateY(-5px); box-shadow: 0 30px 80px rgba(0,0,0,0.7),0 0 0 3px rgba(76,140,228,0.5); }
-.game-hero__cover img { width: 100%; height: 100%; object-fit: cover; display: block; }
-.hero-dev-badge { display: flex; align-items: center; gap: 8px; padding: 12px 16px; background: rgba(15,23,42,0.7); backdrop-filter: blur(8px); border: 1px solid rgba(76,140,228,0.2); border-radius: 10px; font-family: var(--font-ui); font-weight: 600; font-size: 14px; color: #ffffff; white-space: nowrap; width: 320px; justify-content: center; }
-.hero-dev-badge strong { color: var(--accent-blue); font-weight: 700; margin-right: 4px; }
-.hero-steam-btn { display: inline-flex; align-items: center; justify-content: center; gap: 12px; padding: 14px 28px; background: linear-gradient(135deg, #4c8ce4 0%, #2d6cc0 100%); border-radius: 14px; text-decoration: none; cursor: pointer; transition: all 0.3s; box-shadow: 0 8px 30px rgba(76,140,228,0.35); font-family: 'Baloo Bhaijaan', sans-serif; font-size: 18px; font-weight: 700; color: #fff; letter-spacing: -0.02em; width: 320px; }
-.hero-steam-btn:hover { transform: translateY(-3px); box-shadow: 0 14px 40px rgba(76,140,228,0.5); }
-.hero-steam-btn img { width: 24px; height: 24px; object-fit: contain; }
-.hero-release-date { font-family: var(--font-body); font-size: 15px; color: var(--text-muted); text-align: center; width: 100%; }
-.game-hero__info { display: flex; flex-direction: column; gap: 20px; padding-top: 0; }
-.game-hero__title { font-family: var(--font-body); font-weight: 800; font-size: clamp(32px,5vw,48px); line-height: 1.1; color: #fff; margin: 0; text-shadow: 0 2px 20px rgba(0,0,0,0.4); }
-.badge-platform-row { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin-top: -8px; margin-bottom: 6px; }
-.very-positive-badge { display: inline-flex; align-items: center; gap: 6px; background: var(--accent-blue); color: #fff; font-family: var(--font-ui); font-weight: 700; font-size: 16px; padding: 6px 16px; border-radius: 6px; box-shadow: 0 4px 12px rgba(76,140,228,0.3); white-space: nowrap; }
-.platform-icons-wrapper { background: #e9efff; border-radius: 6px; padding: 0 8px; display: inline-flex; gap: 4px; align-items: center; height: 30px; }
-.platform-icons-wrapper .platform-icon { width: 20px; height: 20px; object-fit: contain; }
-.rating-info { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; margin-top: 2px; padding: 0; }
-.rate-review-heading { font-family: var(--font-ui); font-weight: 800; font-size: 13px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); white-space: nowrap; }
-.stars-row { display: flex; align-items: center; gap: 6px; font-family: var(--font-body); font-weight: 800; font-size: 18px; color: #fff; white-space: nowrap; }
-.stars-gold { color: #f5b342; letter-spacing: 2px; }
-.rating-number { color: #fff; }
-.badge-recommend { background: rgba(0,201,80,0.15); border: 1px solid rgba(0,201,80,0.4); color: var(--accent-green); padding: 4px 14px; border-radius: 20px; font-weight: 700; font-size: 14px; white-space: nowrap; }
-.read-reviews-link { background: rgba(76,140,228,0.1); border: 1px solid rgba(76,140,228,0.4); color: var(--accent-blue); padding: 4px 16px; border-radius: 20px; font-weight: 700; font-size: 14px; text-decoration: none; transition: background 0.3s; white-space: nowrap; }
-.read-reviews-link:hover { background: rgba(76,140,228,0.2); }
-.game-hero__tags { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 4px; }
-.game-hero__tag { background: rgba(15,23,42,0.9); border: none; border-radius: 6px; padding: 6px 16px; font-family: var(--font-ui); font-weight: 600; font-size: 14px; color: var(--accent-blue); }
-.game-hero__desc { font-family: var(--font-body); font-weight: 400; font-size: 17px; line-height: 1.7; color: var(--text-subtle); max-width: 700px; }
+/* ==========================================================================
+   Hero Section
+   --------------------------------------------------------------------------
+   Full‑width banner with a background image, overlay, and a two‑column
+   layout (cover art on the left, game info on the right).
+   ========================================================================== */
+.game-hero {
+  position: relative;
+  width: 100%;
+  min-height: 650px;            /* Ensure hero has a substantial visual footprint */
+  overflow: hidden;
+}
 
-/* System requirements */
-.sysreq-section { background: var(--bg-darker); padding: 60px 40px; border-top: 1px solid rgba(76,140,228,0.08); }
-.sysreq-container { max-width: 1500px; margin: 0 auto; }
-.section-title { font-family: var(--font-ui); font-weight: 800; font-size: 24px; color: #fff; margin-bottom: 6px; display: flex; align-items: center; gap: 12px; }
-.section-title::before { content: ''; width: 4px; height: 24px; background: var(--accent-blue); border-radius: 2px; }
-.section-subtitle { font-family: var(--font-ui); font-weight: 600; font-size: 13px; color: var(--text-muted); margin-bottom: 32px; text-transform: uppercase; letter-spacing: 0.08em; }
-.sysreq-card { background: rgba(15,23,42,0.6); backdrop-filter: blur(16px); border: 1px solid rgba(76,140,228,0.15); border-radius: 20px; padding: 30px; display: grid; grid-template-columns: 1fr 1fr; gap: 32px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
-.sysreq-col { font-family: var(--font-body); font-size: 15px; color: var(--text-subtle); line-height: 1.7; }
-.sysreq-col p { margin-bottom: 8px; display: flex; align-items: baseline; gap: 8px; }
-.sysreq-col strong { color: #fff; font-weight: 600; min-width: 100px; display: inline-block; }
-.sysreq-note { font-size: 12px; color: var(--text-muted); margin-top: 12px; border-left: 2px solid var(--accent-blue); padding-left: 12px; font-style: italic; }
+/* Background image fills the hero */
+.game-hero__banner-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 30%;  /* Slightly raise focal point for better composition */
+  opacity: 0.55;                /* Blend with overlay and text */
+  pointer-events: none;
+  z-index: 0;
+}
 
-/* Gallery – aligned with review (hugs left) */
-.gallery-section { padding: 40px 40px 60px; background: var(--bg-deep); }
-.gallery-container { max-width: 1800px; margin: 0 auto; }
-.gallery-container .section-title { margin-bottom: 28px; }
-.carousel-container { width: 100%; overflow: visible; mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%); -webkit-mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%); padding: 20px 0; }
-.carousel-track { display: flex; gap: 28px; width: max-content; animation: pan-left 45s linear infinite; will-change: transform; padding: 0 20px; align-items: center; }
-.carousel-track:hover { animation-play-state: paused; }
-.carousel-card { flex-shrink: 0; width: 480px; height: 270px; border-radius: 20px; overflow: hidden; background: #1a2740; cursor: pointer; border: 2px solid rgba(76,140,228,0.12); box-shadow: 0 10px 30px rgba(0,0,0,0.4); transition: transform 0.35s, box-shadow 0.35s, border-color 0.35s; position: relative; }
-.carousel-card:hover { border-color: var(--accent-blue); box-shadow: 0 22px 50px rgba(76,140,228,0.45); transform: scale(1.04); z-index: 5; }
-.carousel-card img { width: 100%; height: 100%; object-fit: cover; display: block; }
-.carousel-card__label { position: absolute; bottom: 0; left: 0; right: 0; padding: 14px 18px; background: linear-gradient(transparent, rgba(0,0,0,0.85)); font-family: var(--font-ui); font-weight: 600; font-size: 13px; color: #fff; opacity: 0; transform: translateY(10px); transition: all 0.35s; }
-.carousel-card:hover .carousel-card__label { opacity: 1; transform: translateY(0); }
-@keyframes pan-left { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+/* Gradient overlay to darken banner and improve text legibility */
+.game-hero__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(5, 32, 78, 0.4) 0%,
+    rgba(15, 23, 42, 0.7) 70%,
+    rgba(15, 23, 42, 0.9) 100%
+  );
+  z-index: 1;
+}
 
-/* Review & Tutorial */
-.review-section { padding: 40px 40px 70px; background: var(--bg-deep); }
-.review-container { max-width: 1800px; margin: 0 auto; }
-.review-card { background: rgba(15,23,42,0.7); backdrop-filter: blur(12px); border: 1px solid rgba(76,140,228,0.25); border-radius: 24px; padding: 34px 36px; box-shadow: 0 15px 40px rgba(0,0,0,0.4); color: var(--text-light); transition: transform 0.3s, box-shadow 0.3s; }
-.review-card:hover { transform: translateY(-3px); box-shadow: 0 25px 60px rgba(76,140,228,0.2); }
-.review-card p { font-family: var(--font-body); font-size: 17px; line-height: 1.8; color: var(--text-subtle); }
-.tutorial-section { padding: 0 40px 70px; background: var(--bg-deep); }
-.tutorial-container { max-width: 1800px; margin: 0 auto; }
-.video-card { display: block; background: rgba(15,23,42,0.7); backdrop-filter: blur(12px); border: 1px solid rgba(76,140,228,0.25); border-radius: 24px; padding: 34px 36px; box-shadow: 0 15px 40px rgba(0,0,0,0.4); color: var(--text-light); text-decoration: none; transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s; }
-.video-card:hover { transform: translateY(-3px); box-shadow: 0 25px 60px rgba(76,140,228,0.2); border-color: var(--accent-blue); }
-.video-card__inner { display: flex; align-items: center; gap: 16px; }
-.video-card__play { font-size: 24px; color: var(--accent-blue); flex-shrink: 0; }
-.video-card__text { flex: 1; font-family: var(--font-body); font-size: 17px; color: var(--text-subtle); }
-.video-card__arrow { font-size: 20px; color: var(--accent-blue); flex-shrink: 0; transition: transform 0.2s; }
-.video-card:hover .video-card__arrow { transform: translateX(4px); }
+/* Content container above the overlay */
+.game-hero__content {
+  position: relative;
+  z-index: 2;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 50px 60px;
+  display: grid;
+  grid-template-columns: 320px 1fr;  /* Fixed left column for cover, flexible right */
+  gap: 48px;
+  min-height: 650px;                /* Match hero min-height for alignment */
+}
 
-/* Footer */
-.footer { background: linear-gradient(0deg, #0F172A, #05204E); padding: 32px 36px 24px; display: flex; flex-direction: column; align-items: center; gap: 14px; }
-.footer__links { display: flex; gap: 8px; font-size: 15px; color: var(--text-muted); flex-wrap: wrap; justify-content: center; }
-.footer__link { cursor: pointer; padding: 4px 8px; transition: color 0.2s; text-decoration: none; color: var(--text-muted); }
-.footer__link:hover { color: #fff; }
-.footer__copy { font-size: 14px; color: var(--text-muted); }
+/* Left column – cover art and action buttons */
+.game-hero__left {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
 
+/* Box‑art with hover lift and stronger shadow on interaction */
+.game-hero__cover {
+  width: 320px;
+  height: 450px;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, 0.6),
+    0 0 0 2px rgba(76, 140, 228, 0.25);  /* Subtle accent outline */
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.game-hero__cover:hover {
+  transform: translateY(-5px);
+  box-shadow:
+    0 30px 80px rgba(0, 0, 0, 0.7),
+    0 0 0 3px rgba(76, 140, 228, 0.5);
+}
+.game-hero__cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Developer badge – frosted glass chip */
+.hero-dev-badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  background: rgba(15, 23, 42, 0.7);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(76, 140, 228, 0.2);
+  border-radius: 10px;
+  font-family: var(--font-ui);
+  font-weight: 600;
+  font-size: 14px;
+  color: #ffffff;
+  white-space: nowrap;
+  width: 320px;                    /* Match cover width */
+  justify-content: center;
+}
+.hero-dev-badge strong {
+  color: var(--accent-blue);
+  font-weight: 700;
+  margin-right: 4px;
+}
+
+/* Steam button – prominent gradient CTA */
+.hero-steam-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 14px 28px;
+  background: linear-gradient(135deg, #4c8ce4 0%, #2d6cc0 100%);
+  border-radius: 14px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s;
+  box-shadow: 0 8px 30px rgba(76, 140, 228, 0.35);
+  font-family: 'Baloo Bhaijaan', sans-serif; /* Brand‑specific font for button */
+  font-size: 18px;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: -0.02em;
+  width: 320px;                     /* Full width within left column */
+}
+.hero-steam-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 40px rgba(76, 140, 228, 0.5);
+}
+.hero-steam-btn img {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+}
+
+/* Release date below the Steam button */
+.hero-release-date {
+  font-family: var(--font-body);
+  font-size: 15px;
+  color: var(--text-muted);
+  text-align: center;
+  width: 100%;
+}
+
+/* Right column – title, badges, tags, description */
+.game-hero__info {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding-top: 0;
+}
+
+/* Responsive game title */
+.game-hero__title {
+  font-family: var(--font-body);           /* Using body font for high‑impact headline */
+  font-weight: 800;
+  font-size: clamp(32px, 5vw, 48px);
+  line-height: 1.1;
+  color: #fff;
+  margin: 0;
+  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.4);
+}
+
+/* Row holding the “Very Positive” badge and platform icons */
+.badge-platform-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-top: -8px;      /* Tighten vertical rhythm */
+  margin-bottom: 6px;
+}
+
+/* Steam review summary badge */
+.very-positive-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--accent-blue);
+  color: #fff;
+  font-family: var(--font-ui);
+  font-weight: 700;
+  font-size: 16px;
+  padding: 6px 16px;
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(76, 140, 228, 0.3);
+  white-space: nowrap;
+}
+
+/* Platform icons inside a light pill */
+.platform-icons-wrapper {
+  background: #e9efff;
+  border-radius: 6px;
+  padding: 0 8px;
+  display: inline-flex;
+  gap: 4px;
+  align-items: center;
+  height: 30px;
+}
+.platform-icons-wrapper .platform-icon {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+}
+
+/* Star rating and “Recommend” / “Read reviews” buttons */
+.rating-info {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-top: 2px;
+  padding: 0;
+}
+
+.rate-review-heading {
+  font-family: var(--font-ui);
+  font-weight: 800;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.stars-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-body);
+  font-weight: 800;
+  font-size: 18px;
+  color: #fff;
+  white-space: nowrap;
+}
+.stars-gold {
+  color: #f5b342;
+  letter-spacing: 2px;
+}
+.rating-number {
+  color: #fff;
+}
+
+/* Pill‑shaped “Recommend” indicator */
+.badge-recommend {
+  background: rgba(0, 201, 80, 0.15);
+  border: 1px solid rgba(0, 201, 80, 0.4);
+  color: var(--accent-green);
+  padding: 4px 14px;
+  border-radius: 20px;
+  font-weight: 700;
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+/* Link to read more reviews */
+.read-reviews-link {
+  background: rgba(76, 140, 228, 0.1);
+  border: 1px solid rgba(76, 140, 228, 0.4);
+  color: var(--accent-blue);
+  padding: 4px 16px;
+  border-radius: 20px;
+  font-weight: 700;
+  font-size: 14px;
+  text-decoration: none;
+  transition: background 0.3s;
+  white-space: nowrap;
+}
+.read-reviews-link:hover {
+  background: rgba(76, 140, 228, 0.2);
+}
+
+/* Genre / feature tags */
+.game-hero__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 4px;
+}
+.game-hero__tag {
+  background: rgba(15, 23, 42, 0.9);
+  border: none;
+  border-radius: 6px;
+  padding: 6px 16px;
+  font-family: var(--font-ui);
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--accent-blue);
+}
+
+/* Game description */
+.game-hero__desc {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 17px;
+  line-height: 1.7;
+  color: var(--text-subtle);
+  max-width: 700px;           /* Prevent overly long lines for readability */
+}
+
+/* ==========================================================================
+   System Requirements
+   --------------------------------------------------------------------------
+   A two‑column card listing minimum and recommended specs.
+   Uses a frosted glass effect and a subtle blue left border on notes.
+   ========================================================================== */
+.sysreq-section {
+  background: var(--bg-darker);
+  padding: 60px 40px;
+  border-top: 1px solid rgba(76, 140, 228, 0.08); /* Very faint separator */
+}
+
+.sysreq-container {
+  max-width: 1500px;
+  margin: 0 auto;
+}
+
+/* Section title with a small accent bar */
+.section-title {
+  font-family: var(--font-ui);
+  font-weight: 800;
+  font-size: 24px;
+  color: #fff;
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.section-title::before {
+  content: '';
+  width: 4px;
+  height: 24px;
+  background: var(--accent-blue);
+  border-radius: 2px;
+}
+
+.section-subtitle {
+  font-family: var(--font-ui);
+  font-weight: 600;
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-bottom: 32px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+/* Card holding two columns */
+.sysreq-card {
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(76, 140, 228, 0.15);
+  border-radius: 20px;
+  padding: 30px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;  /* Minimum / Recommended side by side */
+  gap: 32px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.sysreq-col {
+  font-family: var(--font-body);
+  font-size: 15px;
+  color: var(--text-subtle);
+  line-height: 1.7;
+}
+.sysreq-col p {
+  margin-bottom: 8px;
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+.sysreq-col strong {
+  color: #fff;
+  font-weight: 600;
+  min-width: 100px;          /* Align all labels */
+  display: inline-block;
+}
+
+/* Additional requirement note (italic, with accent left border) */
+.sysreq-note {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 12px;
+  border-left: 2px solid var(--accent-blue);
+  padding-left: 12px;
+  font-style: italic;
+}
+
+/* ==========================================================================
+   Gallery (Carousel)
+   --------------------------------------------------------------------------
+   An auto‑scrolling strip of large thumbnails. Edge fading is achieved
+   via mask‑image, and the animation is paused on hover.
+   ========================================================================== */
+.gallery-section {
+  padding: 40px 40px 60px;
+  background: var(--bg-deep);
+}
+.gallery-container {
+  max-width: 1800px;
+  margin: 0 auto;
+}
+.gallery-container .section-title {
+  margin-bottom: 28px;
+}
+
+/* Carousel outer wrapper with fade edges */
+.carousel-container {
+  width: 100%;
+  overflow: visible;                /* Allow shadows to extend */
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 5%,
+    black 95%,
+    transparent 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 5%,
+    black 95%,
+    transparent 100%
+  );
+  padding: 20px 0;                  /* Vertical breathing room */
+}
+
+/* The moving track – width is content‑based */
+.carousel-track {
+  display: flex;
+  gap: 28px;
+  width: max-content;
+  animation: pan-left 45s linear infinite;
+  will-change: transform;           /* Hint for GPU acceleration */
+  padding: 0 20px;
+  align-items: center;
+}
+.carousel-track:hover {
+  animation-play-state: paused;    /* Stop animation on hover for interaction */
+}
+
+/* Each card in the carousel */
+.carousel-card {
+  flex-shrink: 0;
+  width: 480px;
+  height: 270px;                    /* 16:9 aspect ratio */
+  border-radius: 20px;
+  overflow: hidden;
+  background: #1a2740;
+  cursor: pointer;
+  border: 2px solid rgba(76, 140, 228, 0.12);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  transition: transform 0.35s, box-shadow 0.35s, border-color 0.35s;
+  position: relative;
+}
+.carousel-card:hover {
+  border-color: var(--accent-blue);
+  box-shadow: 0 22px 50px rgba(76, 140, 228, 0.45);
+  transform: scale(1.04);          /* Slight pop on hover */
+  z-index: 5;                      /* Above siblings */
+}
+.carousel-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Label that appears on hover (title / description overlay) */
+.carousel-card__label {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 14px 18px;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.85));
+  font-family: var(--font-ui);
+  font-weight: 600;
+  font-size: 13px;
+  color: #fff;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 0.35s;
+}
+.carousel-card:hover .carousel-card__label {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Infinite pan animation: moves the track left by 50% of its width.
+   Duplicate content is needed in the HTML to create a seamless loop. */
+@keyframes pan-left {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* ==========================================================================
+   Review & Tutorial Sections
+   --------------------------------------------------------------------------
+   Both share a card layout with glass effect and subtle hover lift.
+   The tutorial card acts as a clickable link to a video.
+   ========================================================================== */
+.review-section {
+  padding: 40px 40px 70px;
+  background: var(--bg-deep);
+}
+.review-container {
+  max-width: 1800px;
+  margin: 0 auto;
+}
+
+.review-card {
+  background: rgba(15, 23, 42, 0.7);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(76, 140, 228, 0.25);
+  border-radius: 24px;
+  padding: 34px 36px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+  color: var(--text-light);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.review-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 25px 60px rgba(76, 140, 228, 0.2);
+}
+.review-card p {
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.8;
+  color: var(--text-subtle);
+}
+
+.tutorial-section {
+  padding: 0 40px 70px;          /* Top padding zero because it follows review */
+  background: var(--bg-deep);
+}
+.tutorial-container {
+  max-width: 1800px;
+  margin: 0 auto;
+}
+
+/* Video card – entire card is a link */
+.video-card {
+  display: block;
+  background: rgba(15, 23, 42, 0.7);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(76, 140, 228, 0.25);
+  border-radius: 24px;
+  padding: 34px 36px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+  color: var(--text-light);
+  text-decoration: none;
+  transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+}
+.video-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 25px 60px rgba(76, 140, 228, 0.2);
+  border-color: var(--accent-blue);
+}
+
+/* Inner layout: play icon | text | arrow */
+.video-card__inner {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.video-card__play {
+  font-size: 24px;
+  color: var(--accent-blue);
+  flex-shrink: 0;
+}
+.video-card__text {
+  flex: 1;
+  font-family: var(--font-body);
+  font-size: 17px;
+  color: var(--text-subtle);
+}
+.video-card__arrow {
+  font-size: 20px;
+  color: var(--accent-blue);
+  flex-shrink: 0;
+  transition: transform 0.2s;
+}
+.video-card:hover .video-card__arrow {
+  transform: translateX(4px);      /* Arrow slides right on hover */
+}
+
+/* ==========================================================================
+   Footer
+   --------------------------------------------------------------------------
+   Simple gradient footer with links and copyright.
+   ========================================================================== */
+.footer {
+  background: linear-gradient(0deg, #0F172A, #05204E);
+  padding: 32px 36px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+
+.footer__links {
+  display: flex;
+  gap: 8px;
+  font-size: 15px;
+  color: var(--text-muted);
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.footer__link {
+  cursor: pointer;
+  padding: 4px 8px;
+  transition: color 0.2s;
+  text-decoration: none;
+  color: var(--text-muted);
+}
+.footer__link:hover {
+  color: #fff;
+}
+
+.footer__copy {
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+/* ==========================================================================
+   Responsive Adjustments
+   ========================================================================== */
+
+/* ≤ 1100px: Stack hero columns, reduce cover size, make buttons fluid */
 @media (max-width: 1100px) {
-    .game-hero__content { grid-template-columns: 1fr; padding: 40px 30px; gap: 30px; }
-    .game-hero__left { flex-direction: row; flex-wrap: wrap; justify-content: center; gap: 16px; }
-    .game-hero__cover { width: 200px; height: 300px; }
-    .hero-dev-badge, .hero-steam-btn { width: auto; flex: 1 1 auto; }
-    .sysreq-card { grid-template-columns: 1fr; }
-    .carousel-card { width: 360px; height: 200px; }
+  .game-hero__content {
+    grid-template-columns: 1fr;
+    padding: 40px 30px;
+    gap: 30px;
+  }
+  .game-hero__left {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 16px;
+  }
+  .game-hero__cover {
+    width: 200px;
+    height: 300px;
+  }
+  .hero-dev-badge,
+  .hero-steam-btn {
+    width: auto;               /* Allow buttons to shrink and fit */
+    flex: 1 1 auto;
+  }
+  .sysreq-card {
+    grid-template-columns: 1fr; /* Stack minimum and recommended */
+  }
+  .carousel-card {
+    width: 360px;
+    height: 200px;
+  }
 }
+
+/* ≤ 600px: Further reduce sizes, adjust header and title */
 @media (max-width: 600px) {
-    .header { padding: 0 16px; }
-    .header__brand { font-size: 22px; }
-    .game-hero__cover { width: 140px; height: 210px; }
-    .game-hero__title { font-size: 24px; }
-    .hero-steam-btn { font-size: 14px; padding: 10px 20px; width: 100%; }
-    .carousel-card { width: 260px; height: 150px; }
+  .header {
+    padding: 0 16px;
+  }
+  .header__brand {
+    font-size: 22px;
+  }
+  .game-hero__cover {
+    width: 140px;
+    height: 210px;
+  }
+  .game-hero__title {
+    font-size: 24px;
+  }
+  .hero-steam-btn {
+    font-size: 14px;
+    padding: 10px 20px;
+    width: 100%;              /* Full width on small screens */
+  }
+  .carousel-card {
+    width: 260px;
+    height: 150px;
+  }
 }
